@@ -1,0 +1,35 @@
+{
+  "name": "@leicht.io/ui",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build:production:dist": "tsc --build tsconfig.json",
+    "build:production:examples": "parcel build ./examples/index.html --out-dir ./examples/dist",
+    "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
+    "deploy": "npm run build:production && npm publish"
+  },
+  "files": [
+    "/src",
+    "/dist",
+    "/index.ts",
+    "/package.json",
+    "/package-lock.json",
+    "/README.md"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leicht-io/ui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leicht-io/ui/issues"
+  },
+  "homepage": "https://github.com/leicht-io/ui#readme",
+  "devDependencies": {
+    "parcel": "^1.12.3",
+    "typescript": "^3.4.5"
+  }
+}
