@@ -6,12 +6,13 @@
     "build:production:dist": "tsc --build tsconfig.json",
     "build:production:examples": "parcel build ./examples/index.html --out-dir ./examples/dist",
     "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
-    "deploy": "npm run build:production && npm publish"
+    "build:all": "npm run build:production:dist && npm run build:production:examples",
+    "deploy": "npm run build:all && npm publish"
   },
   "files": [
     "/src",
     "/dist",
-    "/index.ts",
+    "/examples",
     "/package.json",
     "/package-lock.json",
     "/README.md"
