@@ -1,5 +1,6 @@
 import {UIModalInterface} from "./UIModalInterface";
-import {UIComponent} from "../../base/UIComponent";
+import {UIComponent} from "../../@core/base/UIComponent";
+import "./UIModal.scss";
 
 export class UIModal extends UIComponent {
     constructor(content: UIModalInterface) {
@@ -7,22 +8,18 @@ export class UIModal extends UIComponent {
     }
 
     public render(): string {
-        const person = {
-            name: 'Wes',
-            job: 'Web Developer',
-            city: 'Hamilton',
-            bio: 'Wes is a really cool guy that loves to teach web development!'
-        };
-
-        return (`
-             <div class="person">
-                <h2>
-                    ${person.name}
-                </h2>
-                <p class="location">${person.city}</p>
-                <p class="bio">${person.bio}</p>
-             </div>
-            `);
+        return `<div class="ui-modal--container">
+    <div class="ui-modal--wrapper">
+        <div class="ui-modal--title-wrapper">
+            <div class="ui-modal--title">${this.properties.title}</div>
+            <div class="ui-modal--buttons"><div class="ui-modal--buttons-close">&#10005;</div> </div>
+        </div>
+        <div class="ui-modal--content--wrapper">
+            <div class="ui-modal--content"></div>
+        </div>
+    </div>
+</div>
+            `;
     }
 
 }

@@ -3,7 +3,10 @@ import {UIModal} from "../src/components/UIModal";
 export class App {
 
     constructor() {
-        new UIModal({container: "body", title: "hej"});
+        document.getElementById("showModal").addEventListener("click", () => {
+            console.log("clicked")
+            new UIModal({container: "body", title: "hej"});
+        });
     }
 
 }

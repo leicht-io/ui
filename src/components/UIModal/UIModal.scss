@@ -1,0 +1,34 @@
+@import "../../@core/theme";
+
+.ui-modal--container {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+
+  .ui-modal--wrapper {
+    background: #fff;
+    width: 1170px;
+    min-height: 300px;
+    border-radius: $border-radius;
+    max-height: 90vh;
+  }
+
+  .ui-modal--title-wrapper {
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
+}
