@@ -1,5 +1,4 @@
 import { UIComponent } from "../../@core/base/UIComponent";
-import "./UIModal.scss";
 import { DOM } from "../../@core/utils/DOM";
 export class UIModal extends UIComponent {
     constructor(content) {
