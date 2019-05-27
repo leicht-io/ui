@@ -1,11 +1,15 @@
 import {UIModal} from "../src/components/UIModal";
+import {DOM} from "../src/@core/utils/DOM";
 
 export class App {
 
     constructor() {
-        document.getElementById("showModal").addEventListener("click", () => {
-            console.log("clicked")
-            new UIModal({container: "body", title: "hej"});
+        DOM.query("#showModal").addEventListener("click", () => {
+            new UIModal({container: "body", title: "IFRAME with Wikipedia", iframe: "https://en.wikipedia.org/wiki/Ardbeg_distillery"});
+        });
+
+        DOM.query("#showModalWithHtml").addEventListener("click", () => {
+            new UIModal({container: "body", title: "HTML", content: "<p>hej</p>"});
         });
     }
 

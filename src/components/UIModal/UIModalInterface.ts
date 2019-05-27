@@ -8,5 +8,6 @@ export interface UIModalInterface {
     title: string;
     description?: string;
     type?: UIModalTypes;
-    content?: Element
+    content?: Element | string;
+    iframe?: string;
 }

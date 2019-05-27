@@ -1,4 +1,4 @@
-@import "../../@core/theme";
+@import "../../@core/styles/@theme";
 
 .ui-modal--container {
   background: rgba(0, 0, 0, 0.5);
@@ -14,21 +14,56 @@
   align-items: center;
   align-content: stretch;
 
+  @include fadeOut();
+
+  &.ui-modal--container-with-iframe {
+    iframe {
+      width: 100%;
+      border: 0;
+      height: calc(90vh - 85px);
+    }
+  }
+
+  &.ui-modal--container-with-html .ui-modal--content {
+    padding: $base-spacing * 3;
+  }
+
+  &.ui-modal--container--visible {
+    @include fadeIn();
+  }
+
   .ui-modal--wrapper {
-    background: #fff;
-    width: 1170px;
+    background: $white;
+    width: 85vw;
     min-height: 300px;
     border-radius: $border-radius;
     max-height: 90vh;
+    overflow: hidden;
+
+    @include boxShadow;
+
+    @include xl() {
+      width: 1170px;
+    }
   }
 
   .ui-modal--title-wrapper {
-    padding: 24px;
+    padding: $base-spacing * 3;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     align-content: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .ui-modal--title {
+    color: $primaryText;
+  }
+
+  .ui-modal--buttons-close {
+    cursor: pointer;
+    color: $secondaryText;
   }
 }
