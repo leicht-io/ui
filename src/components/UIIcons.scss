@@ -1,0 +1,74 @@
+$icon-base-size: 16px;
+$icon-github: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path width='100%' height='100%' d='M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z'></path></svg>";
+$icon-instagram: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer2" d="M44.122 2H19.87A17.875 17.875 0 0 0 2 19.835v24.2a17.875 17.875 0 0 0 17.87 17.834h24.252A17.875 17.875 0 0 0 62 44.034v-24.2A17.875 17.875 0 0 0 44.122 2zM55.96 44.034a11.825 11.825 0 0 1-11.838 11.812H19.87A11.825 11.825 0 0 1 8.032 44.034v-24.2A11.825 11.825 0 0 1 19.87 8.022h24.252A11.825 11.825 0 0 1 55.96 19.835zm0 0" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></path><path data-name="layer1" d="M32 16.45a15.484 15.484 0 1 0 15.514 15.484A15.519 15.519 0 0 0 32 16.45zm0 24.95a9.461 9.461 0 1 1 9.482-9.461A9.472 9.472 0 0 1 32 41.4zm19.263-24.834a3.719 3.719 0 1 1-3.719-3.711 3.714 3.714 0 0 1 3.719 3.711zm0 0" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></path></svg>';
+$icon-facebook: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer1" d="M56.375 2H7.625A5.642 5.642 0 0 0 2 7.625v48.75A5.642 5.642 0 0 0 7.625 62h26.25V37.625h-6.563V28.25h6.563v-4.687c.152-5.256 1.512-9.932 10.424-10.312h7.389v9.293h-6.247a2.953 2.953 0 0 0-3.129 2.895v2.811h9.375l-1.6 9.375h-7.775V62h14.063A5.642 5.642 0 0 0 62 56.375V7.625A5.642 5.642 0 0 0 56.375 2z" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></path></svg>';
+$icon-landscape: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M10 46H2V2h44v8"></path><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M18 54h-8V10h44v8"></path><path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M18 18h44v44H18zm0 34h44"></path><circle data-name="layer1" cx="28" cy="28" r="4" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2"></circle><path data-name="layer1" d="M24 52c0-2.8.6-14 7.3-14s4.1 6 6.7 6 .6-16 8-16 10 21.8 10 24" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2"></path></svg>';
+$icon-burger: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer2" d="M58 43v5a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5v-5m0-12v-6a14 14 0 0 1 14-14h24a14 14 0 0 1 14 14v6" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><rect data-name="layer1" x="2" y="31" width="60" height="12" rx="5" ry="5" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></rect><circle data-name="layer1" cx="18" cy="19" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><circle data-name="layer1" cx="26" cy="21" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><circle data-name="layer1" cx="32" cy="17" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><circle data-name="layer1" cx="40" cy="21" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><circle data-name="layer1" cx="48" cy="19" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>';
+$icon-three-d-model: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M62 35v20.4L45 61l-17-5.6V35l17-5.7L62 35z"></path><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M62 35l-17 5.6L28 35m17 5.6V61M28 33.2v15.6l-13 4.3-13-4.3V33.2l13-4.3 13 4.3z"></path><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M28 33.2l-13 4.3-13-4.3m13 4.3v15.6"></path><path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M42 6.9v14.2L30 25l-12-3.9V6.9L30 3l12 3.9z"></path><path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M42 6.9l-12 4-12-4m12 4V25"></path></svg>';
+$icon-electronics: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect data-name="layer2" x="12" y="12" width="40" height="40" rx="2" ry="2" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></rect><path data-name="layer2" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32 12V2M22 12V2m20 10V2M22 62V52m20 10V52M32 62V52m20-20h10M52 22h10M52 42h10M2 22h10M2 42h10M2 32h10"></path><rect data-name="layer1" x="20" y="20" width="24" height="24" rx="2" ry="2" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></rect></svg>';
+$icon-mail: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M26 38v21l10.3-14.6"></path><path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M3 29L59 5l-9 48-24-15-23-9zM59 5L26 38"></path></svg>';
+$icon-phone: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect data-name="layer1" x="18" y="6" width="28" height="52" rx="4" ry="4" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></rect><path data-name="layer1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14h28M18 46h28"></path><path data-name="layer2" d="M52.5 22a22.1 22.1 0 0 1 0 16m-41 0a22.1 22.1 0 0 1 0-16m48-4a30.1 30.1 0 0 1 0 24m-55 0a30.1 30.1 0 0 1 0-24" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><circle data-name="layer1" cx="32" cy="52" r="1" fill="none" stroke="#202020" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>';
+
+.ui-i {
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+
+
+  &.ui-i--sm {
+    width: $icon-base-size;
+    height: $icon-base-size;
+  }
+
+  &.ui-i--md {
+    width: $icon-base-size * 2;
+    height: $icon-base-size * 2;
+  }
+
+  &.ui-i--lg {
+    width: $icon-base-size * 3;
+    height: $icon-base-size * 3;
+  }
+
+  &.ui-i--auto {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.ui-i--github {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-github}");
+  }
+
+  &.ui-i--instagram {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-instagram}");
+  }
+
+  &.ui-i--facebook {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-facebook}");
+  }
+
+  &.ui-i--landscape {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-landscape}");
+  }
+
+  &.ui-i--burger {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-burger}");
+  }
+
+  &.ui-i--three-d-model {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-three-d-model}");
+  }
+
+  &.ui-i--electronics {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-electronics}");
+  }
+
+  &.ui-i--mail {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-mail}");
+  }
+
+  &.ui-i--phone {
+    background-image: url("data:image/svg+xml;utf8,#{$icon-phone}");
+  }
+}
