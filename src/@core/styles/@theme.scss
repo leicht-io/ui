@@ -1,9 +1,13 @@
+//Variables & Mixins
 @import "variables";
 @import "shadows";
 @import "transitions";
 @import "colors";
 @import "typography";
 @import "breakpoints";
+//Components
+@import "icons";
+@import "../../components/UIModal/UIModal.scss";
 
 body {
   @include fontFamily();
