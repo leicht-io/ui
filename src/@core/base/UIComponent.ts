@@ -3,6 +3,7 @@ import {DOM} from "../utils/DOM";
 export class UIComponent {
     public properties: any;
     private id: string = DOM.generateUUID(8);
+    private timeout: any;
 
     constructor(properties: any) {
         this.properties = properties;
@@ -12,8 +13,15 @@ export class UIComponent {
     }
 
     public destroy(): void {
-        setTimeout(() => {
-            DOM.query("#" + this.id).outerHTML = "";
+        this.timeout = setTimeout(() => {
+            const container: Element | null = DOM.query("#" + this.id);
+            if (container) {
+                container.outerHTML = "";
+            }
+
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
         }, 350);
     }
 
@@ -28,7 +36,10 @@ export class UIComponent {
         element.innerHTML = content;
         element.id = this.id;
 
-        DOM.query(this.properties.container).appendChild(element);
+        const container: Element | null = DOM.query(this.properties.container);
+        if (container) {
+            container.appendChild(element);
+        }
 
         setTimeout(() => {
             this.onRendered();

@@ -35,13 +35,26 @@
     width: 85vw;
     min-height: 300px;
     border-radius: $border-radius;
-    max-height: 90vh;
+    max-height: 80vh;
     overflow: hidden;
 
     @include boxShadow;
 
     @include xl() {
       width: 1170px;
+    }
+
+    &.ui-modal--wrapper-sm {
+
+    }
+
+    &.ui-modal--wrapper-md {
+      width: 65vw;
+      max-height: 70vh;
+    }
+
+    &.ui-modal--wrapper-lg {
+
     }
   }
 

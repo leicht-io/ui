@@ -3,6 +3,7 @@ import {UIComponent} from "../../@core/base/UIComponent";
 import {DOM} from "../../@core/utils/DOM";
 
 export class UIModal extends UIComponent {
+    private f = (event) => this.handleKeyDown(event);
 
     constructor(content: UIModalInterface) {
         super(content);
@@ -13,7 +14,12 @@ export class UIModal extends UIComponent {
     }
 
     private hideModal(): void {
-        this.getParentContainer().classList.remove("ui-modal--container--visible");
+        this.removeEventListeners();
+        const parentContainer: Element = this.getParentContainer();
+        if (parentContainer) {
+            this.getParentContainer().classList.remove("ui-modal--container--visible");
+        }
+        this.destroy();
 
     }
 
@@ -22,16 +28,53 @@ export class UIModal extends UIComponent {
     }
 
     public addEventListeners(): void {
-        DOM.query(".ui-modal--buttons-close").addEventListener("click", () => {
-            this.hideModal();
+        const closeBtn: Element | null = DOM.query(".ui-modal--buttons-close");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                this.handleCloseButtonClick();
+            });
+        }
+        this.getParentContainer().addEventListener("click", (event) => {
+            this.handleContainerClick(event);
         });
 
-        this.getParentContainer().addEventListener("click", (event: Event) => {
-            if ((event.target as Node).isSameNode(this.getParentContainer())) {
-                this.hideModal();
-                this.destroy();
-            }
-        });
+        document.addEventListener("keydown", this.f);
+    }
+
+    private handleCloseButtonClick(): void {
+        this.hideModal();
+    }
+
+    private handleContainerClick(event: Event): void {
+        if ((event.target as Node).isSameNode(this.getParentContainer())) {
+            this.hideModal();
+        }
+    }
+
+    private handleKeyDown(event: KeyboardEvent): void {
+        console.log("clicked")
+        if (event.key === "Escape") {
+            this.hideModal();
+        }
+    }
+
+    public removeEventListeners(): void {
+        document.removeEventListener("keydown", this.f);
+
+        const closeBtn: Element | null = DOM.query(".ui-modal--buttons-close");
+        if (closeBtn) {
+            closeBtn.removeEventListener("click", (event) => {
+                this.handleContainerClick(event);
+            });
+        }
+
+        const parentContainer: Element = this.getParentContainer();
+        if (parentContainer) {
+            parentContainer.removeEventListener("click", () => {
+                this.handleCloseButtonClick();
+            });
+        }
+
     }
 
     public onRendered(): void {

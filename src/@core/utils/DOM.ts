@@ -3,13 +3,13 @@ export class DOM {
 
     }
 
-    public static query(query: string): Element {
+    public static query(query: string): Element | null {
         const element: Element | null = document.querySelector(query);
         if (element) {
             return element;
         }
 
-        throw Error("Element " + query + " was not found.");
+        return null;
     }
 
     public static generateUUID(length: number): string {
