@@ -7,7 +7,7 @@
 @import "breakpoints";
 //Components
 @import "icons";
-@import "../../components/UIModal/UIModal.scss";
+@import "../../components/UIModal/UIModal";
 
 body {
   @include fontFamily();
