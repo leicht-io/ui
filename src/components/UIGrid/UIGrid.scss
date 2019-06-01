@@ -1,0 +1,163 @@
+@import "UIGridDirections";
+
+/*
+  _____________________________
+  1. Elements
+  _____________________________
+    1.1 Grid
+  _____________________________
+  2. Modifiers
+  _____________________________
+    2.1 Direction
+    2.2 Auto
+    2.3 Collapse
+    2.4 Alignment
+    2.5 Gutters
+*/
+
+
+/* ======================== */
+/* 1. Elements
+/* ======================== */
+/* 1.1 Grid */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex: 1;
+
+  max-width: 100%;
+  width: 100%;
+}
+
+
+/* ======================== */
+/* 2. Modifiers
+/* ======================== */
+/* 2.1 Direction */
+.grid--direction-row {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: start;
+  align-content: stretch;
+}
+
+.grid--direction-column {
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+
+/* 2.2 Auto */
+.grid--auto {
+  @extend .grid;
+
+  justify-content: normal;
+
+  > .tile {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: auto;
+  }
+}
+
+
+/* 2.3 Collapse */
+.grid--collapse-top,
+.grid--collapse-bottom {
+  @extend .grid;
+}
+
+.grid--collapse-top {
+  margin-top: 0;
+}
+
+.grid--collapse-bottom {
+  margin-bottom: 0;
+}
+
+
+/* 2.4 Alignment */
+.grid--align-center-vertical {
+  @extend .grid;
+
+  align-items: center;
+}
+
+.grid--align-center-both {
+  @extend .grid;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 2.5 Gutters */
+.grid {
+  @include row(0px);
+}
+
+.grid--gutter-x1 {
+  @include row($base-spacing);
+}
+
+.grid--gutter-x2 {
+  @include row($base-spacing * 2);
+}
+
+.grid--gutter-x3 {
+  @include row($base-spacing * 3);
+}
+
+.grid--gutter-x4 {
+  @include row($base-spacing * 4);
+}
+
+.grid--gutter-x5 {
+  @include row($base-spacing * 5);
+}
+
+.grid--column {
+  @include column(0px);
+}
+
+.grid--column.grid--gutter-x1 {
+  @include column($base-spacing);
+}
+
+.grid--column.grid--gutter-x2 {
+  @include column($base-spacing * 2);
+}
+
+.grid--column.grid--gutter-x3 {
+  @include column($base-spacing * 3);
+}
+
+.grid--column.grid--gutter-x4 {
+  @include column($base-spacing * 4);
+}
+
+.grid--column.grid--gutter-x5 {
+  @include column($base-spacing * 5);
+}
+
+
+/**
+Real grid
+ */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
+
+  &.grid-four-columns {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &.grid-two-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}

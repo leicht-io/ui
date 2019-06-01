@@ -1,0 +1,75 @@
+.input-wrap {
+  width: 100%;
+  position: relative;
+  border: 1px solid #e6e6e6;
+  border-radius: $base-spacing;
+  margin-bottom: $base-spacing * 2;
+  margin-right: $base-spacing;
+  margin-left: $base-spacing;
+
+  > label {
+    font-size: 12px;
+    color: #666666;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    padding: 15px 0 2px 24px;
+    display: block;
+    margin: 0;
+  }
+
+  > input, textarea {
+    display: block;
+    width: calc(100% - #{$base-spacing * 6});
+    background: transparent;
+    font-size: 18px;
+    color: #404b46;
+    line-height: 1.2;
+    height: $base-spacing * 6;
+    outline: none;
+    border: none;
+    overflow: visible;
+    border-radius: $base-spacing;
+    padding: 0 $base-spacing *3;
+  }
+
+  > textarea {
+    min-height: $base-spacing * 20;
+    margin-top: $base-spacing * 2;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+
+  .form-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    &.form-content--multiple {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
+  }
+}

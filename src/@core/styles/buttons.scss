@@ -1,0 +1,49 @@
+.btn {
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  border: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+
+  border-radius: $base-spacing / 2;
+
+  height: $base-spacing * 6;
+  line-height: $base-spacing * 6;
+
+  max-width: $base-spacing * 24;
+
+  transition: all 0.3s;
+
+  &.btn--full-width {
+    width: 100%;
+  }
+
+  &.btn--primary {
+    color: #ffffff;
+    background-color: #009688;
+
+    &:hover {
+      background-color: #37474f;
+      transition: all 0.3s;
+    }
+
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  &.btn--center {
+
+  }
+
+  &.btn--medium {
+
+  }
+
+  &.btn--large {
+
+  }
+}

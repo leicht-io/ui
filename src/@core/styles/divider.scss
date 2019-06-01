@@ -1,0 +1,25 @@
+.divider {
+  float: left;
+  width: 100%;
+
+  &.divider-small {
+    margin-top: $base-spacing;
+    margin-bottom: $base-spacing;
+  }
+
+  &.divider-medium {
+    margin-top: $base-spacing *2;
+    margin-bottom: $base-spacing * 2;
+  }
+
+  &.divider-large {
+    margin-top: $base-spacing * 2;
+    margin-bottom: $base-spacing * 2;
+  }
+
+  &.divider-border {
+    border-top: 1px solid $primaryText;
+  }
+
+}
+

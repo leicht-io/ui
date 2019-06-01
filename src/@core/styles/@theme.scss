@@ -5,9 +5,16 @@
 @import "colors";
 @import "typography";
 @import "breakpoints";
+@import "mixins";
 //Components
+@import "fonts";
 @import "icons";
+@import "buttons";
+@import "divider";
 @import "../../components/UIModal/UIModal";
+@import "../../components/UIInput/UIInput";
+@import "../../components/UIGrid/UIGrid";
+@import "../../components/UINotifications/UINotifications";
 
 body {
   @include fontFamily();

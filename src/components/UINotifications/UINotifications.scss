@@ -1,0 +1,16 @@
+.notification {
+  width: 100%;
+  padding: $base-spacing * 2;
+  border-radius: $base-spacing;
+  margin-bottom: $base-spacing * 2;
+
+  &.notification--error {
+    background: #E57572;
+    color: #fff;
+  }
+
+  &.notification--success {
+    background: #95CE67;
+    color: #fff;
+  }
+}
