@@ -7,15 +7,25 @@
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
+  float: left;
 
   border-radius: $base-spacing / 2;
 
   height: $base-spacing * 6;
   line-height: $base-spacing * 6;
-
-  max-width: $base-spacing * 24;
+  padding: 0 $base-spacing * 2;
 
   transition: all 0.3s;
+
+  margin-left: $base-spacing * 2;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
 
   &.btn--full-width {
     width: 100%;
@@ -34,6 +44,35 @@
       text-decoration: underline;
     }
   }
+
+  &.btn--danger {
+    color: #ffffff;
+    background-color: #961700;
+
+    &:hover {
+      background-color: #4f2f28;
+      transition: all 0.3s;
+    }
+
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  &.btn--success {
+    color: #ffffff;
+    background-color: #4d9600;
+
+    &:hover {
+      background-color: #294f33;
+      transition: all 0.3s;
+    }
+
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
 
   &.btn--center {
 

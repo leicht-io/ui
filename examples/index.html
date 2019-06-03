@@ -6,7 +6,74 @@
 </head>
 
 <body>
-<div id="app">
+
+<div class="nav-wrapper nav-wrapper--fixed">
+    <div class="nav-hamburger">
+        <div class="nav-hamburger-box">
+            <div class="nav-hamburger-inner"></div>
+            <div class="nav-hamburger-inner"></div>
+            <div class="nav-hamburger-inner"></div>
+        </div>
+        <span class="nav-hamburger-label">Menu</span>
+    </div>
+
+    <div class="nav-logo">
+        <img src="https://leicht.io/assets/images/leicht_logo_medium_white.10d12fb7f3bbe7d6e1b0559fffae2b68401516ad907bbd4d258f3933a88103a5.png">
+    </div>
+
+    <div class="nav-background">
+    </div>
+
+    <nav class="nav">
+        <div class="nav-responsive-header">
+            <div class="nav-hamburger">
+                <div class="nav-hamburger-box">
+                    <div class="nav-hamburger-inner"></div>
+                    <div class="nav-hamburger-inner"></div>
+                    <div class="nav-hamburger-inner"></div>
+                </div>
+                <span class="nav-hamburger-label">Menu</span>
+            </div>
+        </div>
+        <div class="nav-content">
+            <div class="nav-item">
+                <a href="#home">Home</a>
+            </div>
+            <div class="nav-item nav-sub">
+                <span class="nav-sub-btn">About <div class="ui-i ui-i--chevron-down ui-i--auto"></div></span>
+                <div class="nav-sub-content">
+                    <a href="#company">Company</a>
+                    <a href="#team">Team</a>
+                    <a href="#careers">Careers</a>
+                </div>
+            </div>
+            <div class="nav-item nav-sub">
+                <span class="nav-sub-btn">Services <div class="ui-i ui-i--chevron-down"></div></span>
+                <div class="nav-sub-content">
+                    <a href="#bring">Bring</a>
+                    <a href="#deliver">Deliver</a>
+                    <a href="#package">Package</a>
+                    <a href="#express">Express</a>
+                </div>
+            </div>
+            <div class="nav-item nav-sub">
+                <span class="nav-sub-btn">Partners <div class="ui-i ui-i--chevron-down"></div></span>
+                <div class="nav-sub-content">
+                    <a href="#link1">Link 1</a>
+                    <a href="#link2">Link 2</a>
+                    <a href="#link3">Link 3</a>
+                    <a href="#link4">Link 4</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<div class="page-container">
 
     <h1>Leicht.io UI Library (heading 1)</h1>
 
@@ -21,12 +88,16 @@
     <div class="divider divider-medium divider-border"></div>
 
     <h3>Buttons</h3>
-    <button class="btn btn--primary">Primary Button</button>
+    <div>
+        <button class="btn btn--primary">Primary Button</button>
+        <button class="btn btn--danger">Danger Button</button>
+        <button class="btn btn--success">Success Button</button>
+    </div>
 
     <div class="divider divider-medium divider-border"></div>
 
     <h3>Modals</h3>
-    <div class="grid grid--direction-row grid--align-center-vertical">
+    <div>
         <button class="btn btn--primary" id="showModal">Show Modal with IFRAME</button>
         <button class="btn btn--primary" id="showModalWithHtml">Show Modal with HTML</button>
     </div>
@@ -44,6 +115,12 @@
         <div class="ui-i ui-i--lg ui-i--electronics"></div>
         <div class="ui-i ui-i--lg ui-i--mail"></div>
         <div class="ui-i ui-i--lg ui-i--phone"></div>
+    </div>
+
+    <div class="divider divider-medium divider-border"></div>
+
+    <h3>Gallery</h3>
+    <div class="ui-gallery grid-container">
     </div>
 </div>
 </body>
