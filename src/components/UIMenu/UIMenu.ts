@@ -5,6 +5,11 @@ export class UIMenu {
     private yDiff: any = null;
     private timeDown: any = null;
     private startEl: any = null;
+    private timer: any = null;
+    private throttleDelay: number = 100;
+    private last: any = null;
+    private initialLoad = true;
+    private logoAnimationDelayInMillis = 150;
 
     constructor() {
         // patch CustomEvent to allow constructor creation (IE/Chrome)
@@ -55,6 +60,78 @@ export class UIMenu {
                 document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
             }
         });
+
+        window.addEventListener('scroll', () => {
+            this.throttle();
+        }, true);
+    }
+
+    private throttle() {
+        const now = +new Date();
+        if (this.last && now < this.last + this.throttleDelay) {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.last = now;
+                this.onScroll();
+            }, this.throttleDelay);
+        } else {
+            this.last = now;
+            this.onScroll();
+        }
+    }
+
+    private getHeaderElement() {
+        return document.querySelector(".nav-wrapper");
+    }
+
+    private getLogoElement(): any {
+        const logoElement = document.querySelector(".nav-logo");
+        //this.originalLogoSrc = logoElement.src;
+        //this.originalLogoSrcSet = logoElement.srcset;
+        return logoElement;
+    }
+
+    private animateAndShowNewLogo() {
+        console.log("SCROLLING");
+        const header = this.getHeaderElement();
+        const logo = this.getLogoElement();
+
+        if (header && logo) {
+            header.classList.add("nav-wrapper--active");
+            logo.style.opacity = 0;
+            setTimeout(() => {
+                //logo.setAttribute("src", this.options.logo.replacement.src);
+                //logo.setAttribute("srcset", this.getSrcSet());
+                logo.style.opacity = 100;
+            }, this.logoAnimationDelayInMillis);
+        }
+    }
+
+    private animateAndShowOriginalLogo() {
+        const header = this.getHeaderElement();
+        const logo = this.getLogoElement();
+
+        if (header && logo) {
+            console.log("AT TOP");
+            header.classList.remove("nav-wrapper--active");
+            logo.style.opacity = 0;
+            setTimeout(() => {
+                //logo.setAttribute("src", this.originalLogoSrc);
+                //logo.setAttribute("srcset", this.originalLogoSrcSet);
+                logo.style.opacity = 100;
+            }, this.logoAnimationDelayInMillis);
+        }
+    }
+
+    private onScroll() {
+        const header = this.getHeaderElement();
+
+        if (header && window.pageYOffset && !header.classList.contains("nav-wrapper--active")) {
+            this.animateAndShowNewLogo();
+        } else if (window.pageYOffset === 0 && !this.initialLoad) {
+            this.animateAndShowOriginalLogo();
+        }
+        this.initialLoad = false;
     }
 
     private handleTouchEnd(e) {
