@@ -1,5 +1,5 @@
 .header {
-  height: 500px;
+  height: 300px;
   width: 1070px;
   margin: 0 auto;
 
@@ -20,7 +20,11 @@
     color: #fff;
     z-index: 9;
     font-weight: 700;
-    font-size: 56px;
+    font-size: 34px;
+
+    @include sm() {
+      font-size: 56px;
+    }
   }
 
   &.header-full-width {
@@ -36,4 +40,9 @@
     top: 0;
     bottom: 0;
   }
+
+  @include sm() {
+    height: 500px;
+  }
+
 }

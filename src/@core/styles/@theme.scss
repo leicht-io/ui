@@ -30,7 +30,7 @@ body {
   flex-grow: 1;
 
   max-width: $extended-content-width;
-  width: 100%;
+  width: calc(100% - 24*2px);
   margin: 0 auto;
 
   padding: $base-spacing * 3;
