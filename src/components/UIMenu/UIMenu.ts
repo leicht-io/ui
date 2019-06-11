@@ -9,7 +9,7 @@ export class UIMenu {
     private throttleDelay: number = 100;
     private last: any = null;
     private initialLoad = true;
-    private logoAnimationDelayInMillis = 150;
+    private originalLogo: string | null = null;
 
     constructor() {
         // patch CustomEvent to allow constructor creation (IE/Chrome)
@@ -26,14 +26,17 @@ export class UIMenu {
         document.addEventListener('touchmove', this.handleTouchMove, false);
         document.addEventListener('touchend', this.handleTouchEnd, false);
 
-        document.addEventListener('swiped-left', function (e) {
-            document.getElementsByClassName("nav")[0].classList.remove("nav-active");
-            document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
+        const closeBtn: any = document.querySelector(".nav-responsive-header .ui-i--close");
+        closeBtn.addEventListener("click", () => {
+            this.closeMenu();
         });
-        document.getElementsByClassName("nav-background")[0].addEventListener("click", function () {
-            document.getElementsByClassName("nav")[0].classList.remove("nav-active");
-            document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
+        document.addEventListener('swiped-left', () => {
+            this.closeMenu();
         });
+        document.getElementsByClassName("nav-background")[0].addEventListener("click", () => {
+            this.closeMenu();
+        });
+
         const subBtns = document.getElementsByClassName("nav-sub-btn");
         for (let i = 0; i < subBtns.length; i++) {
             const btn = subBtns[i];
@@ -50,20 +53,54 @@ export class UIMenu {
                 }
             });
         }
-        document.getElementsByClassName("nav-hamburger")[0].addEventListener("click", function () {
-
-            if ((document.getElementsByClassName("nav")[0] as any).style.display !== "block") {
-                document.getElementsByClassName("nav")[0].classList.add("nav-active");
-                document.getElementsByClassName("nav-background")[0].classList.add("nav-background-active");
-            } else {
-                document.getElementsByClassName("nav")[0].classList.remove("nav-active");
-                document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
-            }
+        document.getElementsByClassName("nav-hamburger")[0].addEventListener("click", () => {
+            this.openMenu();
         });
 
         window.addEventListener('scroll', () => {
             this.throttle();
         }, true);
+
+        const logo: HTMLElement = this.getLogoElement();
+        this.originalLogo = logo.getAttribute("src");
+
+        setTimeout(() => {
+            const wrapper: any = document.querySelector(".nav-wrapper");
+            if (wrapper !== null) {
+                if (this.initialLoad && window.pageYOffset > 0) {
+                    wrapper.classList.add("disable-animations");
+
+                    this.animateAndShowNewLogo();
+                    this.toggleMenuChevrons(false);
+                    this.toggleHamburger(true);
+                } else {
+                    wrapper.classList.remove("disable-animations");
+                }
+            }
+            this.initialLoad = false;
+        }, 0);
+    }
+
+    private openMenu(): void {
+        const body: any = document.getElementsByTagName('body')[0];
+        const nav: any = document.getElementsByClassName("nav")[0];
+        const navBackground: any = document.getElementsByClassName("nav-background")[0];
+        if (nav && nav.style.display !== "block") {
+            nav.classList.add("nav-active");
+            navBackground.classList.add("nav-background-active");
+            body.classList.add("nav--disable-scroll");
+        } else {
+            nav.classList.remove("nav-active");
+            navBackground.classList.remove("nav-background-active");
+            body.classList.remove("nav--disable-scroll");
+        }
+    }
+
+    private closeMenu(): void {
+        document.getElementsByClassName("nav")[0].classList.remove("nav-active");
+        document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
+
+        document.getElementsByTagName('body')[0].classList.remove("nav--disable-scroll");
     }
 
     private throttle() {
@@ -85,62 +122,92 @@ export class UIMenu {
     }
 
     private getLogoElement(): any {
-        const logoElement = document.querySelector(".nav-logo");
-        //this.originalLogoSrc = logoElement.src;
-        //this.originalLogoSrcSet = logoElement.srcset;
-        return logoElement;
+        return document.querySelector(".nav-logo");
     }
 
     private animateAndShowNewLogo() {
-        console.log("SCROLLING");
         const header = this.getHeaderElement();
-        const logo = this.getLogoElement();
+        const logo: HTMLElement = this.getLogoElement();
+        const scrollLogo: string | null = logo.getAttribute("data-scroll-src");
 
-        if (header && logo) {
+        if (header && logo && logo.style && scrollLogo) {
             header.classList.add("nav-wrapper--active");
-            logo.style.opacity = 0;
-            setTimeout(() => {
-                //logo.setAttribute("src", this.options.logo.replacement.src);
-                //logo.setAttribute("srcset", this.getSrcSet());
-                logo.style.opacity = 100;
-            }, this.logoAnimationDelayInMillis);
+
+            logo.style.opacity = "0";
+            logo.setAttribute("src", scrollLogo);
+            logo.style.opacity = "100";
         }
     }
 
     private animateAndShowOriginalLogo() {
         const header = this.getHeaderElement();
-        const logo = this.getLogoElement();
+        const logo: HTMLElement = this.getLogoElement();
 
-        if (header && logo) {
-            console.log("AT TOP");
+        if (header && logo && logo.style && this.originalLogo) {
             header.classList.remove("nav-wrapper--active");
-            logo.style.opacity = 0;
-            setTimeout(() => {
-                //logo.setAttribute("src", this.originalLogoSrc);
-                //logo.setAttribute("srcset", this.originalLogoSrcSet);
-                logo.style.opacity = 100;
-            }, this.logoAnimationDelayInMillis);
+
+            if (this.originalLogo) {
+                logo.style.opacity = "0";
+                logo.setAttribute("src", this.originalLogo);
+                logo.style.opacity = "100";
+            }
         }
     }
 
+    private toggleMenuChevrons(add: boolean): void {
+        const menuIcons: any = document.querySelectorAll(".nav-wrapper .ui-i--chevron-down");
+        for (const icon of menuIcons) {
+            if (add) {
+                icon.classList.add("ui-i--white");
+                icon.classList.remove("ui-i--gray");
+            } else {
+                icon.classList.remove("ui-i--white");
+                icon.classList.add("ui-i--white");
+            }
+        }
+    }
+
+    private toggleHamburger(dark: boolean): void {
+        document.querySelectorAll(".nav-wrapper .ui-i--hamburger").forEach((hamburger) => {
+            if (dark) {
+                hamburger.classList.remove("ui-i--white");
+                hamburger.classList.remove("ui-i--gray");
+            } else {
+                hamburger.classList.remove("ui-i--white");
+                hamburger.classList.remove("ui-i--gray");
+
+                hamburger.classList.add("ui-i--white");
+            }
+        })
+    }
+
     private onScroll() {
+        const wrapper: any = document.querySelector(".nav-wrapper");
+        if (wrapper !== null) {
+            wrapper.classList.remove("disable-animations");
+        }
+
         const header = this.getHeaderElement();
 
         if (header && window.pageYOffset && !header.classList.contains("nav-wrapper--active")) {
             this.animateAndShowNewLogo();
-        } else if (window.pageYOffset === 0 && !this.initialLoad) {
+            this.toggleMenuChevrons(false);
+            this.toggleHamburger(true);
+        } else if (window.pageYOffset === 0) {
             this.animateAndShowOriginalLogo();
+            this.toggleMenuChevrons(true);
+            this.toggleHamburger(false);
         }
-        this.initialLoad = false;
     }
 
     private handleTouchEnd(e) {
-        // if the user released on a different target, cancel!
         if (this.startEl !== e.target) return;
-        var swipeThreshold = parseInt(this.startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
-        var swipeTimeout = parseInt(this.startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
-        var timeDiff = Date.now() - this.timeDown;
-        var eventType = '';
+
+        const swipeThreshold = parseInt(this.startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
+        const swipeTimeout = parseInt(this.startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
+        const timeDiff = Date.now() - this.timeDown;
+        let eventType = '';
+
         if (Math.abs(this.xDiff) > Math.abs(this.yDiff)) { // most significant
             if (Math.abs(this.xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
                 if (this.xDiff > 0) {
@@ -158,20 +225,19 @@ export class UIMenu {
                 }
             }
         }
+
         if (eventType !== '') {
-            // fire event on the element that started the swipe
-            this.startEl.dispatchEvent(new CustomEvent(eventType, {bubbles: true, cancelable: true}));
-            // if (console && console.log) console.log(eventType + ' fired on ' + startEl.tagName);
+            this.startEl.dispatchEvent(new CustomEvent(eventType, {bubbles: true, cancelable: true})); // fire event on the element that started the swipe
         }
-        // reset values
+
         this.xDown = null;
         this.yDown = null;
         this.timeDown = null;
     }
 
     private handleTouchStart(e) {
-        // if the element has data-swipe-ignore="true" we stop listening for swipe events
         if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
+
         this.startEl = e.target;
         this.timeDown = Date.now();
         this.xDown = e.touches[0].clientX;
@@ -182,8 +248,9 @@ export class UIMenu {
 
     private handleTouchMove(e) {
         if (!this.xDown || !this.yDown) return;
-        var xUp = e.touches[0].clientX;
-        var yUp = e.touches[0].clientY;
+
+        const xUp = e.touches[0].clientX;
+        const yUp = e.touches[0].clientY;
         this.xDiff = this.xDown - xUp;
         this.yDiff = this.yDown - yUp;
     };

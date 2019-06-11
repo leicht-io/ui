@@ -10,6 +10,12 @@ export class UIGallery {
     constructor(container: string, response: any) {
         this.photos = response.photos;
 
+        document.addEventListener("keyup", (e: any) => {
+            if (e.key === "Escape") {
+                this.hideImage();
+            }
+        });
+
         let index = 0;
         for (const photo of response.photos) {
             const node: Element = document.createElement("DIV");
