@@ -79,6 +79,14 @@ export class UIMenu {
             }
             this.initialLoad = false;
         }, 0);
+
+        document.querySelectorAll(".nav-wrapper a").forEach((anchor: Element) => {
+            const pathName = document.location.pathname.split("/")[1];
+            const attribute: string | null = anchor.getAttribute("href");
+            if (anchor && anchor.parentElement && attribute && attribute.split("/")[1] === pathName) {
+                anchor.parentElement.classList.add("active");
+            }
+        });
     }
 
     private openMenu(): void {
@@ -157,12 +165,13 @@ export class UIMenu {
     private toggleMenuChevrons(add: boolean): void {
         const menuIcons: any = document.querySelectorAll(".nav-wrapper .ui-i--chevron-down");
         for (const icon of menuIcons) {
+            console.log(icon, add)
             if (add) {
                 icon.classList.add("ui-i--white");
                 icon.classList.remove("ui-i--gray");
             } else {
                 icon.classList.remove("ui-i--white");
-                icon.classList.add("ui-i--white");
+                icon.classList.add("ui-i-gray");
             }
         }
     }

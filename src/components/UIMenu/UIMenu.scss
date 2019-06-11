@@ -31,11 +31,11 @@ body.nav--disable-scroll {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3) !important;
 
     a, .nav-sub-btn {
-      color: $secondaryText !important;
+      color: $secondaryText;
     }
   }
 
-  a {
+  a, .nav-sub-btn {
     transition: all 0.100s linear;
     font-size: 16px;
     color: white;
@@ -51,6 +51,11 @@ body.nav--disable-scroll {
     justify-content: space-between;
     align-items: center;
     align-content: center;
+  }
+
+  .nav-item.active a {
+    font-weight: 700;
+    color: $teal;
   }
 
   &.nav-wrapper--full-width {
@@ -228,6 +233,7 @@ body.nav--disable-scroll {
       background: #fff;
       bottom: 0;
       width: 85%;
+      overflow: hidden;
     }
     .nav-sub-content a {
       background: transparent;
@@ -311,8 +317,7 @@ body.nav--disable-scroll {
       font-size: 16px;
       border: none;
       outline: none;
-      color: white;
-      padding: 23px 16px;
+      padding: 22px 16px;
       background-color: inherit;
       font-family: inherit;
       margin: 0;
@@ -357,9 +362,21 @@ body.nav--disable-scroll {
       color: $secondaryText;
     }
 
-    .nav-sub-content a:hover {
-      background-color: #eee;
-      color: black;
+    .nav-sub-content {
+      a:hover {
+        background-color: #eee;
+        color: black;
+      }
+
+      a:first-child:hover {
+        border-top-left-radius: $base-spacing;
+        border-top-right-radius: $base-spacing;
+      }
+
+      a:last-child:hover {
+        border-bottom-left-radius: $base-spacing;
+        border-bottom-right-radius: $base-spacing;
+      }
     }
 
     .nav-sub:hover .nav-sub-content {
