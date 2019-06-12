@@ -12,55 +12,27 @@ export class UIMenu {
     private originalLogo: string | null = null;
 
     constructor() {
-        // patch CustomEvent to allow constructor creation (IE/Chrome)
+        this.addCustomEvent();
+        this.handleInitialLoad();
+        this.setActiveLinkItem();
+        this.setListeners();
+    }
+
+    // patch CustomEvent to allow constructor creation (IE/Chrome)
+    private addCustomEvent(): void {
         if (typeof (window as any).CustomEvent !== 'function') {
             (window as any).CustomEvent = function (event, params) {
                 params = params || {bubbles: false, cancelable: false, detail: undefined};
-                var evt = document.createEvent('CustomEvent');
+                const evt = document.createEvent('CustomEvent');
                 evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
                 return evt;
             };
+
             (window as any).CustomEvent.prototype = (window as any).Event.prototype;
         }
-        document.addEventListener('touchstart', this.handleTouchStart, false);
-        document.addEventListener('touchmove', this.handleTouchMove, false);
-        document.addEventListener('touchend', this.handleTouchEnd, false);
+    }
 
-        const closeBtn: any = document.querySelector(".nav-responsive-header .ui-i--close");
-        closeBtn.addEventListener("click", () => {
-            this.closeMenu();
-        });
-        document.addEventListener('swiped-left', () => {
-            this.closeMenu();
-        });
-        document.getElementsByClassName("nav-background")[0].addEventListener("click", () => {
-            this.closeMenu();
-        });
-
-        const subBtns = document.getElementsByClassName("nav-sub-btn");
-        for (let i = 0; i < subBtns.length; i++) {
-            const btn = subBtns[i];
-            btn.addEventListener("click", function (event: any) {
-                if (event.target.parentElement.getElementsByClassName("nav-sub-content")[0].classList.contains("nav-sub-content-active")) {
-                    event.target.parentElement.getElementsByClassName("nav-sub-content")[0].classList.remove("nav-sub-content-active");
-                } else {
-                    for (let q = 0; q < subBtns.length; q++) {
-                        const subParent: any = subBtns[q].parentElement;
-                        subParent.getElementsByClassName("nav-sub-content")[0].classList.remove("nav-sub-content-active");
-                    }
-
-                    event.target.parentElement.getElementsByClassName("nav-sub-content")[0].classList.add("nav-sub-content-active");
-                }
-            });
-        }
-        document.getElementsByClassName("nav-hamburger")[0].addEventListener("click", () => {
-            this.openMenu();
-        });
-
-        window.addEventListener('scroll', () => {
-            this.throttle();
-        }, true);
-
+    private handleInitialLoad(): void {
         const logo: HTMLElement = this.getLogoElement();
         this.originalLogo = logo.getAttribute("src");
 
@@ -70,7 +42,7 @@ export class UIMenu {
                 if (this.initialLoad && window.pageYOffset > 0) {
                     wrapper.classList.add("disable-animations");
 
-                    this.animateAndShowNewLogo();
+                    this.handleLogo(true);
                     this.toggleMenuChevrons(false);
                     this.toggleHamburger(true);
                 } else {
@@ -79,7 +51,9 @@ export class UIMenu {
             }
             this.initialLoad = false;
         }, 0);
+    }
 
+    private setActiveLinkItem(): void {
         document.querySelectorAll(".nav-wrapper a").forEach((anchor: Element) => {
             const pathName = document.location.pathname.split("/")[1];
             const attribute: string | null = anchor.getAttribute("href");
@@ -89,26 +63,84 @@ export class UIMenu {
         });
     }
 
-    private openMenu(): void {
+    private setListeners(): void {
+        this.setTouchListeners();
+        this.setClickListeners();
+        this.setScrollListeners();
+    }
+
+    private setScrollListeners(): void {
+        window.addEventListener('scroll', () => {
+            this.throttle();
+        }, true);
+    }
+
+    private setTouchListeners(): void {
+        document.addEventListener('touchstart', this.handleTouchStart, false);
+        document.addEventListener('touchmove', this.handleTouchMove, false);
+        document.addEventListener('touchend', this.handleTouchEnd, false);
+
+        document.addEventListener('swiped-left', () => {
+            this.toggleMenu(false);
+        });
+    }
+
+    private setClickListeners(): void {
+        const hamburger: any = document.querySelector(".nav-hamburger");
+        const navBackground: any = document.querySelector(".nav-background");
+        const dropDownButtons = document.querySelectorAll(".nav-sub-btn");
+        const closeBtn: any = document.querySelector(".nav-responsive-header .ui-i--close");
+
+        hamburger.addEventListener("click", () => {
+            this.toggleMenu(true);
+        });
+
+        navBackground.addEventListener("click", () => {
+            this.toggleMenu(false);
+        });
+
+        dropDownButtons.forEach((button: any) => {
+            button.addEventListener("click", function (event: any) {
+                const subContent: any = event.target.parentElement.querySelector(".nav-sub-content");
+
+                if (subContent.classList.contains("nav-sub-content-active")) {
+                    subContent.classList.remove("nav-sub-content-active");
+                } else {
+                    for (let q = 0; q < dropDownButtons.length; q++) {
+                        const subParent: any = dropDownButtons[q].parentElement;
+                        subParent.getElementsByClassName("nav-sub-content")[0].classList.remove("nav-sub-content-active");
+                    }
+
+                    subContent.classList.add("nav-sub-content-active");
+                }
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            this.toggleMenu(false);
+        });
+    }
+
+    private toggleMenu(shouldOpen: boolean): void {
         const body: any = document.getElementsByTagName('body')[0];
         const nav: any = document.getElementsByClassName("nav")[0];
         const navBackground: any = document.getElementsByClassName("nav-background")[0];
-        if (nav && nav.style.display !== "block") {
-            nav.classList.add("nav-active");
-            navBackground.classList.add("nav-background-active");
-            body.classList.add("nav--disable-scroll");
+
+        if (shouldOpen) {
+            if (nav && nav.style.display !== "block") {
+                nav.classList.add("nav-active");
+                navBackground.classList.add("nav-background-active");
+                body.classList.add("nav--disable-scroll");
+            } else {
+                nav.classList.remove("nav-active");
+                navBackground.classList.remove("nav-background-active");
+                body.classList.remove("nav--disable-scroll");
+            }
         } else {
             nav.classList.remove("nav-active");
             navBackground.classList.remove("nav-background-active");
             body.classList.remove("nav--disable-scroll");
         }
-    }
-
-    private closeMenu(): void {
-        document.getElementsByClassName("nav")[0].classList.remove("nav-active");
-        document.getElementsByClassName("nav-background")[0].classList.remove("nav-background-active");
-
-        document.getElementsByTagName('body')[0].classList.remove("nav--disable-scroll");
     }
 
     private throttle() {
@@ -133,39 +165,30 @@ export class UIMenu {
         return document.querySelector(".nav-logo");
     }
 
-    private animateAndShowNewLogo() {
+    private handleLogo(showOriginal: boolean): void {
         const header = this.getHeaderElement();
         const logo: HTMLElement = this.getLogoElement();
         const scrollLogo: string | null = logo.getAttribute("data-scroll-src");
 
-        if (header && logo && logo.style && scrollLogo) {
+        if (!header || !logo || !scrollLogo || !this.originalLogo) {
+            return;
+        }
+
+        logo.style.opacity = "0";
+        if (!showOriginal) {
             header.classList.add("nav-wrapper--active");
-
-            logo.style.opacity = "0";
             logo.setAttribute("src", scrollLogo);
-            logo.style.opacity = "100";
-        }
-    }
-
-    private animateAndShowOriginalLogo() {
-        const header = this.getHeaderElement();
-        const logo: HTMLElement = this.getLogoElement();
-
-        if (header && logo && logo.style && this.originalLogo) {
+        } else {
             header.classList.remove("nav-wrapper--active");
-
-            if (this.originalLogo) {
-                logo.style.opacity = "0";
-                logo.setAttribute("src", this.originalLogo);
-                logo.style.opacity = "100";
-            }
+            logo.setAttribute("src", this.originalLogo);
         }
+        logo.style.opacity = "100";
     }
 
     private toggleMenuChevrons(add: boolean): void {
         const menuIcons: any = document.querySelectorAll(".nav-wrapper .ui-i--chevron-down");
+
         for (const icon of menuIcons) {
-            console.log(icon, add)
             if (add) {
                 icon.classList.add("ui-i--white");
                 icon.classList.remove("ui-i--gray");
@@ -178,13 +201,12 @@ export class UIMenu {
 
     private toggleHamburger(dark: boolean): void {
         document.querySelectorAll(".nav-wrapper .ui-i--hamburger").forEach((hamburger) => {
+
             if (dark) {
                 hamburger.classList.remove("ui-i--white");
                 hamburger.classList.remove("ui-i--gray");
             } else {
-                hamburger.classList.remove("ui-i--white");
                 hamburger.classList.remove("ui-i--gray");
-
                 hamburger.classList.add("ui-i--white");
             }
         })
@@ -199,11 +221,11 @@ export class UIMenu {
         const header = this.getHeaderElement();
 
         if (header && window.pageYOffset && !header.classList.contains("nav-wrapper--active")) {
-            this.animateAndShowNewLogo();
+            this.handleLogo(false);
             this.toggleMenuChevrons(false);
             this.toggleHamburger(true);
         } else if (window.pageYOffset === 0) {
-            this.animateAndShowOriginalLogo();
+            this.handleLogo(true);
             this.toggleMenuChevrons(true);
             this.toggleHamburger(false);
         }

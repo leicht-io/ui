@@ -1,6 +1,15 @@
 .ui-gallery {
+
   .grid-item {
-    height: 280px;
+    height: 150px;
+
+    @include sm() {
+      height: 200px;
+    }
+
+    @include lg() {
+      height: 280px;
+    }
   }
 
   img {
