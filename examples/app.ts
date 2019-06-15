@@ -404,7 +404,7 @@ export class App {
                 "updatedAt": "2019-03-20T14:42:35.000Z"
             }]
         };
-        new UIGallery(".ui-gallery", response);
+        new UIGallery(".ui-gallery", {baseUrl: "https://ni.leicht.io/"}, response);
     }
 
 }

@@ -19,6 +19,8 @@
 @import "../../components/UIMenu/UIMenu";
 @import "../../components/UIHeader/UIHeader";
 @import "../../components/UILinks/UILinks";
+@import "../../components/UICard/UICard";
+@import "../../components/UITags/UITags";
 
 body {
   @include fontFamily();

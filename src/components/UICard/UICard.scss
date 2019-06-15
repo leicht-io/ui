@@ -1,0 +1,61 @@
+.ui-card {
+  border: 1px solid #d0d0d0;
+  border-radius: $base-spacing;
+  min-height: 100px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .ui-card--title {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+
+    &.ui-card--title-top {
+      top: 0;
+      bottom: auto;
+    }
+
+    &.ui-card--title h4 {
+      color: $white;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      height: $base-spacing * 4;
+      line-height: $base-spacing * 4;
+      margin: 0;
+    }
+  }
+
+  .ui-card--content {
+    img {
+      float: left;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .ui-card--toolbar {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    max-height: $base-spacing * 7;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 0 $base-spacing * 2;
+
+    p {
+      line-height: $base-spacing * 7;
+      color: #fff;
+      margin: 0;
+    }
+  }
+}

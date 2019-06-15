@@ -1,0 +1,37 @@
+.ui-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+
+  position: absolute;
+  top: $base-spacing;
+  right: $base-spacing;
+
+  .ui-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: $white;
+    height: $base-spacing * 3;
+    line-height: $base-spacing * 3;
+    text-transform: uppercase;
+    padding: 0 $base-spacing;
+    border-radius: $base-spacing / 4;
+    background: $white;
+    margin-left: $base-spacing;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &.ui-tag--primary {
+      background: $teal;
+    }
+
+    &.ui-tag--secondary {
+      background: $lightGreen;
+    }
+  }
+}

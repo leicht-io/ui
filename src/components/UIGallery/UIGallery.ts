@@ -1,4 +1,5 @@
 import {Swipe} from "../../@core/utils/Swipe";
+import {UIGalleryOptions} from "./UIGalleryOptions";
 
 export class UIGallery {
     private nextSource: string | null = "";
@@ -6,9 +7,11 @@ export class UIGallery {
     private currentImage: string = "";
     private currentIndex: number = 0;
     private photos: any;
+    private options: UIGalleryOptions;
 
-    constructor(container: string, response: any) {
+    constructor(container: string, options: UIGalleryOptions, response: any) {
         this.photos = response.photos;
+        this.options = options;
 
         document.addEventListener("keyup", (e: any) => {
             if (e.key === "Escape") {
@@ -183,13 +186,13 @@ export class UIGallery {
         }
 
         if (this.photos[this.currentIndex + 1]) {
-            this.nextSource = "https://ni.leicht.io/" + this.photos[this.currentIndex + 1].fullSizePath;
+            this.nextSource = this.options.baseUrl + this.photos[this.currentIndex + 1].fullSizePath;
         } else {
             this.nextSource = "";
         }
 
         if (this.photos[this.currentIndex - 1]) {
-            this.previousSource = "https://ni.leicht.io/" + this.photos[this.currentIndex - 1].fullSizePath;
+            this.previousSource = this.options.baseUrl + this.photos[this.currentIndex - 1].fullSizePath;
         } else {
             this.previousSource = "";
         }
