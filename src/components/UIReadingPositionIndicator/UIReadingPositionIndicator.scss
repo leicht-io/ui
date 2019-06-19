@@ -1,0 +1,32 @@
+progress.ui-reading-position-indicator {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: $base-spacing / 2;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border: none;
+
+  background-color: transparent;
+
+  color: $teal;
+
+  z-index: 9999;
+
+  &::-webkit-progress-bar {
+    background-color: transparent;
+  }
+
+  &::-webkit-progress-value {
+    background-color: $teal;
+  }
+
+  &::-moz-progress-bar {
+    background-color: $teal;
+  }
+}

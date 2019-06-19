@@ -6,7 +6,7 @@ export class DOM {
         if (element) {
             return element;
         }
-        return null;
+        return new Element();
     }
     static generateUUID(length) {
         let result = '';
