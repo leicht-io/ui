@@ -1,8 +1,4 @@
 export class DOM {
-    constructor() {
-
-    }
-
     public static query(query: string): Element {
         const element: Element | null = document.querySelector(query);
         if (element) {

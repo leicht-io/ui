@@ -1,59 +1,18 @@
 import {Swipe} from "../../@core/utils/Swipe";
 import {UIGalleryOptions} from "./UIGalleryOptions";
+import {BaseComponent} from "../UIBuilder/UIBuilder";
 
-export class UIGallery {
+export class UIGallery extends BaseComponent<UIGalleryOptions> {
+    constructor(config?: UIGalleryOptions) {
+        super(config);
+    }
+
     private nextSource: string | null = "";
     private previousSource: string | null = "";
     private currentImage: string = "";
     private currentIndex: number = 0;
     private photos: any;
-    private options: UIGalleryOptions;
-
-    constructor(container: string, options: UIGalleryOptions, response: any) {
-        this.photos = response.photos;
-        this.options = options;
-
-        document.addEventListener("keyup", (e: any) => {
-            if (e.key === "Escape") {
-                this.hideImage();
-            }
-        });
-
-        let index = 0;
-        for (const photo of response.photos) {
-            const node: Element = document.createElement("DIV");
-            node.classList.add("grid-item");
-            node.innerHTML = `<img data-index="${index}" src='https://ni.leicht.io/${photo.mediumThumbPath}' data-large='https://ni.leicht.io/${photo.fullSizePath}'>`;
-
-            const image: Element | null = node.querySelector("img");
-            if (image) {
-                image.addEventListener("load", () => {
-                    image.classList.add("loaded");
-                });
-
-                image.addEventListener("click", (event: Event) => {
-                    if (event && event.target) {
-                        this.currentImage = (event.target as any).getAttribute("data-large");
-                        this.currentIndex = Number((event.target as any).getAttribute("data-index"));
-                        //this.previousSource = this.photos[this.currentIndex - 1].fullSizePath;
-                        //this.nextSource = this.photos[this.currentIndex + 1].fullSizePath;
-
-                    }
-
-                    this.showImage(this.currentImage);
-                });
-            }
-
-            const gallery: Element | null = document.querySelector(container);
-            if (gallery) {
-                gallery.append(node)
-            }
-
-            index++;
-        }
-
-        this.run();
-    }
+    private options: any;
 
     private getBody(): Element | null {
         return document.querySelector("body");
@@ -181,7 +140,7 @@ export class UIGallery {
     }
 
     private setNextAndPrevImage(): void {
-        if (!this.photos) {
+        if (!this.photos && !this.options !== null) {
             return;
         }
 
@@ -198,7 +157,51 @@ export class UIGallery {
         }
     }
 
-    private run(): void {
+
+    public render() {
+        if (!this.config) {
+            return;
+        }
+
+        document.addEventListener("keyup", (e: any) => {
+            if (e.key === "Escape") {
+                this.hideImage();
+            }
+        });
+
+        let index = 0;
+        for (const photo of this.config.data.photos) {
+            const node: Element = document.createElement("DIV");
+            node.classList.add("grid-item");
+            node.innerHTML = `<img data-index="${index}" src='https://ni.leicht.io/${photo.mediumThumbPath}' data-large='https://ni.leicht.io/${photo.fullSizePath}'>`;
+
+            const image: Element | null = node.querySelector("img");
+            if (image) {
+                image.addEventListener("load", () => {
+                    image.classList.add("loaded");
+                });
+
+                image.addEventListener("click", (event: Event) => {
+                    if (event && event.target) {
+                        this.currentImage = (event.target as any).getAttribute("data-large");
+                        this.currentIndex = Number((event.target as any).getAttribute("data-index"));
+                        //this.previousSource = this.photos[this.currentIndex - 1].fullSizePath;
+                        //this.nextSource = this.photos[this.currentIndex + 1].fullSizePath;
+
+                    }
+
+                    this.showImage(this.currentImage);
+                });
+            }
+
+            const gallery: Element | null = document.querySelector(this.config.selector);
+            if (gallery) {
+                gallery.append(node)
+            }
+
+            index++;
+        }
+
         this.addPopUpWrapperToDom();
         this.addListeners();
     }

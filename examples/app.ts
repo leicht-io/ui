@@ -13,7 +13,7 @@ export class App {
         new UIBuilder()
             .with(UIMenu)
             .with(UIReadingPositionIndicator)
-            .with(UIGallery, ".ui-gallery", {baseUrl: "https://ni.leicht.io/"}, galleryMockResponse)
+            .with(UIGallery, {selector: ".ui-gallery", baseUrl: "https://ni.leicht.io/", data: galleryMockResponse})
             .run();
 
         DOM.query("#showModal").addEventListener("click", () => {

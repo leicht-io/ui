@@ -1,11 +1,8 @@
-export class UIReadingPositionIndicator {
-    constructor() {
-        const progressBar: HTMLElement | null = document.querySelector("progress.ui-reading-position-indicator");
+import {BaseComponent, BaseConfig} from "../UIBuilder/UIBuilder";
 
-        this.cycle(progressBar);
-        window.addEventListener("scroll", () => {
-            this.cycle(progressBar);
-        })
+export class UIReadingPositionIndicator extends BaseComponent<BaseConfig> {
+    constructor(config?: BaseConfig) {
+        super(config);
     }
 
     private cycle(progressBar: HTMLElement | null): void {
@@ -31,5 +28,14 @@ export class UIReadingPositionIndicator {
         const max: number = documentHeight - windowHeight;
 
         progressBar.setAttribute('max', max.toString());
+    }
+
+    public render() {
+        const progressBar: HTMLElement | null = document.querySelector("progress.ui-reading-position-indicator");
+
+        this.cycle(progressBar);
+        window.addEventListener("scroll", () => {
+            this.cycle(progressBar);
+        })
     }
 }

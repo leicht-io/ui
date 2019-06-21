@@ -1,5 +1,7 @@
-export class UIMenu {
-    private xDown: any = null;
+import {BaseConfig, BaseComponent} from "../UIBuilder/UIBuilder";
+
+export class UIMenu extends BaseComponent<BaseConfig> {
+        private xDown: any = null;
     private yDown: any = null;
     private xDiff: any = null;
     private yDiff: any = null;
@@ -11,11 +13,8 @@ export class UIMenu {
     private initialLoad = true;
     private originalLogo: string | null = null;
 
-    constructor() {
-        this.addCustomEvent();
-        this.handleInitialLoad();
-        this.setActiveLinkItem();
-        this.setListeners();
+    constructor(config?: BaseConfig) {
+        super(config);
     }
 
     // patch CustomEvent to allow constructor creation (IE/Chrome)
@@ -285,5 +284,12 @@ export class UIMenu {
         this.xDiff = this.xDown - xUp;
         this.yDiff = this.yDown - yUp;
     };
+
+    public render(): void {
+        this.addCustomEvent();
+        this.handleInitialLoad();
+        this.setActiveLinkItem();
+        this.setListeners();
+    }
 
 }
