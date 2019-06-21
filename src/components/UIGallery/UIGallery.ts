@@ -3,16 +3,21 @@ import {UIGalleryOptions} from "./UIGalleryOptions";
 import {BaseComponent} from "../UIBuilder/UIBuilder";
 
 export class UIGallery extends BaseComponent<UIGalleryOptions> {
-    constructor(config?: UIGalleryOptions) {
-        super(config);
-    }
-
     private nextSource: string | null = "";
     private previousSource: string | null = "";
     private currentImage: string = "";
     private currentIndex: number = 0;
     private photos: any;
     private options: any;
+
+    constructor(config?: UIGalleryOptions) {
+        super(config);
+
+        if (config) {
+            this.photos = config.data.photos;
+            this.options = config;
+        }
+    }
 
     private getBody(): Element | null {
         return document.querySelector("body");
@@ -173,7 +178,7 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         for (const photo of this.config.data.photos) {
             const node: Element = document.createElement("DIV");
             node.classList.add("grid-item");
-            node.innerHTML = `<img data-index="${index}" src='https://ni.leicht.io/${photo.mediumThumbPath}' data-large='https://ni.leicht.io/${photo.fullSizePath}'>`;
+            node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'>`;
 
             const image: Element | null = node.querySelector("img");
             if (image) {
