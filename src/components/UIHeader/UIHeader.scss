@@ -94,7 +94,7 @@
     width: 100%;
 
     @include lg() {
-      width: 905px;
+      width: $extended-content-width;
     }
   }
 

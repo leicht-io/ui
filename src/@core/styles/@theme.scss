@@ -50,6 +50,10 @@ body, html {
     @include cardShadow();
   }
 
+  .ui-icons a {
+    background: none;
+  }
+
   &.fullwidth {
     max-width: 100%;
   }
