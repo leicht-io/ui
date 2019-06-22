@@ -1,10 +1,11 @@
 .ui-card {
-  border: 1px solid #d0d0d0;
   border-radius: $base-spacing;
   min-height: 100px;
   width: 100%;
   overflow: hidden;
   position: relative;
+
+  @include cardShadow();
 
   .ui-card--title {
     bottom: 0;
