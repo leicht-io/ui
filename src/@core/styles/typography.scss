@@ -12,7 +12,8 @@ h1, h2, h3, h4, h5, h6 {
 p, a {
   @include fontFamily();
   color: $secondaryText;
-  font-size: $base-spacing * 2;
+  // font-size: $base-spacing * 2;
+  font-size: 20px;
 }
 
 p {
@@ -42,7 +43,7 @@ h4 {
 
 h5 {
   font-size: $base-spacing * 3;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 h6 {

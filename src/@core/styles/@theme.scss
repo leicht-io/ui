@@ -1,4 +1,4 @@
-//@import "../../../node_modules/systematize";
+@import "systematize";
 //Variables & Mixins
 @import "variables";
 @import "shadows";
@@ -12,6 +12,8 @@
 @import "icons";
 @import "buttons";
 @import "divider";
+@import "loader";
+@import "images";
 @import "../../components/UIModal/UIModal";
 @import "../../components/UIInput/UIInput";
 @import "../../components/UIGrid/UIGrid";
@@ -26,11 +28,44 @@
 
 body {
   @include fontFamily();
+
+  //TODO: Clean this
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.6;
+  color: #424242;
+  float: left !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-y: scroll;
+}
+
+html {
+  color: #333;
 }
 
 body, html {
   margin: 0;
   padding: 0;
+
+  height:100%;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+figure, p, pre {
+  margin: 0 0 1rem 0;
+}
+
+::selection {
+  background: #0965b0;
+  color: #fff;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
 .page-container {
@@ -50,7 +85,7 @@ body, html {
     @include cardShadow();
   }
 
-  .ui-icons a {
+  .ui-icons.ui-icons a {
     background: none;
   }
 
@@ -89,7 +124,3 @@ body, html {
   }
 }
 
-
-.img-circle {
-  border-radius: 50%;
-}
