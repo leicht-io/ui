@@ -5,6 +5,7 @@ export declare class UIModal extends UIComponent {
     constructor(content: UIModalInterface);
     private getParentContainer;
     private hideModal;
+    private toggleScroll;
     private showModal;
     addEventListeners(): void;
     private handleCloseButtonClick;

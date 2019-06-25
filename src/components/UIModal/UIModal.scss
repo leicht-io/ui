@@ -72,6 +72,10 @@
 
   .ui-modal--title {
     color: $primaryText;
+
+    h5 {
+      margin: 0;
+    }
   }
 
   .ui-modal--buttons-close {

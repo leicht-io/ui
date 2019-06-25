@@ -14,9 +14,19 @@ export class UIModal extends UIComponent {
         if (parentContainer) {
             this.getParentContainer().classList.remove("ui-modal--container--visible");
         }
+        this.toggleScroll(false);
         this.destroy();
     }
+    toggleScroll(enable) {
+        if (enable) {
+            DOM.query("body").classList.add("body--disable-scroll");
+        }
+        else {
+            DOM.query("body").classList.remove("body--disable-scroll");
+        }
+    }
     showModal() {
+        this.toggleScroll(true);
         this.getParentContainer().classList.add("ui-modal--container--visible");
     }
     addEventListeners() {

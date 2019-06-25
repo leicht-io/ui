@@ -1,6 +1,7 @@
 import {Swipe} from "../../@core/utils/Swipe";
 import {UIGalleryOptions} from "./UIGalleryOptions";
 import {BaseComponent} from "../UIBuilder/UIBuilder";
+import {DOM} from "../../@core/utils/DOM";
 
 export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private nextSource: string | null = "";
@@ -60,6 +61,7 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
             wrapper.classList.remove("ui-gallery--wrapper-visible");
             setTimeout(() => {
                 this.removePopUpWrapperFromDom();
+                this.toggleScroll(false);
             }, 250);
         }
     }
@@ -75,28 +77,42 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         return false;
     }
 
+    private toggleScroll(enable: boolean): void {
+        if (enable) {
+            DOM.query("body").classList.add("body--disable-scroll");
+        } else {
+            DOM.query("body").classList.remove("body--disable-scroll");
+        }
+    }
+
     private showImage(source: string | null): void {
+        this.toggleScroll(true);
         this.setNextAndPrevImage();
 
         const wrapper = this.getWrapper();
         if (wrapper && source) {
             const prevImageSrc: any = this.previousSource;
             const nextImageSrc: any = this.nextSource;
-            wrapper.innerHTML = `<img draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/><img draggable='false' id='ui-gallery--current-image' src='${source}'/><img draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>`;
+            wrapper.innerHTML = `
+<img draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/>
+<div class="ui-gallery--current-image"><img draggable='false' id='ui-gallery--current-image' src='${source}'/>
+<div class="ui-gallery--close">X</div></div>
+<img draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>`;
+
             wrapper.classList.add("ui-gallery--wrapper-visible");
 
             const currentImage: any = document.querySelector("#ui-gallery--current-image");
-            currentImage.addEventListener("load", (event) => {
+            currentImage.addEventListener("load", () => {
                 currentImage.classList.add("loaded");
             });
 
             const prevImage: any = document.querySelector("#ui-gallery--prev-image");
-            prevImage.addEventListener("load", (event) => {
+            prevImage.addEventListener("load", () => {
                 prevImage.classList.add("loaded");
             });
 
             const nextImage: any = document.querySelector("#ui-gallery--next-image");
-            nextImage.addEventListener("load", (event) => {
+            nextImage.addEventListener("load", () => {
                 nextImage.classList.add("loaded");
             });
         }

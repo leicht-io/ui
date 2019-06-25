@@ -54,6 +54,10 @@
   align-items: center;
   align-content: stretch;
 
+  .ui-gallery--current-image {
+    position: relative;
+  }
+
   &.ui-gallery--wrapper-visible {
     opacity: 1;
     visibility: visible;
@@ -74,6 +78,7 @@
     text-align: center;
     line-height: 32px;
     opacity: 0.8;
+    cursor: pointer;
   }
 
   .ui-gallery--image-wrapper {
