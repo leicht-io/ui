@@ -44,12 +44,16 @@
 
   &:last-child {
     margin-right: 0;
+    margin-left: 0;
+
+    @include sm() {
+      margin-left: $base-spacing;
+    }
   }
 }
 
 form {
   .form-content {
-    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -58,11 +62,17 @@ form {
 
     &.form-content--multiple {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: nowrap;
       justify-content: flex-start;
-      align-items: stretch;
+      align-items: center;
       align-content: stretch;
+
+      @include sm() {
+        flex-direction: row;
+        align-items: stretch;
+        align-content: stretch;
+      }
     }
   }
 }

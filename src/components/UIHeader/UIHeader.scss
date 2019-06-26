@@ -18,13 +18,18 @@
 
   h1 {
     text-align: center;
-    padding: 0 $base-spacing * 3;
     color: #fff;
     z-index: 9;
     font-weight: 700;
     font-size: 34px;
+    margin: 0;
+    padding-top: $base-spacing * 3;
+    padding-right: $base-spacing * 3;
+    padding-left: $base-spacing * 3;
+    padding-bottom: 0;
 
     @include sm() {
+      padding-top: 0;
       font-size: 56px;
     }
   }
@@ -113,8 +118,10 @@
       -webkit-box-orient: vertical;
       line-height: 36px;
       max-height: 72px;
+      padding-top: $base-spacing * 8;
 
       @include sm() {
+        padding-top: 0;
         line-height: 67px;
         max-height: 143px;
       }
