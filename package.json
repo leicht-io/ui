@@ -1,6 +1,6 @@
 {
   "name": "@leicht.io/ui",
-  "version": "0.0.42",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
     "build:production:dist": "tsc --build tsconfig.json",

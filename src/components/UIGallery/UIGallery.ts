@@ -94,10 +94,11 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
             const prevImageSrc: any = this.previousSource;
             const nextImageSrc: any = this.nextSource;
             wrapper.innerHTML = `
-<img draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/>
-<div class="ui-gallery--current-image"><img draggable='false' id='ui-gallery--current-image' src='${source}'/>
-<div class="ui-gallery--close">X</div></div>
-<img draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>`;
+                                    <img draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/>
+                                    <div class="ui-gallery--current-image"><img draggable='false' id='ui-gallery--current-image' src='${source}'/>
+                                    <div class="ui-gallery--close">X</div></div>
+                                    <img draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>
+                                `;
 
             wrapper.classList.add("ui-gallery--wrapper-visible");
 
@@ -194,7 +195,7 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         for (const photo of this.config.data.photos) {
             const node: Element = document.createElement("DIV");
             node.classList.add("grid-item");
-            node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'>`;
+            node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'><p>${photo.description}</p>`;
 
             const image: Element | null = node.querySelector("img");
             if (image) {
