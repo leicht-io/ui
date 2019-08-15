@@ -147,21 +147,17 @@ Real grid
  */
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   justify-items: stretch;
   align-items: stretch;
 
-  @include md() {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 
   &.grid-four-columns {
     grid-template-columns: 1fr;
 
     @include sm() {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
     @include md() {
@@ -169,7 +165,23 @@ Real grid
     }
   }
 
+  &.grid-three-columns {
+    grid-template-columns: 1fr;
+
+    @include sm() {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include md() {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
   &.grid-two-columns {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    @include sm() {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

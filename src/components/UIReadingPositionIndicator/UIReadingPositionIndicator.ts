@@ -1,41 +1,45 @@
 import {BaseComponent, BaseConfig} from "../UIBuilder/UIBuilder";
 
 export class UIReadingPositionIndicator extends BaseComponent<BaseConfig> {
+    private windowHeight: number = 0;
+    private documentHeight: number = 0;
+    private progressBar: HTMLElement | null = null;
+
     constructor(config?: BaseConfig) {
         super(config);
+
+        requestAnimationFrame(() => {
+            this.windowHeight = window.innerHeight;
+            this.documentHeight = document.documentElement.scrollHeight;
+            this.progressBar = document.querySelector("progress.ui-reading-position-indicator");
+
+            this.setMax();
+        });
     }
 
-    private cycle(progressBar: HTMLElement | null): void {
-        this.setMax(progressBar);
-        this.setProgress(progressBar)
-    }
-
-    private setProgress(progressBar: HTMLElement | null): void {
-        if (!progressBar) {
+    private setProgress(): void {
+        if (!this.progressBar) {
             return;
         }
 
-        progressBar.setAttribute('value', window.pageYOffset.toString());
+        this.progressBar.setAttribute('value', window.pageYOffset.toString());
     }
 
-    private setMax(progressBar: HTMLElement | null): void {
-        if (!progressBar) {
+    private setMax(): void {
+        if (!this.progressBar) {
             return;
         }
 
-        const windowHeight: number = window.innerHeight;
-        const documentHeight: number = document.documentElement.offsetHeight;
-        const max: number = documentHeight - windowHeight;
+        const max: number = this.documentHeight - this.windowHeight;
 
-        progressBar.setAttribute('max', max.toString());
+        this.progressBar.setAttribute('max', max.toString());
     }
 
     public render() {
-        const progressBar: HTMLElement | null = document.querySelector("progress.ui-reading-position-indicator");
+        this.setProgress();
 
-        this.cycle(progressBar);
         window.addEventListener("scroll", () => {
-            this.cycle(progressBar);
+            this.setProgress();
         })
     }
 }
