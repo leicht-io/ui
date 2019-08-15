@@ -11,7 +11,6 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     private throttleDelay: number = 100;
     private last: any = null;
     private initialLoad = true;
-    private originalLogo: string | null = null;
 
     constructor(config?: BaseConfig) {
         super(config);
@@ -32,16 +31,13 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private handleInitialLoad(): void {
-        const logo: HTMLElement = this.getLogoElement();
-        this.originalLogo = logo.getAttribute("src");
-
         setTimeout(() => {
             const wrapper: any = document.querySelector(".nav-wrapper");
             if (wrapper !== null) {
                 if (this.initialLoad && window.pageYOffset > 0) {
                     wrapper.classList.add("disable-animations");
 
-                    this.handleLogo(true);
+                    this.handleScrollClasses(true);
                     this.toggleMenuChevrons(false);
                     this.toggleHamburger(true);
                 } else {
@@ -160,28 +156,18 @@ export class UIMenu extends BaseComponent<BaseConfig> {
         return document.querySelector(".nav-wrapper");
     }
 
-    private getLogoElement(): any {
-        return document.querySelector(".nav-logo");
-    }
-
-    private handleLogo(showOriginal: boolean): void {
+    private handleScrollClasses(showOriginal: boolean): void {
         const header = this.getHeaderElement();
-        const logo: HTMLElement = this.getLogoElement();
-        const scrollLogo: string | null = logo.getAttribute("data-scroll-src");
 
-        if (!header || !logo || !scrollLogo || !this.originalLogo) {
+        if (!header) {
             return;
         }
 
-        logo.style.opacity = "0";
         if (!showOriginal) {
             header.classList.add("nav-wrapper--active");
-            logo.setAttribute("src", scrollLogo);
         } else {
             header.classList.remove("nav-wrapper--active");
-            logo.setAttribute("src", this.originalLogo);
         }
-        logo.style.opacity = "100";
     }
 
     private toggleMenuChevrons(add: boolean): void {
@@ -220,11 +206,11 @@ export class UIMenu extends BaseComponent<BaseConfig> {
         const header = this.getHeaderElement();
 
         if (header && window.pageYOffset && !header.classList.contains("nav-wrapper--active")) {
-            this.handleLogo(false);
+            this.handleScrollClasses(false);
             this.toggleMenuChevrons(false);
             this.toggleHamburger(true);
         } else if (window.pageYOffset === 0) {
-            this.handleLogo(true);
+            this.handleScrollClasses(true);
             this.toggleMenuChevrons(true);
             this.toggleHamburger(false);
         }

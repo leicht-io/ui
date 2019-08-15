@@ -8,7 +8,7 @@ body.nav--disable-scroll {
 }
 
 .nav-wrapper {
-  height: 64px;
+  height: $navigation-height;
 
   background-color: #333;
 
@@ -21,6 +21,35 @@ body.nav--disable-scroll {
 
   transition: all 0.250s linear;
 
+  .logo {
+    height: $navigation-height;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    a {
+      padding: 0;
+    }
+
+    svg:first-child {
+      width: $navigation-height / 1.5;
+      height: $navigation-height / 1.5;
+      margin-right: $base-spacing * 2;
+      fill: $white;
+      transition: all 0.250s linear;
+    }
+
+    svg:last-child {
+      height: $navigation-height / 1.5;
+      fill: white;
+      transition: all 0.250s linear;
+    }
+  }
+
   &.nav-wrapper-transparent {
     background-color: transparent;
   }
@@ -32,6 +61,21 @@ body.nav--disable-scroll {
 
     a, .nav-sub-btn {
       color: $secondaryText;
+    }
+
+    .logo {
+      svg:first-child {
+        width: $navigation-height / 2;
+        height: $navigation-height / 2;
+        fill: #000;
+        transition: all 0.250s linear;
+      }
+
+      svg:last-child {
+        height: $navigation-height / 2;
+        fill: #000;
+        transition: all 0.250s linear;
+      }
     }
   }
 
