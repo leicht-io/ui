@@ -43,3 +43,32 @@ $screen-xl-min: 1200px;
     @content;
   }
 }
+
+// TODO: Add to own stylesheet
+.hidden-xs {
+  display: none;
+
+  @include sm() {
+    display: block;
+  }
+}
+
+.xs-full-width {
+  width: 100%;
+
+  @include sm() {
+    width: auto;
+  }
+}
+
+.xs-text-center {
+  text-align: center;
+
+  @include sm() {
+    text-align: left;
+  }
+}
+
+.content-fullwidth {
+  width: 100%;
+}

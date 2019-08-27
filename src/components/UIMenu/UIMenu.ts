@@ -1,7 +1,7 @@
-import {BaseConfig, BaseComponent} from "../UIBuilder/UIBuilder";
+import {BaseComponent, BaseConfig} from "../UIBuilder/UIBuilder";
 
 export class UIMenu extends BaseComponent<BaseConfig> {
-        private xDown: any = null;
+    private xDown: any = null;
     private yDown: any = null;
     private xDiff: any = null;
     private yDiff: any = null;
@@ -31,8 +31,9 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private handleInitialLoad(): void {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             const wrapper: any = document.querySelector(".nav-wrapper");
+
             if (wrapper !== null) {
                 if (this.initialLoad && window.pageYOffset > 0) {
                     wrapper.classList.add("disable-animations");
@@ -40,12 +41,15 @@ export class UIMenu extends BaseComponent<BaseConfig> {
                     this.handleScrollClasses(true);
                     this.toggleMenuChevrons(false);
                     this.toggleHamburger(true);
+
+                    wrapper.classList.add("nav-wrapper--active");
+
                 } else {
                     wrapper.classList.remove("disable-animations");
                 }
             }
             this.initialLoad = false;
-        }, 0);
+        });
     }
 
     private setActiveLinkItem(): void {

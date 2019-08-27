@@ -12,6 +12,11 @@
     margin-bottom: $base-spacing * 2;
   }
 
+
+  &.divider--transparent {
+    background: transparent !important;
+  }
+
   &.divider-large {
     margin-top: $base-spacing * 2;
     margin-bottom: $base-spacing * 2;

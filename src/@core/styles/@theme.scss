@@ -8,6 +8,7 @@
 @import "breakpoints";
 @import "mixins";
 @import "animations";
+@import "atomics";
 //Components
 @import "fonts";
 @import "icons";
@@ -26,6 +27,7 @@
 @import "../../components/UICard/UICard";
 @import "../../components/UITags/UITags";
 @import "../../components/UIReadingPositionIndicator/UIReadingPositionIndicator";
+@import "../../components/UILoader/UILoader";
 
 body {
   @include fontFamily();

@@ -1,8 +1,8 @@
 //TODO: Create as component
-
 img {
   max-width: 100%;
   height: auto;
+
 
   &.img-fullwidth {
     width: 100%;
@@ -22,6 +22,18 @@ img {
     border-radius: $base-spacing;
   }
 
+  &.img-center {
+    margin: 0 auto;
+  }
+}
+
+//TODO: Change this to a class
+#img-author {
+  margin-bottom: $base-spacing * 3;
+
+  @include sm() {
+    margin-bottom: 0;
+  }
 }
 
 .img-with-caption {

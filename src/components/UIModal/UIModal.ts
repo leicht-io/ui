@@ -62,7 +62,6 @@ export class UIModal extends UIComponent {
     }
 
     private handleKeyDown(event: KeyboardEvent): void {
-        console.log("clicked")
         if (event.key === "Escape") {
             this.hideModal();
         }

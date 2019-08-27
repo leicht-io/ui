@@ -2,6 +2,7 @@ import {Swipe} from "../../@core/utils/Swipe";
 import {UIGalleryOptions} from "./UIGalleryOptions";
 import {BaseComponent} from "../UIBuilder/UIBuilder";
 import {DOM} from "../../@core/utils/DOM";
+import {UILoader} from "../UILoader";
 
 export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private nextSource: string | null = "";
@@ -10,6 +11,7 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private currentIndex: number = 0;
     private photos: any;
     private options: any;
+    private loaderId: string = "";
 
     constructor(config?: UIGalleryOptions) {
         super(config);
@@ -17,6 +19,8 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         if (config) {
             this.photos = config.data.photos;
             this.options = config;
+
+            this.addLoader();
         }
     }
 
@@ -179,52 +183,71 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         }
     }
 
-
-    public render() {
-        if (!this.config) {
-            return;
-        }
-
-        document.addEventListener("keyup", (e: any) => {
-            if (e.key === "Escape") {
-                this.hideImage();
-            }
-        });
-
-        let index = 0;
-        for (const photo of this.config.data.photos) {
-            const node: Element = document.createElement("DIV");
-            node.classList.add("grid-item");
-            node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'><p>${photo.description}</p>`;
-
-            const image: Element | null = node.querySelector("img");
-            if (image) {
-                image.addEventListener("load", () => {
-                    image.classList.add("loaded");
-                });
-
-                image.addEventListener("click", (event: Event) => {
-                    if (event && event.target) {
-                        this.currentImage = (event.target as any).getAttribute("data-large");
-                        this.currentIndex = Number((event.target as any).getAttribute("data-index"));
-                        //this.previousSource = this.photos[this.currentIndex - 1].fullSizePath;
-                        //this.nextSource = this.photos[this.currentIndex + 1].fullSizePath;
-
-                    }
-
-                    this.showImage(this.currentImage);
-                });
-            }
-
+    private addLoader(): void {
+        if (this.config) {
             const gallery: Element | null = document.querySelector(this.config.selector);
             if (gallery) {
-                gallery.append(node)
+                const loader: Element = UILoader.getLoader();
+                this.loaderId = loader.id;
+                gallery.after(loader);
+
+                //TODO: add this to loader component
+                requestAnimationFrame(() => {
+                    loader.classList.add('ui-loader--fade-in');
+                });
+            }
+        }
+    }
+
+    public render() {
+        setTimeout(() => {
+            if (!this.config) {
+                return;
             }
 
-            index++;
-        }
+            document.addEventListener("keyup", (e: any) => {
+                if (e.key === "Escape") {
+                    this.hideImage();
+                }
+            });
 
-        this.addPopUpWrapperToDom();
-        this.addListeners();
+            UILoader.removeLoader(this.loaderId);
+
+            const gallery: Element | null = document.querySelector(this.config.selector);
+            let index = 0;
+            for (const photo of this.config.data.photos) {
+                const node: Element = document.createElement("DIV");
+                node.classList.add("grid-item");
+                node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'><p>${photo.description}</p>`;
+
+                const image: Element | null = node.querySelector("img");
+                if (image) {
+                    image.addEventListener("load", () => {
+                        image.classList.add("loaded");
+                    });
+
+                    image.addEventListener("click", (event: Event) => {
+                        if (event && event.target) {
+                            this.currentImage = (event.target as any).getAttribute("data-large");
+                            this.currentIndex = Number((event.target as any).getAttribute("data-index"));
+                            //this.previousSource = this.photos[this.currentIndex - 1].fullSizePath;
+                            //this.nextSource = this.photos[this.currentIndex + 1].fullSizePath;
+
+                        }
+
+                        this.showImage(this.currentImage);
+                    });
+                }
+
+                if (gallery) {
+                    gallery.append(node)
+                }
+
+                index++;
+            }
+
+            this.addPopUpWrapperToDom();
+            this.addListeners();
+        }, 5000)
     }
 }
