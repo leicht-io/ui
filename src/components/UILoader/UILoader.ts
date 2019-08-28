@@ -1,10 +1,11 @@
+import {DOM} from "../../@core/DOM/DOM";
+
 export class UILoader {
 
     public static getLoader(): Element {
-        const loader: Element = document.createElement("DIV");
+        const loader: Element = DOM.createElement("div", '<div class="double-bounce1"></div><div class="double-bounce2"></div>');
         loader.classList.add("ui-loader");
         loader.id = Math.random().toString(36).substr(2, 9);
-        loader.innerHTML = '<div class="double-bounce1"></div><div class="double-bounce2"></div>';
 
         return loader;
     }

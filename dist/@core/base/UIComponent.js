@@ -1,14 +1,15 @@
-import { DOM } from "../utils/DOM";
+import { UUID } from "../utils/UUID";
+import { QuerySelector } from "../DOM/QuerySelector";
 export class UIComponent {
     constructor(properties) {
-        this.id = DOM.generateUUID(8);
+        this.id = UUID.generate(8);
         this.properties = properties;
         const content = this.render();
         this.addContentToDOM(content);
     }
     destroy() {
         this.timeout = setTimeout(() => {
-            const container = DOM.query("#" + this.id);
+            const container = QuerySelector.get("#" + this.id);
             if (container) {
                 container.outerHTML = "";
             }
@@ -25,7 +26,7 @@ export class UIComponent {
         const element = document.createElement('div');
         element.innerHTML = content;
         element.id = this.id;
-        const container = DOM.query(this.properties.container);
+        const container = QuerySelector.get(this.properties.container);
         if (container) {
             container.appendChild(element);
         }

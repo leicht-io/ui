@@ -1,14 +1,5 @@
-export class DOM {
-    public static query(query: string): Element {
-        const element: Element | null = document.querySelector(query);
-        if (element) {
-            return element;
-        }
-
-        return new Element();
-    }
-
-    public static generateUUID(length: number): string {
+export class UUID {
+    public static generate(length: number): string {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         const charactersLength = characters.length;

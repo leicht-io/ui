@@ -32,8 +32,8 @@ export class UIBuilder {
 
     public run() {
         for (const {component, args} of this.components) {
-            const c = new component(args);
-            c.render();
+            const baseComponent = new component(args);
+            baseComponent.render();
         }
     }
 }

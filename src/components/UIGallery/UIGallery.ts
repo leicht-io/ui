@@ -1,7 +1,10 @@
 import {Swipe} from "../../@core/utils/Swipe";
 import {UIGalleryOptions} from "./UIGalleryOptions";
 import {BaseComponent} from "../UIBuilder/UIBuilder";
-import {DOM} from "../../@core/utils/DOM";
+import {QuerySelector} from "../../@core/DOM/QuerySelector";
+import {DOM} from "../../@core/DOM/DOM";
+import {ClassList} from "../../@core/DOM/ClassList";
+import {GridSkeleton} from "../../@core/utils/GridSkeleton";
 
 export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private nextSource: string | null = "";
@@ -10,7 +13,6 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private currentIndex: number = 0;
     private photos: any;
     private options: any;
-    // private loaderId: string = "";
 
     constructor(config?: UIGalleryOptions) {
         super(config);
@@ -21,28 +23,25 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         }
     }
 
-    private getBody(): Element | null {
-        return document.querySelector("body");
+    private getBody(): HTMLElement | null {
+        return QuerySelector.get("body");
     }
 
     private getWrapper(): Element | null {
-        return document.querySelector(".ui-gallery--wrapper");
+        return QuerySelector.get(".ui-gallery--wrapper");
     }
 
     private removePopUpWrapperFromDom(): void {
-        const wrapper: any = document.querySelector(".ui-gallery--wrapper");
-        if (wrapper) {
-            wrapper.innerHTML = "";
-        }
+        DOM.removeChildren(".ui-gallery--wrapper");
     }
 
     private addPopUpWrapperToDom(): void {
         const body = this.getBody();
+
         if (body) {
-            const div = document.createElement("div");
-            div.innerHTML = "<div class='ui-gallery--wrapper'></div>";
+            const div = DOM.createElement("div", "<div class='ui-gallery--wrapper'></div>");
             if (div && div.firstChild) {
-                body.appendChild(div.firstChild);
+                DOM.append(body, div.firstChild);
             }
         }
 
@@ -59,7 +58,7 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
     private hideImage(): void {
         const wrapper = this.getWrapper();
         if (wrapper) {
-            wrapper.classList.remove("ui-gallery--wrapper-visible");
+            ClassList.remove(wrapper, "ui-gallery--wrapper-visible")
             setTimeout(() => {
                 this.removePopUpWrapperFromDom();
                 this.toggleScroll(false);
@@ -75,14 +74,15 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
                 return true;
             }
         }
+
         return false;
     }
 
     private toggleScroll(enable: boolean): void {
         if (enable) {
-            DOM.query("body").classList.add("body--disable-scroll");
+            ClassList.add('body--disable-scroll', 'body');
         } else {
-            DOM.query("body").classList.remove("body--disable-scroll");
+            ClassList.remove('body--disable-scroll', 'body');
         }
     }
 
@@ -95,27 +95,27 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
             const prevImageSrc: any = this.previousSource;
             const nextImageSrc: any = this.nextSource;
             wrapper.innerHTML = `
-                                    <img draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/>
-                                    <div class="ui-gallery--current-image"><img draggable='false' id='ui-gallery--current-image' src='${source}'/>
+                                    <img alt="Previous Photo" draggable='false' id='ui-gallery--prev-image' src='${prevImageSrc}'/>
+                                    <div class="ui-gallery--current-image"><img alt="Current Photo" draggable='false' id='ui-gallery--current-image' src='${source}'/>
                                     <div class="ui-gallery--close">X</div></div>
-                                    <img draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>
+                                    <img alt="Next Image" draggable='false' id='ui-gallery--next-image' src='${nextImageSrc}'/>
                                 `;
 
-            wrapper.classList.add("ui-gallery--wrapper-visible");
+            ClassList.add(wrapper, "ui-gallery--wrapper-visible");
 
-            const currentImage: any = document.querySelector("#ui-gallery--current-image");
+            const currentImage: any = QuerySelector.get("#ui-gallery--current-image");
             currentImage.addEventListener("load", () => {
-                currentImage.classList.add("loaded");
+                ClassList.add(currentImage, "loaded");
             });
 
-            const prevImage: any = document.querySelector("#ui-gallery--prev-image");
+            const prevImage: any = QuerySelector.get("#ui-gallery--prev-image");
             prevImage.addEventListener("load", () => {
-                prevImage.classList.add("loaded");
+                ClassList.add(prevImage, "loaded");
             });
 
-            const nextImage: any = document.querySelector("#ui-gallery--next-image");
+            const nextImage: any = QuerySelector.get("#ui-gallery--next-image");
             nextImage.addEventListener("load", () => {
-                nextImage.classList.add("loaded");
+                ClassList.add(nextImage, "loaded");
             });
         }
 
@@ -180,24 +180,12 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
         }
     }
 
-    /*private addLoader(): void {
-        if (this.config) {
-            const gallery: Element | null = document.querySelector(this.config.selector);
-            if (gallery) {
-                const loader: Element = UILoader.getLoader();
-                this.loaderId = loader.id;
-                gallery.after(loader);
-
-                //TODO: add this to loader component
-                requestAnimationFrame(() => {
-                    loader.classList.add('ui-loader--fade-in');
-                });
-            }
-        }
-    }*/
-
     public render() {
         if (!this.config) {
+            return;
+        }
+        const gallery: HTMLElement | null = QuerySelector.get(this.config.selector);
+        if (!gallery) {
             return;
         }
 
@@ -207,38 +195,30 @@ export class UIGallery extends BaseComponent<UIGalleryOptions> {
             }
         });
 
-        const gallery: Element | null = document.querySelector(this.config.selector);
-        let index = 0;
-        for (const photo of this.config.data.photos) {
-            const node: Element = document.createElement("DIV");
-            node.classList.add("grid-item");
-            node.innerHTML = `<img data-index="${index}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'><p>${photo.description}</p>`;
-
+        const photoNodes: Element[] = [];
+        for (let i = 0; i < this.config.data.photos.length; i++) {
+            const photo: any = this.config.data.photos[i];
+            const node: Element = DOM.createElement("div", `<img alt="${photo.description}" data-index="${i}" src='${this.config.baseUrl + photo.mediumThumbPath}' data-large='${this.config.baseUrl + photo.fullSizePath}'><p>${photo.description}</p>`, "grid-item");
             const image: Element | null = node.querySelector("img");
+
             if (image) {
                 image.addEventListener("load", () => {
-                    image.classList.add("loaded");
+                    ClassList.add(image, 'loaded');
                 });
 
                 image.addEventListener("click", (event: Event) => {
                     if (event && event.target) {
                         this.currentImage = (event.target as any).getAttribute("data-large");
                         this.currentIndex = Number((event.target as any).getAttribute("data-index"));
-                        //this.previousSource = this.photos[this.currentIndex - 1].fullSizePath;
-                        //this.nextSource = this.photos[this.currentIndex + 1].fullSizePath;
-
                     }
 
                     this.showImage(this.currentImage);
                 });
             }
 
-            if (gallery) {
-                gallery.append(node)
-            }
-
-            index++;
+            photoNodes.push(node);
         }
+        GridSkeleton.handle(gallery, photoNodes);
 
         this.addPopUpWrapperToDom();
         this.addListeners();

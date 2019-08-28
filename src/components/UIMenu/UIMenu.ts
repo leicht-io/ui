@@ -1,4 +1,8 @@
 import {BaseComponent, BaseConfig} from "../UIBuilder/UIBuilder";
+import {QuerySelector} from "../../@core/DOM/QuerySelector";
+import {ClassList} from "../../@core/DOM/ClassList";
+import {Attribute} from "../../@core/DOM/models/Attribute";
+import {Event} from "../../@core/DOM/models/Event";
 
 export class UIMenu extends BaseComponent<BaseConfig> {
     private xDown: any = null;
@@ -32,20 +36,20 @@ export class UIMenu extends BaseComponent<BaseConfig> {
 
     private handleInitialLoad(): void {
         requestAnimationFrame(() => {
-            const wrapper: any = document.querySelector(".nav-wrapper");
+            const wrapper: any = QuerySelector.get(".nav-wrapper");
 
             if (wrapper !== null) {
                 if (this.initialLoad && window.pageYOffset > 0) {
-                    wrapper.classList.add("disable-animations");
+                    ClassList.add(wrapper, "disable-animations");
 
                     this.handleScrollClasses(true);
                     this.toggleMenuChevrons(false);
                     this.toggleHamburger(true);
 
-                    wrapper.classList.add("nav-wrapper--active");
+                    ClassList.add(wrapper, "nav-wrapper--active");
 
                 } else {
-                    wrapper.classList.remove("disable-animations");
+                    ClassList.remove(wrapper, "disable-animations");
                 }
             }
             this.initialLoad = false;
@@ -53,13 +57,16 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private setActiveLinkItem(): void {
-        document.querySelectorAll(".nav-wrapper a").forEach((anchor: Element) => {
-            const pathName = document.location.pathname.split("/")[1];
-            const attribute: string | null = anchor.getAttribute("href");
+        const anchors: NodeListOf<Element> = QuerySelector.getAll(".nav-wrapper a");
+        const pathName = document.location.pathname.split("/")[1];
+
+        for (let i = 0; i < anchors.length; i++) {
+            const anchor: Element = anchors.item(i);
+            const attribute: string | null = anchor.getAttribute(Attribute.HREF);
             if (anchor && anchor.parentElement && attribute && attribute.split("/")[1] === pathName) {
-                anchor.parentElement.classList.add("active");
+                ClassList.add(anchor.parentElement, "active");
             }
-        });
+        }
     }
 
     private setListeners(): void {
@@ -69,7 +76,7 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private setScrollListeners(): void {
-        window.addEventListener('scroll', () => {
+        window.addEventListener(Event.SCROLL, () => {
             this.throttle();
         }, true);
     }
@@ -85,37 +92,39 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private setClickListeners(): void {
-        const hamburger: any = document.querySelector(".nav-hamburger");
-        const navBackground: any = document.querySelector(".nav-background");
-        const dropDownButtons = document.querySelectorAll(".nav-sub-btn");
-        const closeBtn: any = document.querySelector(".nav-responsive-header .ui-i--close");
+        const hamburger: any = QuerySelector.get(".nav-hamburger");
+        const navBackground: any = QuerySelector.get(".nav-background");
+        const dropDownButtons = QuerySelector.getAll(".nav-sub-btn");
+        const closeBtn: any = QuerySelector.get(".nav-responsive-header .ui-i--close");
 
-        hamburger.addEventListener("click", () => {
+        hamburger.addEventListener(Event.CLICK, () => {
             this.toggleMenu(true);
         });
 
-        navBackground.addEventListener("click", () => {
+        navBackground.addEventListener(Event.CLICK, () => {
             this.toggleMenu(false);
         });
 
-        dropDownButtons.forEach((button: any) => {
-            button.addEventListener("click", function (event: any) {
+        for (let i = 0; i < dropDownButtons.length; i++) {
+            const button: Element = dropDownButtons.item(i);
+
+            button.addEventListener(Event.CLICK, function (event: any) {
                 const subContent: any = event.target.parentElement.querySelector(".nav-sub-content");
 
                 if (subContent.classList.contains("nav-sub-content-active")) {
-                    subContent.classList.remove("nav-sub-content-active");
+                    ClassList.remove(subContent, "nav-sub-content-active");
                 } else {
                     for (let q = 0; q < dropDownButtons.length; q++) {
                         const subParent: any = dropDownButtons[q].parentElement;
                         subParent.getElementsByClassName("nav-sub-content")[0].classList.remove("nav-sub-content-active");
                     }
 
-                    subContent.classList.add("nav-sub-content-active");
+                    ClassList.add(subContent, "nav-sub-content-active");
                 }
             });
-        });
+        }
 
-        closeBtn.addEventListener("click", () => {
+        closeBtn.addEventListener(Event.CLICK, () => {
             this.toggleMenu(false);
         });
     }
@@ -125,21 +134,17 @@ export class UIMenu extends BaseComponent<BaseConfig> {
         const nav: any = document.getElementsByClassName("nav")[0];
         const navBackground: any = document.getElementsByClassName("nav-background")[0];
 
-        if (shouldOpen) {
-            if (nav && nav.style.display !== "block") {
-                nav.classList.add("nav-active");
-                navBackground.classList.add("nav-background-active");
-                body.classList.add("nav--disable-scroll");
-            } else {
-                nav.classList.remove("nav-active");
-                navBackground.classList.remove("nav-background-active");
-                body.classList.remove("nav--disable-scroll");
-            }
-        } else {
-            nav.classList.remove("nav-active");
-            navBackground.classList.remove("nav-background-active");
-            body.classList.remove("nav--disable-scroll");
+        if (shouldOpen && nav && nav.style.display !== "block") {
+            nav.classList.add("nav-active");
+            navBackground.classList.add("nav-background-active");
+            body.classList.add("nav--disable-scroll");
+
+            return;
         }
+
+        nav.classList.remove("nav-active");
+        navBackground.classList.remove("nav-background-active");
+        body.classList.remove("nav--disable-scroll");
     }
 
     private throttle() {
@@ -157,7 +162,7 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private getHeaderElement() {
-        return document.querySelector(".nav-wrapper");
+        return QuerySelector.get(".nav-wrapper");
     }
 
     private handleScrollClasses(showOriginal: boolean): void {
@@ -168,16 +173,18 @@ export class UIMenu extends BaseComponent<BaseConfig> {
         }
 
         if (!showOriginal) {
-            header.classList.add("nav-wrapper--active");
+            ClassList.add(header, "nav-wrapper--active");
         } else {
-            header.classList.remove("nav-wrapper--active");
+            ClassList.remove(header, "nav-wrapper--active");
         }
     }
 
     private toggleMenuChevrons(add: boolean): void {
-        const menuIcons: any = document.querySelectorAll(".nav-wrapper .ui-i--chevron-down");
+        const menuIcons: NodeListOf<Element> = QuerySelector.getAll(".nav-wrapper .ui-i--chevron-down");
 
-        for (const icon of menuIcons) {
+        for (let i = 0; i < menuIcons.length; i++) {
+            const icon: Element = menuIcons.item(i);
+
             if (add) {
                 icon.classList.add("ui-i--white");
                 icon.classList.remove("ui-i--gray");
@@ -189,8 +196,10 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private toggleHamburger(dark: boolean): void {
-        document.querySelectorAll(".nav-wrapper .ui-i--hamburger").forEach((hamburger) => {
+        const hamburgers: NodeListOf<Element> = QuerySelector.getAll(".nav-wrapper .ui-i--hamburger");
 
+        for (let i = 0; i < hamburgers.length; i++) {
+            const hamburger: Element = hamburgers.item(i);
             if (dark) {
                 hamburger.classList.remove("ui-i--white");
                 hamburger.classList.remove("ui-i--gray");
@@ -198,13 +207,13 @@ export class UIMenu extends BaseComponent<BaseConfig> {
                 hamburger.classList.remove("ui-i--gray");
                 hamburger.classList.add("ui-i--white");
             }
-        })
+        }
     }
 
     private onScroll() {
-        const wrapper: any = document.querySelector(".nav-wrapper");
-        if (wrapper !== null) {
-            wrapper.classList.remove("disable-animations");
+        const wrapper: HTMLElement | null = QuerySelector.get(".nav-wrapper");
+        if (wrapper) {
+            ClassList.remove(wrapper, "disable-animations");
         }
 
         const header = this.getHeaderElement();

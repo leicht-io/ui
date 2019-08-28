@@ -1,8 +1,9 @@
-import {DOM} from "../utils/DOM";
+import {UUID} from "../utils/UUID";
+import {QuerySelector} from "../DOM/QuerySelector";
 
 export class UIComponent {
     public properties: any;
-    private id: string = DOM.generateUUID(8);
+    private id: string = UUID.generate(8);
     private timeout: any;
 
     constructor(properties: any) {
@@ -14,7 +15,7 @@ export class UIComponent {
 
     public destroy(): void {
         this.timeout = setTimeout(() => {
-            const container: Element | null = DOM.query("#" + this.id);
+            const container: Element | null = QuerySelector.get("#" + this.id);
             if (container) {
                 container.outerHTML = "";
             }
@@ -36,7 +37,7 @@ export class UIComponent {
         element.innerHTML = content;
         element.id = this.id;
 
-        const container: Element | null = DOM.query(this.properties.container);
+        const container: Element | null = QuerySelector.get(this.properties.container);
         if (container) {
             container.appendChild(element);
         }

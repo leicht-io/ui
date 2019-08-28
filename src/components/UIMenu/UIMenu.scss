@@ -1,3 +1,4 @@
+// TODO: Clean file when using SVG instead of image
 .disable-animations {
   transition: none !important;
   opacity: 1 !important;
@@ -151,7 +152,6 @@ body.nav--disable-scroll {
     }
   }
 
-
   .nav-sub, a {
     cursor: pointer;
     display: flex;
@@ -185,7 +185,6 @@ body.nav--disable-scroll {
   }
 
   @media (max-width: 767px) {
-
     .nav {
       overflow-y: scroll;
     }
@@ -268,12 +267,6 @@ body.nav--disable-scroll {
       border-bottom: 1px solid #eee;
     }
 
-    .nav {
-      transform: translateX(-100%);
-      visibility: hidden;
-      transition: all .5s ease-in-out;
-    }
-
     .nav-active {
       transform: translateX(0%);
       visibility: visible;
@@ -281,6 +274,9 @@ body.nav--disable-scroll {
     }
 
     .nav {
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: all .5s ease-in-out;
       position: fixed;
       left: 0;
       top: 0;
@@ -343,7 +339,6 @@ body.nav--disable-scroll {
   }
 
   @media (min-width: 768px) {
-
     .nav-background {
       display: none;
     }

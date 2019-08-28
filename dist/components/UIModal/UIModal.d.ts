@@ -1,7 +1,7 @@
 import { UIModalInterface } from "./UIModalInterface";
 import { UIComponent } from "../../@core/base/UIComponent";
 export declare class UIModal extends UIComponent {
-    private f;
+    private keyDownCallback;
     constructor(content: UIModalInterface);
     private getParentContainer;
     private hideModal;

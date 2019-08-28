@@ -1,5 +1,6 @@
 @import "systematize";
 //Variables & Mixins
+@import "animations";
 @import "variables";
 @import "shadows";
 @import "transitions";
@@ -7,14 +8,12 @@
 @import "typography";
 @import "breakpoints";
 @import "mixins";
-@import "animations";
 @import "atomics";
 //Components
 @import "fonts";
 @import "icons";
 @import "buttons";
 @import "divider";
-@import "loader";
 @import "images";
 @import "../../components/UIModal/UIModal";
 @import "../../components/UIInput/UIInput";
@@ -58,7 +57,6 @@ body, html {
 
   height: 100%;
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 }
 
