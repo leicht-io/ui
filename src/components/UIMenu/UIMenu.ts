@@ -130,9 +130,9 @@ export class UIMenu extends BaseComponent<BaseConfig> {
     }
 
     private toggleMenu(shouldOpen: boolean): void {
-        const body: any = document.getElementsByTagName('body')[0];
-        const nav: any = document.getElementsByClassName("nav")[0];
-        const navBackground: any = document.getElementsByClassName("nav-background")[0];
+        const body: any = document.body;
+        const nav: any = document.querySelector(".nav");
+        const navBackground: any = document.querySelector(".nav-background");
 
         if (shouldOpen && nav && nav.style.display !== "block") {
             nav.classList.add("nav-active");

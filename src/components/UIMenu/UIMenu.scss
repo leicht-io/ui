@@ -285,7 +285,7 @@ body.nav--disable-scroll {
       border-bottom: 1px solid #eee;
     }
 
-    .nav-active {
+    .nav-active.nav-active {
       transform: translateX(0%);
       visibility: visible;
       transition: all .5s ease-in-out;

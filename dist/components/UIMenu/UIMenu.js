@@ -107,9 +107,9 @@ export class UIMenu extends BaseComponent {
         });
     }
     toggleMenu(shouldOpen) {
-        const body = document.getElementsByTagName('body')[0];
-        const nav = document.getElementsByClassName("nav")[0];
-        const navBackground = document.getElementsByClassName("nav-background")[0];
+        const body = document.body;
+        const nav = document.querySelector(".nav");
+        const navBackground = document.querySelector(".nav-background");
         if (shouldOpen && nav && nav.style.display !== "block") {
             nav.classList.add("nav-active");
             navBackground.classList.add("nav-background-active");
