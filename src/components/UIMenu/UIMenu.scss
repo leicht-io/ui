@@ -37,16 +37,25 @@ body.nav--disable-scroll {
     }
 
     svg:first-child {
-      width: $navigation-height / 1.5;
-      height: $navigation-height / 1.5;
+      width: $base-spacing * 5;
+      height: $base-spacing * 5;
       margin-right: $base-spacing * 2;
-      fill: $white;
       transition: all 0.250s linear;
+
+      .p1 {
+        fill: $white;
+        transition: fill 250ms linear;
+      }
+
+      .p2 {
+        transition: fill 250ms linear;
+        fill: #242424;
+      }
     }
 
     svg:last-child {
       height: $navigation-height / 1.5;
-      fill: white;
+      fill: $white;
       transition: all 0.250s linear;
     }
   }
@@ -66,15 +75,24 @@ body.nav--disable-scroll {
 
     .logo {
       svg:first-child {
-        width: $navigation-height / 2;
-        height: $navigation-height / 2;
-        fill: #000;
+        width: $base-spacing * 5;
+        height: $base-spacing * 5;
         transition: all 0.250s linear;
+
+        .p1 {
+          transition: fill 250ms linear;
+          fill: #242424;
+        }
+
+        .p2 {
+          transition: fill 250ms linear;
+          fill: $white;
+        }
       }
 
       svg:last-child {
         height: $navigation-height / 2;
-        fill: #000;
+        fill: #242424;
         transition: all 0.250s linear;
       }
     }
