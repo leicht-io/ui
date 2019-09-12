@@ -10,7 +10,6 @@
 @import "mixins";
 @import "atomics";
 //Components
-@import "fonts";
 @import "icons";
 @import "buttons";
 @import "divider";
@@ -31,11 +30,9 @@
 body {
   @include fontFamily();
 
-  //TODO: Clean this
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.6;
-  color: #424242;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
   float: left !important;
   width: 100% !important;
   margin: 0 !important;
@@ -58,10 +55,6 @@ body, html {
   height: 100%;
 
   -webkit-tap-highlight-color: transparent;
-}
-
-figure, p, pre {
-  margin: 0 0 1rem 0;
 }
 
 ::selection {

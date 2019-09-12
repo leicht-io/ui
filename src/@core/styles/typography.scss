@@ -4,48 +4,76 @@
 
 h1, h2, h3, h4, h5, h6 {
   @include fontFamily();
-  line-height: 1.2;
+
   color: $primaryText;
-  margin: 0 0 $base-spacing;
 }
 
-p, a {
+p, strong, i, b, u, pre {
+  @media (min-width: 728px) {
+    font-size: 21px;
+  }
+
+  @media (min-width: 552px) and (max-width: 727.98px) {
+    font-size: 18px;
+  }
+
+  letter-spacing: -0.004em;
+  line-height: 1.58;
+  margin-top: 0.42em;
+  margin-bottom: -0.46em;
+
   @include fontFamily();
-  color: $secondaryText;
-  font-size: 18px;
-}
 
-p {
-  margin: 0 0 16px;
-  line-height: 1.5;
+  color: $primaryText;
 }
 
 h1 {
-  font-size: $base-spacing * 12;
-  font-weight: 100;
+  @media (min-width: 728px) {
+    margin-top: 1.95em;
+    font-size: 34px;
+  }
+
+  @media (min-width: 552px) and (max-width: 727.98px) {
+    margin-top: 1.2em;
+    font-size: 30px;
+  }
+
+  line-height: 48px;
+  font-size: 40px;
+  margin-bottom: 0.28em;
+  letter-spacing: -0.022em;
 }
 
 h2 {
-  font-size: $base-spacing * 7.5;
-  font-weight: 100;
+  @media (min-width: 728px) {
+    margin-top: 1.95em;
+    font-size: 34px;
+  }
+
+  @media (min-width: 552px) and (max-width: 727.98px) {
+    margin-top: 1.2em;
+    font-size: 30px;
+  }
+
+  margin-bottom: 0.28em;
+  letter-spacing: -0.022em;
+  line-height: 1.12;
+  font-weight: 600;
 }
 
 h3 {
-  font-size: $base-spacing * 6;
-  font-weight: 400;
-}
+  @media (min-width: 728px) {
+    margin-top: 1.72em;
+    font-size: 26px;
+  }
 
-h4 {
-  font-size: $base-spacing * 4.25;
-  font-weight: 400;
-}
+  @media (min-width: 552px) and (max-width: 727.98px) {
+    margin-top: 1.23em;
+    font-size: 24px;
+  }
 
-h5 {
-  font-size: $base-spacing * 3;
   font-weight: 600;
-}
-
-h6 {
-  font-size: $base-spacing * 2.5;
-  font-weight: 600;
+  margin-bottom: 0.31em;
+  line-height: 1.18;
+  letter-spacing: -0.022em;
 }

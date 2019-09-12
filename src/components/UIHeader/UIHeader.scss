@@ -21,17 +21,26 @@
     color: #fff;
     z-index: 9;
     font-weight: 700;
-    font-size: 34px;
     margin: 0;
-    padding-top: $base-spacing * 3;
     padding-right: $base-spacing * 3;
     padding-left: $base-spacing * 3;
     padding-bottom: 0;
 
     @include sm() {
       padding-top: 0;
-      font-size: 56px;
     }
+
+    @media (min-width: 728px) {
+      font-size: 36px;
+    }
+
+    @media (min-width: 552px) and (max-width: 727.98px) {
+      font-size: 32px;
+    }
+
+    line-height: 50px;
+    font-size: 42px;
+    letter-spacing: -0.022em;
   }
 
   &.header-full-width {
@@ -99,6 +108,10 @@
     width: 100%;
 
     @include lg() {
+      width: $base-content-width;
+    }
+
+    @include xl() {
       width: $extended-content-width;
     }
   }
@@ -116,13 +129,11 @@
       overflow: hidden;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      line-height: 36px;
-      max-height: 72px;
-      padding-top: $base-spacing * 8;
+      line-height: 42px;
+      max-height: 84px;
 
       @include sm() {
         padding-top: 0;
-        line-height: 67px;
         max-height: 143px;
       }
     }
