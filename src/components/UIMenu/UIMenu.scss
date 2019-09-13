@@ -65,9 +65,10 @@ body.nav--disable-scroll {
   }
 
   &.nav-wrapper--active {
+    @include cardShadow();
+
     background-color: #fff !important;
     height: 56px !important;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3) !important;
 
     a, .nav-sub-btn {
       color: $secondaryText;
@@ -200,6 +201,11 @@ body.nav--disable-scroll {
 
   .nav-responsive-header {
     display: none;
+
+    svg:nth-child(2) {
+      margin-right: auto;
+      margin-left: 10px;
+    }
   }
 
   @media (max-width: 767px) {
@@ -403,7 +409,7 @@ body.nav--disable-scroll {
       top: $base-spacing * 9;
       border-radius: 8px;
 
-      box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
+      @include dropDownShadow();
 
       opacity: 0;
       visibility: hidden;
@@ -472,6 +478,7 @@ body.nav--disable-scroll {
     background: #009688;
     height: 32px;
     padding: 0 15px;
+    margin-left: 15px;
     margin-top: 32px;
     border-radius: 4px;
     text-transform: uppercase;

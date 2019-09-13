@@ -1,4 +1,6 @@
 .notification {
+  @include cardShadow();
+
   width: 100%;
   padding: $base-spacing * 2;
   border-radius: $base-spacing;

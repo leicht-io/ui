@@ -39,7 +39,7 @@
     max-height: 80vh;
     overflow: hidden;
 
-    @include boxShadow;
+    @include boxShadow();
 
     @include xl() {
       width: 1170px;
@@ -60,6 +60,7 @@
     align-items: center;
     align-content: center;
     border-bottom: 1px solid #eee;
+    font-size: 18px;
   }
 
   .ui-modal--title {

@@ -8,9 +8,9 @@ h1, h2, h3, h4, h5, h6 {
   color: $primaryText;
 }
 
-p, strong, i, b, u, pre {
+p, strong, i, b, u, pre, li {
   @media (min-width: 728px) {
-    font-size: 21px;
+    font-size: 18px;
   }
 
   font-size: 18px;
