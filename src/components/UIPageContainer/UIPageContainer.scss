@@ -1,0 +1,42 @@
+@import "../../@core/styles/@theme.scss";
+
+.page-container {
+  flex-grow: 1;
+
+  max-width: $extended-content-width;
+  width: calc(100% - 24 * 2px);
+  margin: 0 auto;
+
+  padding: $base-spacing * 3;
+
+  overflow: visible;
+
+  img {
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+    @include cardShadow();
+  }
+
+  .ui-icons.ui-icons a {
+    background: none;
+  }
+
+  &.fullwidth {
+    max-width: 100%;
+  }
+
+  a:not(.btn), code {
+    cursor: pointer;
+    color: #424242;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding: .1rem .3rem .2rem;
+    border-radius: .3rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    font-weight: 700;
+    text-decoration: none;
+    background: -webkit-gradient(linear, left top, right top, from(#fce4ee), to(#cce7ff));
+    background: linear-gradient(to right, #fce4ee, #cce7ff);
+  }
+}
