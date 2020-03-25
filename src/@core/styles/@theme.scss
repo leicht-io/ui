@@ -5,10 +5,13 @@
 @import "shadows";
 @import "transitions";
 @import "colors";
-@import "typography";
 @import "breakpoints";
 @import "mixins";
 @import "atomics";
+
+@mixin fontFamily() {
+  font-family: -system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 
 body {
   @include fontFamily();

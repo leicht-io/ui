@@ -1,21 +1,21 @@
 import {Swipe} from "../../@core/utils/Swipe";
 import {UIGalleryOptions} from "./UIGalleryOptions";
-import {BaseComponent} from "../UIBuilder/UIBuilder";
 import {QuerySelector} from "../../@core/DOM/QuerySelector";
 import {DOM} from "../../@core/DOM/DOM";
 import {ClassList} from "../../@core/DOM/ClassList";
 import {GridSkeleton} from "../../@core/utils/GridSkeleton";
 
-export class UIGallery extends BaseComponent<UIGalleryOptions> {
+export class UIGallery {
     private nextSource: string | null = "";
     private previousSource: string | null = "";
     private currentImage: string = "";
     private currentIndex: number = 0;
     private photos: any;
     private options: any;
+    private config = {};
 
     constructor(config?: UIGalleryOptions) {
-        super(config);
+        // super(config);
 
         if (config) {
             this.photos = config.data.photos;
