@@ -6,3 +6,4 @@ export * from "./UIPageContainer";
 export * from "./UIProgress";
 export * from "./UIDivider";
 export * from "./UIHeader";
+export * from "./UIIcon";

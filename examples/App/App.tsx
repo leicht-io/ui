@@ -1,17 +1,36 @@
 import React from "react";
-import {UIDivider, UIHeader, UIMenu, UIPageContainer, UIProgress, UITags} from "../../src/components";
+import {
+    UIDivider,
+    UIGallery,
+    UIHeader,
+    UIIcon,
+    UIMenu,
+    UIPageContainer,
+    UIProgress,
+    UITags
+} from "../../src/components";
 import {UINotification} from "../../src/components/UINotification";
 import {UICard} from "../../src/components/UICard";
 import {UIGrid} from "../../src/components/UIGrid";
 import {UITypography} from "../../src/components/UITypography";
 import {UIButton} from "../../src/components/UIButton";
+import {galleryMockResponse} from "../assets/gallery.mock";
 
 export const App = () => {
+    const [gallery, setGallery] = React.useState<any>(null);
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            setGallery(galleryMockResponse);
+        }, 2500);
+    }, []);
+
     return (
         <>
             <UIProgress/>
             <UIMenu/>
-            <UIHeader/>
+            <UIHeader title="Leicht.IO React UI Component Library"
+                      imageUrl="https://leicht.io//assets/images/header-7.7f48e486decb2b9246586c0f33d03c942e25dcb23bb5f5d33dff9876f59ca2f9.jpg"/>
 
             <UIPageContainer>
                 <UITypography type={"h3"}>Typography</UITypography>
@@ -58,37 +77,41 @@ export const App = () => {
                 <button className="btn btn--primary" id="showModalWithHtml">Show Modal with HTML</button>
             </UIPageContainer>
 
+            <UIDivider size={"large"}/>
+
+            <UIHeader gradient={true} title="Alternative Header" multiContent={true} breadcrumbs={"Home / Blog /"}
+                      metadata={{
+                          author: {
+                              name: "Christian Leicht",
+                              image: "https://leicht.io/assets/images/Christian%20Leicht.446ae6c5b506726034a6835e04683053805a01936559314861d01c9f7e999e51.jpg",
+                              published: "May 15, 2019",
+                              updated: "May 5, 2020",
+                              length: "5 minutes read"
+                          }
+                      }}/>
+
             <UIPageContainer>
                 <UITypography type={"h3"}>Icons</UITypography>
-                <div className="grid grid--direction-row grid--align-center-vertical">
-                    <div className="ui-i ui-i--lg ui-i--github"/>
-                    <div className="ui-i ui-i--lg ui-i--instagram"/>
-                    <div className="ui-i ui-i--lg ui-i--facebook"/>
-                    <div className="ui-i ui-i--lg ui-i--landscape"/>
-                    <div className="ui-i ui-i--lg ui-i--usa"/>
-                    <div className="ui-i ui-i--lg ui-i--three-d-model"/>
-                    <div className="ui-i ui-i--lg ui-i--electronics"/>
-                    <div className="ui-i ui-i--lg ui-i--mail"/>
-                    <div className="ui-i ui-i--lg ui-i--phone"/>
-                    <div className="ui-i ui-i--lg ui-i--chevron-down"/>
-                    <div className="ui-i ui-i--lg ui-i--hamburger"/>
-                    <div className="ui-i ui-i--lg ui-i--close"/>
-                </div>
+                <UIGrid columns={"four"}>
+                    <UIIcon icon={"github"}/>
+                    <UIIcon icon={"instagram"}/>
+                    <UIIcon icon={"facebook"}/>
+                    <UIIcon icon={"landscape"}/>
+                    <UIIcon icon={"usa"}/>
+                    <UIIcon icon={"three-d-model"}/>
+                    <UIIcon icon={"electronics"}/>
+                    <UIIcon icon={"mail"}/>
+                    <UIIcon icon={"phone"}/>
+                    <UIIcon icon={"chevron-down"}/>
+                    <UIIcon icon={"hamburger"}/>
+                    <UIIcon icon={"close"}/>
+                    <UIIcon icon={"magnify"}/>
+                </UIGrid>
             </UIPageContainer>
 
-
             <UIPageContainer>
-                <h3>Gallery</h3>
-                <div className="ui-gallery grid-container grid-two-columns">
-                    <div className="grid-item">
-                    </div>
-                    <div className="grid-item">
-                    </div>
-                    <div className="grid-item">
-                    </div>
-                    <div className="grid-item">
-                    </div>
-                </div>
+                <UITypography type={"h3"}>Gallery</UITypography>
+                <UIGallery baseUrl="https://ni.leicht.io/" gallery={gallery}/>
             </UIPageContainer>
 
             <UIPageContainer>
@@ -139,34 +162,7 @@ export const App = () => {
     );
 };
 
-
 /*
-import {UIModal} from "../../src/components/UIModal";
-import "../../src/@core/styles/@theme.scss";
-import {UIGallery} from "../src/components/UIGallery";
-import {UIMenu} from "../src/components/UIMenu";
-import {UIReadingPositionIndicator} from "../src/components/UIReadingPositionIndicator/UIReadingPositionIndicator";
-import {UIBuilder} from "../src/components/UIBuilder/UIBuilder";
-import {galleryMockResponse} from "./assets/gallery.mock";
-import {QuerySelector} from "../src/@core/DOM/QuerySelector";
-import {Event} from "../src/@core/DOM/models/Event";
-
-export class App {
-
-    constructor() {
-        new UIBuilder()
-            .with(UIMenu)
-            .with(UIReadingPositionIndicator)
-            .run();
-
-        setTimeout(() => {
-            new UIGallery({
-                selector: ".ui-gallery",
-                baseUrl: "https://ni.leicht.io/",
-                data: galleryMockResponse
-            }).render();
-        }, 1500);
-
         const modal: HTMLElement | null = QuerySelector.get("#showModal");
         const modalWithHtml: HTMLElement | null = QuerySelector.get("#showModalWithHtml");
 
@@ -182,10 +178,4 @@ export class App {
             modalWithHtml.addEventListener(Event.CLICK, () => {
                 new UIModal({container: "body", title: "HTML", content: "<p>hej</p>"});
             });
-        }
-    }
-
-}
-
-new App();
 */

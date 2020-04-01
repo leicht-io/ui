@@ -1,3 +1,5 @@
+@import "../../@core/styles/@theme.scss";
+
 .ui-gallery {
   .grid-item {
     height: 150px;
@@ -48,9 +50,12 @@
   right: 0;
   top: 0;
   bottom: 0;
+
   opacity: 0;
   visibility: hidden;
-  transition: all 0.25s linear;
+  transition: opacity 0.5s linear;
+  will-change: opacity;
+
   z-index: 1000;
 
   display: flex;
@@ -62,29 +67,54 @@
 
   .ui-gallery--current-image {
     position: relative;
+    opacity: 0;
+    visibility: hidden;
+
+    .ui-gallery--close {
+      position: absolute;
+      right: -16px;
+      top: -16px;
+      background: #eee;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      line-height: 32px;
+      cursor: pointer;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: opacity 0.5s linear;
+      will-change: transition;
+    }
+
+    &-visible {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s linear;
+      will-change: opacity;
+
+      .ui-gallery--close {
+        opacity: 1;
+        visibility: visible;
+
+        transition: opacity 0.5s linear;
+        will-change: transition;
+      }
+
+    }
   }
 
   &.ui-gallery--wrapper-visible {
     opacity: 1;
     visibility: visible;
+    transition: opacity 0.5s linear;
+    will-change: opacity;
   }
 
   .ui-gallery--current-image-wrapper {
     position: relative;
-  }
-
-  .ui-gallery--close {
-    position: absolute;
-    right: -16px;
-    top: -16px;
-    background: #eee;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    line-height: 32px;
-    opacity: 0.8;
-    cursor: pointer;
   }
 
   .ui-gallery--image-wrapper {
@@ -102,7 +132,7 @@
   }
 
   img {
-    width: 80vw;
+    max-width: 80vw;
     height: auto;
     max-height: 90vh;
     visibility: hidden;
