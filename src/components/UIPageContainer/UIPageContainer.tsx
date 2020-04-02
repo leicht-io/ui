@@ -3,7 +3,7 @@ import './UIPageContainer.scss';
 
 export const UIPageContainer = (props: any) => {
     return (
-        <div className="page-container">
+        <div className="ui-page-container">
             { props.children }
         </div>
     );

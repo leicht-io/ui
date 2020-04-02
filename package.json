@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/leicht-io/ui#readme",
   "dependencies": {
+    "@glidejs/glide": "^3.4.1",
     "react": ">=15",
     "react-dom": "^16.13.1"
   },

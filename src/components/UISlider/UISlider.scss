@@ -1,0 +1,111 @@
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+@import "../../@core/styles/@theme.scss";
+
+.slider-frame {
+  height: 530px;
+  background-size: cover !important;
+  border-radius: 0 !important;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul.glide__slides {
+  margin: 0;
+}
+
+.slide-content h2, .slide-content p {
+  color: white;
+  text-align: center;
+  max-width: 800px;
+}
+
+.slide-content {
+  padding: 0 $base-spacing * 3;
+  width: 100%;
+
+  p {
+    font-size: 18px;
+    font-weight: 400 !important;
+  }
+
+  a {
+    margin: 0;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 700;
+    text-decoration: underline;
+    background: -webkit-gradient(linear, left top, right top, from(#0089ff), to(#1bda93));
+    background: linear-gradient(to right, #0089ff, #1bda93);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 48px;
+    margin-top: 0;
+
+    @include xs() {
+      overflow: hidden;
+      line-height: 36px;
+      font-size: 36px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      padding-bottom: 6px;
+    }
+  }
+}
+
+.slide-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  opacity: 1;
+}
+
+.slide-content {
+  z-index: 1;
+}
+
+.glide {
+  height: 530px;
+  background: #AFAFAF;
+}
+
+.glide .slider-frame {
+  opacity: 1;
+}
+
+.glide-ready .slider-frame, .glide-ready .slide-overlay {
+  opacity: 1;
+  transition: opacity 0.150s linear;
+  transition-delay: 0.100s;
+}
+
+.slide-content {
+  width: 100%;
+
+  @include sm() {
+    width: auto;
+  }
+}
+
+

@@ -7,5 +7,18 @@ export interface IProps {
     breadcrumbs?: string;
 
     multiContent?: boolean;
-    metadata?: { author: { image: string, name: string, published: string, updated: string, length: string } };
+    metadata?: IMetadata;
+}
+
+export interface IMetadata {
+    author: IAuthor;
+}
+
+export interface IAuthor {
+    image: string;
+    name: string;
+    published;
+    string;
+    updated: string;
+    length: string;
 }

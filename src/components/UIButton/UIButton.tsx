@@ -3,5 +3,6 @@ import { IProps } from './types';
 import './UIButton.scss';
 
 export const UIButton = (props: IProps) => {
-    return (<button onClick={ props.onClick } className={ 'btn btn--' + props.type }>{ props.text }</button>);
+    return (
+        <button onClick={ props.onClick } className={ 'btn btn--' + props.type }>{ props.text || props.children }</button>);
 };

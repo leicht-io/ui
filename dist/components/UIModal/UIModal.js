@@ -1,109 +1,83 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-import { UIComponent } from '../../@core/base/UIComponent';
-import { QuerySelector } from '../../@core/DOM/QuerySelector';
-import { ClassList } from '../../@core/DOM/ClassList';
-import { Event } from '../../@core/DOM/models/Event';
-var UIModal = (function (_super) {
-    __extends(UIModal, _super);
-    function UIModal(content) {
-        var _this = _super.call(this, content) || this;
-        _this.keyDownCallback = function (event) { return _this.handleKeyDown(event); };
-        return _this;
-    }
-    UIModal.prototype.getParentContainer = function () {
-        return QuerySelector.get('.ui-modal--container');
-    };
-    UIModal.prototype.hideModal = function () {
-        this.removeEventListeners();
-        var parentContainer = this.getParentContainer();
-        if (parentContainer) {
-            ClassList.remove(this.getParentContainer(), 'ui-modal--container--visible');
+import React from 'react';
+import './UIModal.scss';
+import { UIIcon } from '../UIIcon';
+export var UIModal = function (props) {
+    var keyDownCallback = function (event) { return handleKeyDown(event); };
+    React.useEffect(function () {
+        addEventListeners();
+    }, []);
+    React.useEffect(function () {
+        if (props.show) {
+            toggleBodyScrollLock(true);
         }
-        this.toggleScroll(false);
-        this.destroy();
-    };
-    UIModal.prototype.toggleScroll = function (enable) {
-        var body = QuerySelector.get('body');
+        else {
+            toggleBodyScrollLock(false);
+        }
+    }, [props.show]);
+    var toggleBodyScrollLock = function (lock) {
+        var body = document.querySelector('body');
         if (body) {
-            if (enable) {
-                ClassList.add(body, ['body--disable-scroll']);
+            if (lock) {
+                body.classList.add('body--disable-scroll');
             }
             else {
-                ClassList.remove(body, ['body--disable-scroll']);
+                body.classList.remove('body--disable-scroll');
             }
         }
     };
-    UIModal.prototype.showModal = function () {
-        this.toggleScroll(true);
-        ClassList.add(this.getParentContainer(), ['ui-modal--container--visible']);
+    var addEventListeners = function () {
+        document.addEventListener('keydown', keyDownCallback);
     };
-    UIModal.prototype.addEventListeners = function () {
-        var _this = this;
-        var closeBtn = QuerySelector.get('.ui-modal--buttons-close');
-        if (closeBtn) {
-            closeBtn.addEventListener(Event.CLICK, function () {
-                _this.handleCloseButtonClick();
-            });
-        }
-        this.getParentContainer().addEventListener(Event.CLICK, function (event) {
-            _this.handleContainerClick(event);
-        });
-        document.addEventListener(Event.KEYDOWN, this.keyDownCallback);
-    };
-    UIModal.prototype.handleCloseButtonClick = function () {
-        this.hideModal();
-    };
-    UIModal.prototype.handleContainerClick = function (event) {
-        if (event.target.isSameNode(this.getParentContainer())) {
-            this.hideModal();
+    var handleKeyDown = function (event) {
+        if (event.key === 'Escape' && props.onHide) {
+            props.onHide();
         }
     };
-    UIModal.prototype.handleKeyDown = function (event) {
-        if (event.key === 'Escape') {
-            this.hideModal();
+    if (props.show) {
+        if (props.type === 'IFRAME') {
+            return (React.createElement("div", { className: "ui-modal--container ui-modal--container-with-iframe ui-modal--container--visible", onClick: function (event) {
+                    if (event.target.classList.contains('ui-modal--container') && props.onHide) {
+                        props.onHide();
+                    }
+                } },
+                React.createElement("div", { className: "ui-modal--wrapper" },
+                    React.createElement("div", { className: "ui-modal--title-wrapper" },
+                        React.createElement("div", { className: "ui-modal--title" },
+                            React.createElement("h5", null, props.title)),
+                        React.createElement("div", { className: "ui-modal--buttons" },
+                            React.createElement("div", { className: "ui-modal--buttons-close", onClick: function () {
+                                    if (props.onHide) {
+                                        props.onHide();
+                                    }
+                                } },
+                                React.createElement(UIIcon, { icon: 'close' })))),
+                    React.createElement("div", { className: "ui-modal--content--wrapper" },
+                        React.createElement("div", { className: "ui-modal--content" },
+                            React.createElement("iframe", { src: props.iframeUrl }))))));
         }
-    };
-    UIModal.prototype.removeEventListeners = function () {
-        var _this = this;
-        document.removeEventListener(Event.KEYDOWN, this.keyDownCallback);
-        var closeBtn = QuerySelector.get('.ui-modal--buttons-close');
-        if (closeBtn) {
-            closeBtn.removeEventListener(Event.CLICK, function (event) {
-                _this.handleContainerClick(event);
-            });
+        else {
+            return (React.createElement("div", { className: "ui-modal--container ui-modal--container-with-html ui-modal--container--visible", onClick: function (event) {
+                    if (event.target.classList.contains('ui-modal--container') && props.onHide) {
+                        props.onHide();
+                    }
+                } },
+                React.createElement("div", { className: "ui-modal--wrapper" },
+                    React.createElement("div", { className: "ui-modal--title-wrapper" },
+                        React.createElement("div", { className: "ui-modal--title" },
+                            React.createElement("h5", null, props.title)),
+                        React.createElement("div", { className: "ui-modal--buttons" },
+                            React.createElement("div", { className: "ui-modal--buttons-close", onClick: function () {
+                                    if (props.onHide) {
+                                        props.onHide();
+                                    }
+                                } },
+                                React.createElement(UIIcon, { icon: 'close' })))),
+                    React.createElement("div", { className: "ui-modal--content--wrapper" },
+                        React.createElement("div", { className: "ui-modal--content" }, props.children)))));
         }
-        var parentContainer = this.getParentContainer();
-        if (parentContainer) {
-            parentContainer.removeEventListener(Event.CLICK, function () {
-                _this.handleCloseButtonClick();
-            });
-        }
-    };
-    UIModal.prototype.onRendered = function () {
-        this.showModal();
-        this.addEventListeners();
-    };
-    UIModal.prototype.render = function () {
-        var content = this.properties.content;
-        var classes = this.properties.iframe ? 'ui-modal--container-with-iframe' : 'ui-modal--container-with-html';
-        if (this.properties.iframe) {
-            content = "<iframe src='" + this.properties.iframe + "'><iframe>";
-        }
-        return "<div class=\"ui-modal--container " + classes + "\">\n                    <div class=\"ui-modal--wrapper\">\n                        <div class=\"ui-modal--title-wrapper\">\n                            <div class=\"ui-modal--title\"><h5>" + this.properties.title + "</h5></div>\n                            <div class=\"ui-modal--buttons\"><div class=\"ui-modal--buttons-close\">&#10005;</div> </div>\n                        </div>\n                        <div class=\"ui-modal--content--wrapper\">\n                            <div class=\"ui-modal--content\">" + content + "</div>\n                        </div>\n                    </div>\n                </div>";
-    };
-    return UIModal;
-}(UIComponent));
-export { UIModal };
+    }
+    else {
+        return null;
+    }
+};
 //# sourceMappingURL=UIModal.js.map

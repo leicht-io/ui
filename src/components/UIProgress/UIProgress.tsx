@@ -1,26 +1,21 @@
 import React from 'react';
-import { QuerySelector } from '../../@core/DOM/QuerySelector';
-import { Attribute } from '../../@core/DOM/models/Attribute';
-import { Event } from '../../@core/DOM/models/Event';
 import './UIProgress.scss';
 
 export const UIProgress = () => {
     let windowHeight: number = 0;
     let documentHeight: number = 0;
-    let progressBar: HTMLElement | null = null;
+    const progressBar = React.useRef();
 
     React.useEffect(() => {
-        requestAnimationFrame(() => {
-            calculateDimensions();
-        });
+        calculateProgress();
     });
 
-    const calculateDimensions = (): void => {
+    const calculateProgress = (): void => {
         windowHeight = window.innerHeight;
         documentHeight = document.documentElement.scrollHeight;
-        progressBar = QuerySelector.get('progress.ui-reading-position-indicator');
 
         setMax();
+        setProgress();
     };
 
     const setProgress = (): void => {
@@ -28,7 +23,7 @@ export const UIProgress = () => {
             return;
         }
 
-        progressBar.setAttribute(Attribute.VALUE, window.pageYOffset.toString());
+        progressBar.current.setAttribute('value', window.pageYOffset.toString());
     };
 
     const setMax = (): void => {
@@ -38,14 +33,10 @@ export const UIProgress = () => {
 
         const max: number = documentHeight - windowHeight;
 
-        progressBar.setAttribute(Attribute.MAX, max.toString());
+        progressBar.current.setAttribute('max', max.toString());
     };
 
-    requestAnimationFrame(() => {
-        setProgress();
-    });
-
-    window.addEventListener(Event.SCROLL, () => {
+    window.addEventListener('scroll', () => {
         setProgress();
     });
 
@@ -54,11 +45,11 @@ export const UIProgress = () => {
     if (container && typeof ResizeObserver === 'function') {
         // @ts-ignore
         new ResizeObserver(entries => {
-            calculateDimensions();
+            calculateProgress();
         }).observe(container);
     }
 
     return (
-        <progress className="ui-reading-position-indicator" value="0" />
+        <progress className="ui-reading-position-indicator" value="0" ref={ progressBar } />
     );
 };

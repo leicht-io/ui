@@ -1,14 +1,13 @@
-import { ClassList } from '../../@core/DOM/ClassList';
 import React from 'react';
 import './UIGallery.scss';
-import { IProps } from './types';
+import { IGallery, IProps, Photo } from './types';
 import { UIIcon } from '../UIIcon';
 
 export const UIGallery = (props: IProps) => {
-    const [photos, setPhotos] = React.useState<any | null>(null);
+    const [photos, setPhotos] = React.useState<IGallery | null>(null);
     const [showSlider, setShowSlider] = React.useState<boolean>(false);
     const [sliderReady, setSliderReady] = React.useState<boolean>(false);
-    const [currentImage, setCurrentImage] = React.useState<any | null>(null);
+    const [currentImage, setCurrentImage] = React.useState<Photo | null>(null);
 
     React.useEffect(() => {
         if (currentImage !== null && currentImage !== '') {
@@ -106,7 +105,7 @@ export const UIGallery = (props: IProps) => {
                     { /* <img alt="Previous Photo" draggable='false' id='ui-gallery--prev-image' src={previousImage}
                          onLoad={(event) => {
                              ClassList.add(event.target, 'loaded');
-                         }}/>*/ }
+                         }}/>*/}
 
                     <div
                         className={ 'ui-gallery--current-image ' + (sliderReady ? 'ui-gallery--current-image-visible' : '') }>
@@ -115,7 +114,7 @@ export const UIGallery = (props: IProps) => {
                                 <div className="double-bounce1"/>
                                 <div className="double-bounce2"/>
                             </div>
-                        </div>*/ }
+                        </div>*/}
                         <img alt="Current Photo" draggable="false" className={ 'loaded' }
                              src={ currentImage && currentImage.source }
                              onLoad={ () => {
@@ -131,7 +130,7 @@ export const UIGallery = (props: IProps) => {
                     { /*<img alt="Next Image" draggable='false' id='ui-gallery--next-image' src={nextImage}
                          onLoad={(event) => {
                              ClassList.add(event.target, 'loaded');
-                         }}/>*/ }
+                         }}/>*/}
                 </>
             );
         } else {
@@ -152,7 +151,7 @@ export const UIGallery = (props: IProps) => {
                 </div>
 
                 <div className="ui-gallery grid-container grid-two-columns">
-                    { photos && photos.map((photo, index) => {
+                    { photos && photos.map((photo: Photo, index) => {
                         return (
                             <div className="grid-item" key={ index }>
                                 <img alt={ photo.description }
@@ -165,7 +164,7 @@ export const UIGallery = (props: IProps) => {
                                          setCurrentImage({source: currentImage, index: currentIndex});
                                      } }
                                      onLoad={ (event) => {
-                                         ClassList.add(event.target, 'loaded');
+                                         event.target.classList.add('loaded');
                                      } }
                                 />
                                 <p>{ photo.description }</p>

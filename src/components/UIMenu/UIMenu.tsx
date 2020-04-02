@@ -1,7 +1,4 @@
 import React from 'react';
-import { QuerySelector } from '../../@core/DOM/QuerySelector';
-import { Attribute } from '../../@core/DOM/models/Attribute';
-import { Event } from '../../@core/DOM/models/Event';
 import './UIMenu.scss';
 
 export const UIMenu = () => {
@@ -33,7 +30,7 @@ export const UIMenu = () => {
 
     const handleInitialLoad = (): void => {
         requestAnimationFrame(() => {
-            const wrapper: any = QuerySelector.get('.nav-wrapper');
+            const wrapper: any = document.querySelector('.nav-wrapper');
 
             if (wrapper !== null) {
                 if (initialLoad && window.pageYOffset > 0) {
@@ -54,12 +51,12 @@ export const UIMenu = () => {
     };
 
     const setActiveLinkItem = (): void => {
-        const anchors: NodeListOf<Element> = QuerySelector.getAll('.nav-wrapper a');
+        const anchors: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper a');
         const pathName = document.location.pathname.split('/')[1];
 
         for (let i = 0; i < anchors.length; i++) {
             const anchor: Element = anchors.item(i);
-            const attribute: string | null = anchor.getAttribute(Attribute.HREF);
+            const attribute: string | null = anchor.getAttribute('href');
             if (anchor && anchor.parentElement && attribute && attribute.split('/')[1] === pathName) {
                 anchor.parentElement.classList.add('active');
             }
@@ -73,7 +70,7 @@ export const UIMenu = () => {
     };
 
     const setScrollListeners = (): void => {
-        window.addEventListener(Event.SCROLL, () => {
+        window.addEventListener('scroll', () => {
             throttle();
         }, true);
     };
@@ -89,19 +86,19 @@ export const UIMenu = () => {
     };
 
     const setClickListeners = (): void => {
-        const hamburger: any = QuerySelector.get('.nav-hamburger');
-        const navBackground: any = QuerySelector.get('.nav-background');
-        const dropDownButtons = QuerySelector.getAll('.nav-sub-btn');
-        const closeBtn: any = QuerySelector.get('.nav-responsive-header .ui-i--close');
+        const hamburger: any = document.querySelector('.nav-hamburger');
+        const navBackground: any = document.querySelector('.nav-background');
+        const dropDownButtons = document.querySelectorAll('.nav-sub-btn');
+        const closeBtn: any = document.querySelector('.nav-responsive-header .ui-i--close');
 
         if (hamburger) {
-            hamburger.addEventListener(Event.CLICK, () => {
+            hamburger.addEventListener('click', () => {
                 toggleMenu(true);
             });
         }
 
         if (navBackground) {
-            navBackground.addEventListener(Event.CLICK, () => {
+            navBackground.addEventListener('click', () => {
                 toggleMenu(false);
             });
         }
@@ -109,7 +106,7 @@ export const UIMenu = () => {
         for (let i = 0; i < dropDownButtons.length; i++) {
             const button: Element = dropDownButtons.item(i);
 
-            button.addEventListener(Event.CLICK, (event: any) => {
+            button.addEventListener('click', (event: any) => {
                 const subContent: any = event.target.parentElement.querySelector('.nav-sub-content');
 
                 if (subContent.classList.contains('nav-sub-content-active')) {
@@ -126,7 +123,7 @@ export const UIMenu = () => {
         }
 
         if (closeBtn) {
-            closeBtn.addEventListener(Event.CLICK, () => {
+            closeBtn.addEventListener('click', () => {
                 toggleMenu(false);
             });
         }
@@ -165,7 +162,7 @@ export const UIMenu = () => {
     };
 
     const getHeaderElement = () => {
-        return QuerySelector.get('.nav-wrapper');
+        return document.querySelector('.nav-wrapper');
     };
 
     const handleScrollClasses = (showOriginal: boolean): void => {
@@ -183,7 +180,7 @@ export const UIMenu = () => {
     };
 
     const toggleMenuChevrons = (add: boolean): void => {
-        const menuIcons: NodeListOf<Element> = QuerySelector.getAll('.nav-wrapper .ui-i--chevron-down');
+        const menuIcons: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper .ui-i--chevron-down');
 
         for (let i = 0; i < menuIcons.length; i++) {
             const icon: Element = menuIcons.item(i);
@@ -199,7 +196,7 @@ export const UIMenu = () => {
     };
 
     const toggleHamburger = (dark: boolean): void => {
-        const hamburgers: NodeListOf<Element> = QuerySelector.getAll('.nav-wrapper .ui-i--hamburger');
+        const hamburgers: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper .ui-i--hamburger');
 
         for (let i = 0; i < hamburgers.length; i++) {
             const hamburger: Element = hamburgers.item(i);
@@ -214,7 +211,7 @@ export const UIMenu = () => {
     };
 
     const onScroll = () => {
-        const wrapper: HTMLElement | null = QuerySelector.get('.nav-wrapper');
+        const wrapper: HTMLElement | null = document.querySelector('.nav-wrapper');
         if (wrapper) {
             wrapper.classList.remove('disable-animations');
         }

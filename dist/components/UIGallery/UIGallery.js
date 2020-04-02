@@ -1,4 +1,3 @@
-import { ClassList } from '../../@core/DOM/ClassList';
 import React from 'react';
 import './UIGallery.scss';
 import { UIIcon } from '../UIIcon';
@@ -76,7 +75,7 @@ export var UIGallery = function (props) {
                             var currentIndex = Number(event.target.getAttribute('data-index'));
                             setCurrentImage({ source: currentImage, index: currentIndex });
                         }, onLoad: function (event) {
-                            ClassList.add(event.target, 'loaded');
+                            event.target.classList.add('loaded');
                         } }),
                     React.createElement("p", null, photo.description)));
             }))));

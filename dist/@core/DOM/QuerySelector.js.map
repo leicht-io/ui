@@ -1,1 +1,0 @@
-{"version":3,"file":"QuerySelector.js","sourceRoot":"","sources":["../../../src/@core/DOM/QuerySelector.ts"],"names":[],"mappings":"AAAA;IAAA;IAQA,CAAC;IAPiB,iBAAG,GAAjB,UAAkB,KAAa;QAC3B,OAAO,QAAQ,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC;IACzC,CAAC;IAEa,oBAAM,GAApB,UAAqB,KAAa;QAC9B,OAAO,QAAQ,CAAC,gBAAgB,CAAC,KAAK,CAAC,CAAC;IAC5C,CAAC;IACL,oBAAC;AAAD,CAAC,AARD,IAQC"}

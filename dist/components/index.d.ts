@@ -7,3 +7,5 @@ export * from './UIProgress';
 export * from './UIDivider';
 export * from './UIHeader';
 export * from './UIIcon';
+export * from './UISlider';
+export * from './UIInput';

@@ -1,5 +1,6 @@
 export interface IProps {
-    text: string;
+    text?: string;
+    children?: any;
     type: 'success' | 'danger' | 'primary';
     onClick?: () => void;
 }

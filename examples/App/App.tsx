@@ -4,9 +4,12 @@ import {
     UIGallery,
     UIHeader,
     UIIcon,
+    UIInput,
     UIMenu,
+    UIModal,
     UIPageContainer,
     UIProgress,
+    UISlider,
     UITags
 } from '../../src/components';
 import { UINotification } from '../../src/components/UINotification';
@@ -15,9 +18,12 @@ import { UIGrid } from '../../src/components/UIGrid';
 import { UITypography } from '../../src/components/UITypography';
 import { UIButton } from '../../src/components/UIButton';
 import { galleryMockResponse } from '../assets/gallery.mock';
+import { sliderMockResponse } from '../assets/slider.mock';
 
 export const App = () => {
     const [gallery, setGallery] = React.useState<any>(null);
+    const [showModal1, setShowModal1] = React.useState<boolean>(false);
+    const [showModal2, setShowModal2] = React.useState<boolean>(false);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -73,8 +79,12 @@ export const App = () => {
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Modals</UITypography>
 
-                <button className="btn btn--primary" id="showModal">Show Modal with IFRAME</button>
-                <button className="btn btn--primary" id="showModalWithHtml">Show Modal with HTML</button>
+                <UIButton type={ 'primary' } onClick={ () => {
+                    setShowModal1(true);
+                } }>Show Modal with IFRAME</UIButton>
+                <UIButton type={ 'primary' } onClick={ () => {
+                    setShowModal2(true);
+                } }>Show Modal with HTML</UIButton>
             </UIPageContainer>
 
             <UIDivider size={ 'large' } />
@@ -129,13 +139,19 @@ export const App = () => {
                     </UICard>
 
                     <UICard title="Title 2">
-                        <p>This content is a paragraph</p>
+                        <UITypography type={ 'p' }> This content is a paragraph</UITypography>
                     </UICard>
 
                     <UICard title="Title 3">
+                        {
+                            // TODO: images
+                        }
                         <img
                             src="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg" />
 
+                        {
+                            // TODO: Toolbar
+                        }
                         <div className="ui-card--toolbar">
                             <div>
                                 <p>Content left</p>
@@ -155,29 +171,37 @@ export const App = () => {
             </UIPageContainer>
 
             <UIPageContainer>
+                <UITypography type={ 'h3' }>Inputs</UITypography>
+
+                <UIInput label={ 'Input Label' } onChange={ (value: string) => {
+                    // tslint:disable-next-line:no-console
+                    console.log('Value:', value);
+                } } />
+            </UIPageContainer>
+
+            <UIPageContainer>
                 <UITypography type={ 'h3' }>Notifications</UITypography>
 
                 <UINotification type="success" title="Success!" description="We'll be in touch!" />
                 <UINotification type="error" title="Error!" description="Please try again!" />
             </UIPageContainer>
+
+            <UIPageContainer>
+                <UITypography type={ 'h3' }>Slider (based on GlideJS)</UITypography>
+            </UIPageContainer>
+
+            <UISlider slides={ sliderMockResponse } />
+
+            <UIModal type={ 'IFRAME' } title={ 'Modal Title' } show={ showModal1 } onHide={ () => {
+                setShowModal1(false);
+            } }
+                     iframeUrl={ 'https://en.wikipedia.org/wiki/Ardbeg_distillery' } />
+
+            <UIModal title={ 'Modal Title' } show={ showModal2 } onHide={ () => {
+                setShowModal2(false);
+            } }>
+                <p>With HTML content</p>
+            </UIModal>
         </>
     );
 };
-
-/*
-        const modal: HTMLElement | null = QuerySelector.get("#showModal");
-        const modalWithHtml: HTMLElement | null = QuerySelector.get("#showModalWithHtml");
-
-        if (modal && modalWithHtml) {
-            modal.addEventListener(Event.CLICK, () => {
-                new UIModal({
-                    container: "body",
-                    title: "IFRAME with Wikipedia",
-                    iframe: "https://en.wikipedia.org/wiki/Ardbeg_distillery"
-                });
-            });
-
-            modalWithHtml.addEventListener(Event.CLICK, () => {
-                new UIModal({container: "body", title: "HTML", content: "<p>hej</p>"});
-            });
-*/

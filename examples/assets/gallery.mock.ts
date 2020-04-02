@@ -1,4 +1,6 @@
-export const galleryMockResponse = {
+import { IGallery } from '../../src/components/UIGallery/types';
+
+export const galleryMockResponse: IGallery = {
     'id': 1,
     'title': 'Landscape & Nature',
     'description': 'Landscape & Nature',

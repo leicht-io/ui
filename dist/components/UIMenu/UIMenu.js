@@ -1,7 +1,4 @@
 import React from 'react';
-import { QuerySelector } from '../../@core/DOM/QuerySelector';
-import { Attribute } from '../../@core/DOM/models/Attribute';
-import { Event } from '../../@core/DOM/models/Event';
 import './UIMenu.scss';
 export var UIMenu = function () {
     var xDown = null;
@@ -27,7 +24,7 @@ export var UIMenu = function () {
     };
     var handleInitialLoad = function () {
         requestAnimationFrame(function () {
-            var wrapper = QuerySelector.get('.nav-wrapper');
+            var wrapper = document.querySelector('.nav-wrapper');
             if (wrapper !== null) {
                 if (initialLoad && window.pageYOffset > 0) {
                     wrapper.classList.add('disable-animations');
@@ -44,11 +41,11 @@ export var UIMenu = function () {
         });
     };
     var setActiveLinkItem = function () {
-        var anchors = QuerySelector.getAll('.nav-wrapper a');
+        var anchors = document.querySelectorAll('.nav-wrapper a');
         var pathName = document.location.pathname.split('/')[1];
         for (var i = 0; i < anchors.length; i++) {
             var anchor = anchors.item(i);
-            var attribute = anchor.getAttribute(Attribute.HREF);
+            var attribute = anchor.getAttribute('href');
             if (anchor && anchor.parentElement && attribute && attribute.split('/')[1] === pathName) {
                 anchor.parentElement.classList.add('active');
             }
@@ -60,7 +57,7 @@ export var UIMenu = function () {
         setScrollListeners();
     };
     var setScrollListeners = function () {
-        window.addEventListener(Event.SCROLL, function () {
+        window.addEventListener('scroll', function () {
             throttle();
         }, true);
     };
@@ -73,23 +70,23 @@ export var UIMenu = function () {
         });
     };
     var setClickListeners = function () {
-        var hamburger = QuerySelector.get('.nav-hamburger');
-        var navBackground = QuerySelector.get('.nav-background');
-        var dropDownButtons = QuerySelector.getAll('.nav-sub-btn');
-        var closeBtn = QuerySelector.get('.nav-responsive-header .ui-i--close');
+        var hamburger = document.querySelector('.nav-hamburger');
+        var navBackground = document.querySelector('.nav-background');
+        var dropDownButtons = document.querySelectorAll('.nav-sub-btn');
+        var closeBtn = document.querySelector('.nav-responsive-header .ui-i--close');
         if (hamburger) {
-            hamburger.addEventListener(Event.CLICK, function () {
+            hamburger.addEventListener('click', function () {
                 toggleMenu(true);
             });
         }
         if (navBackground) {
-            navBackground.addEventListener(Event.CLICK, function () {
+            navBackground.addEventListener('click', function () {
                 toggleMenu(false);
             });
         }
         for (var i = 0; i < dropDownButtons.length; i++) {
             var button = dropDownButtons.item(i);
-            button.addEventListener(Event.CLICK, function (event) {
+            button.addEventListener('click', function (event) {
                 var subContent = event.target.parentElement.querySelector('.nav-sub-content');
                 if (subContent.classList.contains('nav-sub-content-active')) {
                     subContent.classList.remove('nav-sub-content-active');
@@ -104,7 +101,7 @@ export var UIMenu = function () {
             });
         }
         if (closeBtn) {
-            closeBtn.addEventListener(Event.CLICK, function () {
+            closeBtn.addEventListener('click', function () {
                 toggleMenu(false);
             });
         }
@@ -138,7 +135,7 @@ export var UIMenu = function () {
         }
     };
     var getHeaderElement = function () {
-        return QuerySelector.get('.nav-wrapper');
+        return document.querySelector('.nav-wrapper');
     };
     var handleScrollClasses = function (showOriginal) {
         var header = getHeaderElement();
@@ -153,7 +150,7 @@ export var UIMenu = function () {
         }
     };
     var toggleMenuChevrons = function (add) {
-        var menuIcons = QuerySelector.getAll('.nav-wrapper .ui-i--chevron-down');
+        var menuIcons = document.querySelectorAll('.nav-wrapper .ui-i--chevron-down');
         for (var i = 0; i < menuIcons.length; i++) {
             var icon = menuIcons.item(i);
             if (add) {
@@ -167,7 +164,7 @@ export var UIMenu = function () {
         }
     };
     var toggleHamburger = function (dark) {
-        var hamburgers = QuerySelector.getAll('.nav-wrapper .ui-i--hamburger');
+        var hamburgers = document.querySelectorAll('.nav-wrapper .ui-i--hamburger');
         for (var i = 0; i < hamburgers.length; i++) {
             var hamburger = hamburgers.item(i);
             if (dark) {
@@ -181,7 +178,7 @@ export var UIMenu = function () {
         }
     };
     var onScroll = function () {
-        var wrapper = QuerySelector.get('.nav-wrapper');
+        var wrapper = document.querySelector('.nav-wrapper');
         if (wrapper) {
             wrapper.classList.remove('disable-animations');
         }
