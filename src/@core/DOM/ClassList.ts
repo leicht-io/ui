@@ -1,4 +1,4 @@
-import {QuerySelector} from "./QuerySelector";
+import { QuerySelector } from './QuerySelector';
 
 export class ClassList {
 

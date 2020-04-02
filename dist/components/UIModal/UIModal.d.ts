@@ -1,5 +1,5 @@
-import { UIModalInterface } from "./UIModalInterface";
-import { UIComponent } from "../../@core/base/UIComponent";
+import { UIModalInterface } from './UIModalInterface';
+import { UIComponent } from '../../@core/base/UIComponent';
 export declare class UIModal extends UIComponent {
     private keyDownCallback;
     constructor(content: UIModalInterface);

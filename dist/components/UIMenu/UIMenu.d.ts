@@ -1,2 +1,2 @@
-import "./UIMenu.scss";
+import './UIMenu.scss';
 export declare const UIMenu: () => any;

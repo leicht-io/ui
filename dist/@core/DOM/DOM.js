@@ -1,13 +1,15 @@
-import { QuerySelector } from "./QuerySelector";
-export class DOM {
-    static removeChildren(query) {
-        const parent = QuerySelector.get(query);
-        if (parent) {
-            parent.innerHTML = "";
-        }
+import { QuerySelector } from './QuerySelector';
+var DOM = (function () {
+    function DOM() {
     }
-    static createElement(tagName, innerHtml, className) {
-        const element = document.createElement(tagName);
+    DOM.removeChildren = function (query) {
+        var parent = QuerySelector.get(query);
+        if (parent) {
+            parent.innerHTML = '';
+        }
+    };
+    DOM.createElement = function (tagName, innerHtml, className) {
+        var element = document.createElement(tagName);
         if (innerHtml) {
             element.innerHTML = innerHtml;
         }
@@ -15,9 +17,9 @@ export class DOM {
             element.classList.add(className);
         }
         return element;
-    }
-    static append(queryOrElementToAppendTo, childToAppend) {
-        let element = null;
+    };
+    DOM.append = function (queryOrElementToAppendTo, childToAppend) {
+        var element = null;
         if (queryOrElementToAppendTo.constructor === String) {
             element = QuerySelector.get(queryOrElementToAppendTo);
         }
@@ -25,6 +27,8 @@ export class DOM {
             element = queryOrElementToAppendTo;
         }
         element.append(childToAppend);
-    }
-}
+    };
+    return DOM;
+}());
+export { DOM };
 //# sourceMappingURL=DOM.js.map

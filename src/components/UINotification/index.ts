@@ -1,1 +1,1 @@
-export * from "./UINotification"
+export * from './UINotification';

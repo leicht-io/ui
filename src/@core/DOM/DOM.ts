@@ -1,10 +1,10 @@
-import {QuerySelector} from "./QuerySelector";
+import { QuerySelector } from './QuerySelector';
 
 export class DOM {
     public static removeChildren(query: string): void {
         const parent: any = QuerySelector.get(query);
         if (parent) {
-            parent.innerHTML = "";
+            parent.innerHTML = '';
         }
     }
 

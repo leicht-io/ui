@@ -1,1 +1,1 @@
-export * from "./UIProgress"
+export * from './UIProgress';

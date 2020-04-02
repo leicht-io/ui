@@ -1,2 +1,2 @@
-export * from "./UIGallery";
+export * from './UIGallery';
 //# sourceMappingURL=index.js.map

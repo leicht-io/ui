@@ -1,9 +1,13 @@
-export class QuerySelector {
-    static get(query) {
+var QuerySelector = (function () {
+    function QuerySelector() {
+    }
+    QuerySelector.get = function (query) {
         return document.querySelector(query);
-    }
-    static getAll(query) {
+    };
+    QuerySelector.getAll = function (query) {
         return document.querySelectorAll(query);
-    }
-}
+    };
+    return QuerySelector;
+}());
+export { QuerySelector };
 //# sourceMappingURL=QuerySelector.js.map

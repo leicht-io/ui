@@ -1,10 +1,10 @@
-import React from "react";
-import "./UIPageContainer.scss";
+import React from 'react';
+import './UIPageContainer.scss';
 
 export const UIPageContainer = (props: any) => {
     return (
         <div className="page-container">
-            {props.children}
+            { props.children }
         </div>
     );
 };

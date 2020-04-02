@@ -1,2 +1,2 @@
-export * from "./UIModal";
+export * from './UIModal';
 //# sourceMappingURL=index.js.map

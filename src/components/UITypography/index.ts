@@ -1,1 +1,1 @@
-export * from "./UITyphography"
+export * from './UITyphography';

@@ -1,8 +1,8 @@
-import {UIModalInterface} from "./UIModalInterface";
-import {UIComponent} from "../../@core/base/UIComponent";
-import {QuerySelector} from "../../@core/DOM/QuerySelector";
-import {ClassList} from "../../@core/DOM/ClassList";
-import {Event} from "../../@core/DOM/models/Event";
+import { UIModalInterface } from './UIModalInterface';
+import { UIComponent } from '../../@core/base/UIComponent';
+import { QuerySelector } from '../../@core/DOM/QuerySelector';
+import { ClassList } from '../../@core/DOM/ClassList';
+import { Event } from '../../@core/DOM/models/Event';
 
 export class UIModal extends UIComponent {
     private keyDownCallback = (event) => this.handleKeyDown(event);
@@ -12,14 +12,14 @@ export class UIModal extends UIComponent {
     }
 
     private getParentContainer(): any {
-        return QuerySelector.get(".ui-modal--container");
+        return QuerySelector.get('.ui-modal--container');
     }
 
     private hideModal(): void {
         this.removeEventListeners();
         const parentContainer: Element = this.getParentContainer();
         if (parentContainer) {
-            ClassList.remove(this.getParentContainer(), "ui-modal--container--visible");
+            ClassList.remove(this.getParentContainer(), 'ui-modal--container--visible');
         }
         this.toggleScroll(false);
         this.destroy();
@@ -27,7 +27,7 @@ export class UIModal extends UIComponent {
     }
 
     private toggleScroll(enable: boolean): void {
-        const body: HTMLElement | null = QuerySelector.get("body");
+        const body: HTMLElement | null = QuerySelector.get('body');
 
         if (body) {
             if (enable) {
@@ -40,11 +40,11 @@ export class UIModal extends UIComponent {
 
     private showModal(): void {
         this.toggleScroll(true);
-        ClassList.add(this.getParentContainer(), ["ui-modal--container--visible"]);
+        ClassList.add(this.getParentContainer(), ['ui-modal--container--visible']);
     }
 
     public addEventListeners(): void {
-        const closeBtn: Element | null = QuerySelector.get(".ui-modal--buttons-close");
+        const closeBtn: Element | null = QuerySelector.get('.ui-modal--buttons-close');
         if (closeBtn) {
             closeBtn.addEventListener(Event.CLICK, () => {
                 this.handleCloseButtonClick();
@@ -68,7 +68,7 @@ export class UIModal extends UIComponent {
     }
 
     private handleKeyDown(event: KeyboardEvent): void {
-        if (event.key === "Escape") {
+        if (event.key === 'Escape') {
             this.hideModal();
         }
     }
@@ -76,7 +76,7 @@ export class UIModal extends UIComponent {
     public removeEventListeners(): void {
         document.removeEventListener(Event.KEYDOWN, this.keyDownCallback);
 
-        const closeBtn: Element | null = QuerySelector.get(".ui-modal--buttons-close");
+        const closeBtn: Element | null = QuerySelector.get('.ui-modal--buttons-close');
         if (closeBtn) {
             closeBtn.removeEventListener(Event.CLICK, (event) => {
                 this.handleContainerClick(event);
@@ -99,7 +99,7 @@ export class UIModal extends UIComponent {
 
     public render(): string {
         let content: string | Element = this.properties.content;
-        let classes: string = this.properties.iframe ? "ui-modal--container-with-iframe" : "ui-modal--container-with-html";
+        const classes: string = this.properties.iframe ? 'ui-modal--container-with-iframe' : 'ui-modal--container-with-html';
 
         if (this.properties.iframe) {
             content = `<iframe src='${this.properties.iframe}'><iframe>`;

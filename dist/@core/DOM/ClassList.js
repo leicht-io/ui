@@ -1,7 +1,9 @@
-import { QuerySelector } from "./QuerySelector";
-export class ClassList {
-    static getElement(queryOrElement) {
-        let element = null;
+import { QuerySelector } from './QuerySelector';
+var ClassList = (function () {
+    function ClassList() {
+    }
+    ClassList.getElement = function (queryOrElement) {
+        var element = null;
         if (queryOrElement.constructor === String) {
             element = QuerySelector.get(queryOrElement);
         }
@@ -9,34 +11,36 @@ export class ClassList {
             element = queryOrElement;
         }
         return element;
-    }
-    static remove(queryOrElement, classes) {
-        const element = this.getElement(queryOrElement);
+    };
+    ClassList.remove = function (queryOrElement, classes) {
+        var element = this.getElement(queryOrElement);
         if (element) {
             if (classes.constructor === String) {
                 element.classList.remove(classes);
             }
             if (classes.constructor === Array) {
-                for (let i = 0; i < classes.length; i++) {
-                    const className = classes[i];
+                for (var i = 0; i < classes.length; i++) {
+                    var className = classes[i];
                     element.classList.remove(className);
                 }
             }
         }
-    }
-    static add(queryOrElement, classes) {
-        const element = this.getElement(queryOrElement);
+    };
+    ClassList.add = function (queryOrElement, classes) {
+        var element = this.getElement(queryOrElement);
         if (element) {
             if (classes.constructor === String) {
                 element.classList.add(classes);
             }
             if (classes.constructor === Array) {
-                for (let i = 0; i < classes.length; i++) {
-                    const className = classes[i];
+                for (var i = 0; i < classes.length; i++) {
+                    var className = classes[i];
                     element.classList.add(className);
                 }
             }
         }
-    }
-}
+    };
+    return ClassList;
+}());
+export { ClassList };
 //# sourceMappingURL=ClassList.js.map

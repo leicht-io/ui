@@ -26,15 +26,6 @@ img {
   }
 }
 
-//TODO: Change this to a class
-#img-author {
-  margin-bottom: $base-spacing * 3;
-
-  @include sm() {
-    margin-bottom: 0;
-  }
-}
-
 .img-with-caption {
   position: relative;
   margin-bottom: 20px;

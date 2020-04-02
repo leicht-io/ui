@@ -1,1 +1,1 @@
-export * from "./UICard"
+export * from './UICard';

@@ -1,133 +1,133 @@
-import React from "react";
-import { QuerySelector } from "../../@core/DOM/QuerySelector";
-import { Attribute } from "../../@core/DOM/models/Attribute";
-import { Event } from "../../@core/DOM/models/Event";
-import "./UIMenu.scss";
-export const UIMenu = () => {
-    let xDown = null;
-    let yDown = null;
-    let xDiff = null;
-    let yDiff = null;
-    let timeDown = null;
-    let startEl = null;
-    let timer = null;
-    let throttleDelay = 100;
-    let last = null;
-    let initialLoad = true;
-    const addCustomEvent = () => {
+import React from 'react';
+import { QuerySelector } from '../../@core/DOM/QuerySelector';
+import { Attribute } from '../../@core/DOM/models/Attribute';
+import { Event } from '../../@core/DOM/models/Event';
+import './UIMenu.scss';
+export var UIMenu = function () {
+    var xDown = null;
+    var yDown = null;
+    var xDiff = null;
+    var yDiff = null;
+    var timeDown = null;
+    var startEl = null;
+    var timer = null;
+    var throttleDelay = 100;
+    var last = null;
+    var initialLoad = true;
+    var addCustomEvent = function () {
         if (typeof window.CustomEvent !== 'function') {
             window.CustomEvent = function (event, params) {
                 params = params || { bubbles: false, cancelable: false, detail: undefined };
-                const evt = document.createEvent('CustomEvent');
+                var evt = document.createEvent('CustomEvent');
                 evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
                 return evt;
             };
             window.CustomEvent.prototype = window.Event.prototype;
         }
     };
-    const handleInitialLoad = () => {
-        requestAnimationFrame(() => {
-            const wrapper = QuerySelector.get(".nav-wrapper");
+    var handleInitialLoad = function () {
+        requestAnimationFrame(function () {
+            var wrapper = QuerySelector.get('.nav-wrapper');
             if (wrapper !== null) {
                 if (initialLoad && window.pageYOffset > 0) {
-                    wrapper.classList.add("disable-animations");
+                    wrapper.classList.add('disable-animations');
                     handleScrollClasses(true);
                     toggleMenuChevrons(false);
                     toggleHamburger(true);
-                    wrapper.classList.add("nav-wrapper--active");
+                    wrapper.classList.add('nav-wrapper--active');
                 }
                 else {
-                    wrapper.classList.remove("disable-animations");
+                    wrapper.classList.remove('disable-animations');
                 }
             }
             initialLoad = false;
         });
     };
-    const setActiveLinkItem = () => {
-        const anchors = QuerySelector.getAll(".nav-wrapper a");
-        const pathName = document.location.pathname.split("/")[1];
-        for (let i = 0; i < anchors.length; i++) {
-            const anchor = anchors.item(i);
-            const attribute = anchor.getAttribute(Attribute.HREF);
-            if (anchor && anchor.parentElement && attribute && attribute.split("/")[1] === pathName) {
-                anchor.parentElement.classList.add("active");
+    var setActiveLinkItem = function () {
+        var anchors = QuerySelector.getAll('.nav-wrapper a');
+        var pathName = document.location.pathname.split('/')[1];
+        for (var i = 0; i < anchors.length; i++) {
+            var anchor = anchors.item(i);
+            var attribute = anchor.getAttribute(Attribute.HREF);
+            if (anchor && anchor.parentElement && attribute && attribute.split('/')[1] === pathName) {
+                anchor.parentElement.classList.add('active');
             }
         }
     };
-    const setListeners = () => {
+    var setListeners = function () {
         setTouchListeners();
         setClickListeners();
         setScrollListeners();
     };
-    const setScrollListeners = () => {
-        window.addEventListener(Event.SCROLL, () => {
+    var setScrollListeners = function () {
+        window.addEventListener(Event.SCROLL, function () {
             throttle();
         }, true);
     };
-    const setTouchListeners = () => {
+    var setTouchListeners = function () {
         document.addEventListener('touchstart', handleTouchStart, false);
         document.addEventListener('touchmove', handleTouchMove, false);
         document.addEventListener('touchend', handleTouchEnd, false);
-        document.addEventListener('swiped-left', () => {
+        document.addEventListener('swiped-left', function () {
             toggleMenu(false);
         });
     };
-    const setClickListeners = () => {
-        const hamburger = QuerySelector.get(".nav-hamburger");
-        const navBackground = QuerySelector.get(".nav-background");
-        const dropDownButtons = QuerySelector.getAll(".nav-sub-btn");
-        const closeBtn = QuerySelector.get(".nav-responsive-header .ui-i--close");
+    var setClickListeners = function () {
+        var hamburger = QuerySelector.get('.nav-hamburger');
+        var navBackground = QuerySelector.get('.nav-background');
+        var dropDownButtons = QuerySelector.getAll('.nav-sub-btn');
+        var closeBtn = QuerySelector.get('.nav-responsive-header .ui-i--close');
         if (hamburger) {
-            hamburger.addEventListener(Event.CLICK, () => {
+            hamburger.addEventListener(Event.CLICK, function () {
                 toggleMenu(true);
             });
         }
         if (navBackground) {
-            navBackground.addEventListener(Event.CLICK, () => {
+            navBackground.addEventListener(Event.CLICK, function () {
                 toggleMenu(false);
             });
         }
-        for (let i = 0; i < dropDownButtons.length; i++) {
-            const button = dropDownButtons.item(i);
+        for (var i = 0; i < dropDownButtons.length; i++) {
+            var button = dropDownButtons.item(i);
             button.addEventListener(Event.CLICK, function (event) {
-                const subContent = event.target.parentElement.querySelector(".nav-sub-content");
-                if (subContent.classList.contains("nav-sub-content-active")) {
-                    subContent.classList.remove("nav-sub-content-active");
+                var subContent = event.target.parentElement.querySelector('.nav-sub-content');
+                if (subContent.classList.contains('nav-sub-content-active')) {
+                    subContent.classList.remove('nav-sub-content-active');
                 }
                 else {
-                    for (let q = 0; q < dropDownButtons.length; q++) {
-                        const subParent = dropDownButtons[q].parentElement;
-                        subParent.getElementsByClassName("nav-sub-content")[0].classList.remove("nav-sub-content-active");
+                    for (var q = 0; q < dropDownButtons.length; q++) {
+                        var subParent = dropDownButtons[q].parentElement;
+                        subParent.getElementsByClassName('nav-sub-content')[0].classList.remove('nav-sub-content-active');
                     }
-                    subContent.classList.add("nav-sub-content-active");
+                    subContent.classList.add('nav-sub-content-active');
                 }
             });
         }
         if (closeBtn) {
-            closeBtn.addEventListener(Event.CLICK, () => {
+            closeBtn.addEventListener(Event.CLICK, function () {
                 toggleMenu(false);
             });
         }
     };
-    const toggleMenu = (shouldOpen) => {
-        const body = document.body;
-        const nav = document.querySelector(".nav");
-        const navBackground = document.querySelector(".nav-background");
-        if (shouldOpen && nav && nav.style.display !== "block") {
-            nav.classList.add("nav-active");
-            navBackground.classList.add("nav-background-active");
-            body.classList.add("nav--disable-scroll");
+    var toggleMenu = function (shouldOpen) {
+        var body = document.body;
+        var nav = document.querySelector('.nav');
+        var navBackground = document.querySelector('.nav-background');
+        if (shouldOpen && nav && nav.style.display !== 'block') {
+            nav.classList.add('nav-active');
+            navBackground.classList.add('nav-background-active');
+            body.classList.add('nav--disable-scroll');
             return;
         }
-        nav.classList.remove("nav-active");
-        navBackground.classList.remove("nav-background-active");
-        body.classList.remove("nav--disable-scroll");
+        nav.classList.remove('nav-active');
+        navBackground.classList.remove('nav-background-active');
+        body.classList.remove('nav--disable-scroll');
     };
-    const throttle = () => {
-        const now = +new Date();
+    var throttle = function () {
+        var now = +new Date();
         if (last && now < last + throttleDelay) {
             clearTimeout(timer);
-            timer = setTimeout(() => {
+            timer = setTimeout(function () {
                 last = now;
                 onScroll();
             }, throttleDelay);
@@ -137,56 +137,56 @@ export const UIMenu = () => {
             onScroll();
         }
     };
-    const getHeaderElement = () => {
-        return QuerySelector.get(".nav-wrapper");
+    var getHeaderElement = function () {
+        return QuerySelector.get('.nav-wrapper');
     };
-    const handleScrollClasses = (showOriginal) => {
-        const header = getHeaderElement();
+    var handleScrollClasses = function (showOriginal) {
+        var header = getHeaderElement();
         if (!header) {
             return;
         }
         if (!showOriginal) {
-            header.classList.add("nav-wrapper--active");
+            header.classList.add('nav-wrapper--active');
         }
         else {
-            header.classList.remove("nav-wrapper--active");
+            header.classList.remove('nav-wrapper--active');
         }
     };
-    const toggleMenuChevrons = (add) => {
-        const menuIcons = QuerySelector.getAll(".nav-wrapper .ui-i--chevron-down");
-        for (let i = 0; i < menuIcons.length; i++) {
-            const icon = menuIcons.item(i);
+    var toggleMenuChevrons = function (add) {
+        var menuIcons = QuerySelector.getAll('.nav-wrapper .ui-i--chevron-down');
+        for (var i = 0; i < menuIcons.length; i++) {
+            var icon = menuIcons.item(i);
             if (add) {
-                icon.classList.add("ui-i--white");
-                icon.classList.remove("ui-i--gray");
+                icon.classList.add('ui-i--white');
+                icon.classList.remove('ui-i--gray');
             }
             else {
-                icon.classList.remove("ui-i--white");
-                icon.classList.add("ui-i-gray");
+                icon.classList.remove('ui-i--white');
+                icon.classList.add('ui-i-gray');
             }
         }
     };
-    const toggleHamburger = (dark) => {
-        const hamburgers = QuerySelector.getAll(".nav-wrapper .ui-i--hamburger");
-        for (let i = 0; i < hamburgers.length; i++) {
-            const hamburger = hamburgers.item(i);
+    var toggleHamburger = function (dark) {
+        var hamburgers = QuerySelector.getAll('.nav-wrapper .ui-i--hamburger');
+        for (var i = 0; i < hamburgers.length; i++) {
+            var hamburger = hamburgers.item(i);
             if (dark) {
-                hamburger.classList.remove("ui-i--white");
-                hamburger.classList.remove("ui-i--gray");
+                hamburger.classList.remove('ui-i--white');
+                hamburger.classList.remove('ui-i--gray');
             }
             else {
-                hamburger.classList.remove("ui-i--gray");
-                hamburger.classList.add("ui-i--white");
+                hamburger.classList.remove('ui-i--gray');
+                hamburger.classList.add('ui-i--white');
             }
         }
     };
-    const onScroll = () => {
-        const wrapper = QuerySelector.get(".nav-wrapper");
+    var onScroll = function () {
+        var wrapper = QuerySelector.get('.nav-wrapper');
         if (wrapper) {
-            wrapper.classList.remove("disable-animations");
+            wrapper.classList.remove('disable-animations');
         }
-        const header = getHeaderElement();
-        if (header && window.pageYOffset && !header.classList.contains("nav-wrapper--active")) {
+        var header = getHeaderElement();
+        if (header && window.pageYOffset && !header.classList.contains('nav-wrapper--active')) {
             handleScrollClasses(false);
             toggleMenuChevrons(false);
             toggleHamburger(true);
@@ -197,13 +197,13 @@ export const UIMenu = () => {
             toggleHamburger(false);
         }
     };
-    const handleTouchEnd = (e) => {
+    var handleTouchEnd = function (e) {
         if (startEl !== e.target)
             return;
-        const swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);
-        const swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);
-        const timeDiff = Date.now() - timeDown;
-        let eventType = '';
+        var swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);
+        var swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);
+        var timeDiff = Date.now() - timeDown;
+        var eventType = '';
         if (Math.abs(xDiff) > Math.abs(yDiff)) {
             if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
                 if (xDiff > 0) {
@@ -231,7 +231,7 @@ export const UIMenu = () => {
         yDown = null;
         timeDown = null;
     };
-    const handleTouchStart = (e) => {
+    var handleTouchStart = function (e) {
         if (e.target.getAttribute('data-swipe-ignore') === 'true')
             return;
         startEl = e.target;
@@ -241,11 +241,11 @@ export const UIMenu = () => {
         xDiff = 0;
         yDiff = 0;
     };
-    const handleTouchMove = (e) => {
+    var handleTouchMove = function (e) {
         if (!xDown || !yDown)
             return;
-        const xUp = e.touches[0].clientX;
-        const yUp = e.touches[0].clientY;
+        var xUp = e.touches[0].clientX;
+        var yUp = e.touches[0].clientY;
         xDiff = xDown - xUp;
         yDiff = yDown - yUp;
     };

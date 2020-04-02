@@ -1,8 +1,8 @@
-import React from "react";
-import {QuerySelector} from "../../@core/DOM/QuerySelector";
-import {Attribute} from "../../@core/DOM/models/Attribute";
-import {Event} from "../../@core/DOM/models/Event";
-import "./UIProgress.scss";
+import React from 'react';
+import { QuerySelector } from '../../@core/DOM/QuerySelector';
+import { Attribute } from '../../@core/DOM/models/Attribute';
+import { Event } from '../../@core/DOM/models/Event';
+import './UIProgress.scss';
 
 export const UIProgress = () => {
     let windowHeight: number = 0;
@@ -18,7 +18,7 @@ export const UIProgress = () => {
     const calculateDimensions = (): void => {
         windowHeight = window.innerHeight;
         documentHeight = document.documentElement.scrollHeight;
-        progressBar = QuerySelector.get("progress.ui-reading-position-indicator");
+        progressBar = QuerySelector.get('progress.ui-reading-position-indicator');
 
         setMax();
     };
@@ -51,7 +51,7 @@ export const UIProgress = () => {
 
     const container = document.querySelector('.page-container');
     // @ts-ignore
-    if (container && typeof ResizeObserver === "function") {
+    if (container && typeof ResizeObserver === 'function') {
         // @ts-ignore
         new ResizeObserver(entries => {
             calculateDimensions();
@@ -59,6 +59,6 @@ export const UIProgress = () => {
     }
 
     return (
-        <progress className="ui-reading-position-indicator" value="0"/>
+        <progress className="ui-reading-position-indicator" value="0" />
     );
 };

@@ -1,2 +1,2 @@
-export * from "./UILoader";
+export * from './UILoader';
 //# sourceMappingURL=index.js.map

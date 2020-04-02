@@ -1,6 +1,6 @@
 enum UIModalTypes {
-    DEFAULT = "DEFAULT",
-    IFRAME = "IFRAME"
+    DEFAULT = 'DEFAULT',
+    IFRAME = 'IFRAME'
 }
 
 export interface UIModalInterface {

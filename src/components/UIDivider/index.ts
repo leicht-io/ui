@@ -1,1 +1,1 @@
-export * from "./UIDivider";
+export * from './UIDivider';

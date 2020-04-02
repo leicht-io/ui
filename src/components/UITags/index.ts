@@ -1,1 +1,1 @@
-export * from "./UITags";
+export * from './UITags';

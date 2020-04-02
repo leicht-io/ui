@@ -1,1 +1,1 @@
-export * from "./UIPageContainer"
+export * from './UIPageContainer';

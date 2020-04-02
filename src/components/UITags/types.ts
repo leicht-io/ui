@@ -1,3 +1,3 @@
 export interface IProps {
-    tags: { type: "primary" | "secondary", name: string }[];
+    tags: { type: 'primary' | 'secondary', name: string }[];
 }

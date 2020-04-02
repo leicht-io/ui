@@ -1,5 +1,5 @@
-import {UUID} from "../utils/UUID";
-import {QuerySelector} from "../DOM/QuerySelector";
+import { UUID } from '../utils/UUID';
+import { QuerySelector } from '../DOM/QuerySelector';
 
 export class UIComponent {
     public properties: any;
@@ -15,9 +15,9 @@ export class UIComponent {
 
     public destroy(): void {
         this.timeout = setTimeout(() => {
-            const container: Element | null = QuerySelector.get("#" + this.id);
+            const container: Element | null = QuerySelector.get('#' + this.id);
             if (container) {
-                container.outerHTML = "";
+                container.outerHTML = '';
             }
 
             if (this.timeout) {
@@ -27,9 +27,11 @@ export class UIComponent {
     }
 
     public render(): void {
+        return;
     }
 
     public onRendered(): void {
+        return;
     }
 
     private addContentToDOM(content: string): void {

@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "es2015",
+    "target": "es5",
+    "module": "esnext",
     "lib": [
-      "es2015", "dom"
+      "es6",
+      "dom"
     ],
+    "jsx": "react",
     "declaration": true,
     "sourceMap": true,
     "outDir": "dist",
     "removeComments": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -17,15 +20,13 @@
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
+    "esModuleInterop": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "examples"
+    "node_modules"
   ]
 }

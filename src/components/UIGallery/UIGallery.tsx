@@ -1,7 +1,8 @@
-import {ClassList} from "../../@core/DOM/ClassList";
-import React from "react";
-import "./UIGallery.scss"
-import {IProps} from "./types";
+import { ClassList } from '../../@core/DOM/ClassList';
+import React from 'react';
+import './UIGallery.scss';
+import { IProps } from './types';
+import { UIIcon } from '../UIIcon';
 
 export const UIGallery = (props: IProps) => {
     const [photos, setPhotos] = React.useState<any | null>(null);
@@ -10,7 +11,7 @@ export const UIGallery = (props: IProps) => {
     const [currentImage, setCurrentImage] = React.useState<any | null>(null);
 
     React.useEffect(() => {
-        if (currentImage !== null && currentImage !== "") {
+        if (currentImage !== null && currentImage !== '') {
             addKeyEventListeners();
             lockBodyScroll(true);
             setShowSlider(true);
@@ -28,10 +29,14 @@ export const UIGallery = (props: IProps) => {
 
 
     const lockBodyScroll = (lock: boolean): void => {
-        if (lock) {
-            ClassList.add('body--disable-scroll', 'body');
-        } else {
-            ClassList.remove('body--disable-scroll', 'body');
+        const body = document.querySelector('body');
+
+        if (body) {
+            if (lock) {
+                body.classList.add('body--disable-scroll');
+            } else {
+                body.classList.remove('body--disable-scroll');
+            }
         }
     };
 
@@ -78,44 +83,55 @@ export const UIGallery = (props: IProps) => {
             }
         });*/
 
-        document.addEventListener("keyup", (e: any) => {
-            if (e.key === "Escape") {
-                setCurrentImage(null);
-                setSliderReady(false);
+        document.addEventListener('keyup', (e: any) => {
+            if (e.key === 'Escape') {
+                closeImage();
             }
         });
     };
 
+    const closeImage = () => {
+        setCurrentImage(null);
+        setSliderReady(false);
+        setShowSlider(false);
+    };
+
     const getSliderContent = () => {
-        if (showSlider && photos) {
+        if (showSlider) {
             // const previousImage = props.baseUrl + photos[currentImage.index - 1].fullSizePath;
-            //const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
+            // const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
 
             return (
                 <>
-                    {/* <img alt="Previous Photo" draggable='false' id='ui-gallery--prev-image' src={previousImage}
+                    { /* <img alt="Previous Photo" draggable='false' id='ui-gallery--prev-image' src={previousImage}
                          onLoad={(event) => {
                              ClassList.add(event.target, 'loaded');
-                         }}/>*/}
+                         }}/>*/ }
 
                     <div
-                        className={"ui-gallery--current-image " + (sliderReady ? "ui-gallery--current-image-visible" : "")}>
-                        <img alt="Current Photo" draggable='false' className={"loaded"}
-                             src={currentImage && currentImage.source}
-                             onLoad={() => {
+                        className={ 'ui-gallery--current-image ' + (sliderReady ? 'ui-gallery--current-image-visible' : '') }>
+                        { /*<div className="ui-gallery--loading">
+                            <div className="spinner">
+                                <div className="double-bounce1"/>
+                                <div className="double-bounce2"/>
+                            </div>
+                        </div>*/ }
+                        <img alt="Current Photo" draggable="false" className={ 'loaded' }
+                             src={ currentImage && currentImage.source }
+                             onLoad={ () => {
                                  setSliderReady(true);
-                             }}/>
-                        {<div className="ui-gallery--close" onClick={() => {
-                            setCurrentImage(null);
-                            setSliderReady(false);
-                        }}>X
-                        </div>}
+                             } } />
+                        { <div className="ui-gallery--close" onClick={ () => {
+                            closeImage();
+                        } }>
+                            <UIIcon icon={ 'close' } size={ 'sm' } />
+                        </div> }
                     </div>
 
-                    {/*<img alt="Next Image" draggable='false' id='ui-gallery--next-image' src={nextImage}
+                    { /*<img alt="Next Image" draggable='false' id='ui-gallery--next-image' src={nextImage}
                          onLoad={(event) => {
                              ClassList.add(event.target, 'loaded');
-                         }}/>*/}
+                         }}/>*/ }
                 </>
             );
         } else {
@@ -126,42 +142,47 @@ export const UIGallery = (props: IProps) => {
     if (photos) {
         return (
             <>
-                <div className={"ui-gallery--wrapper " + (showSlider ? "ui-gallery--wrapper-visible" : '')}>
-                    {getSliderContent()}
+                <div className={ 'ui-gallery--wrapper ' + (showSlider ? 'ui-gallery--wrapper-visible' : '') }
+                     onClick={ (event) => {
+                         if (event.target.classList.contains('ui-gallery--wrapper')) {
+                             setCurrentImage(null);
+                         }
+                     } }>
+                    { getSliderContent() }
                 </div>
 
                 <div className="ui-gallery grid-container grid-two-columns">
-                    {photos && photos.map((photo, index) => {
+                    { photos && photos.map((photo, index) => {
                         return (
-                            <div className="grid-item" key={index}>
-                                <img alt={photo.description}
-                                     src={props.baseUrl + photo.mediumThumbPath}
-                                     data-index={index}
-                                     data-large={props.baseUrl + photo.fullSizePath}
-                                     onClick={(event) => {
-                                         const currentImage: string = (event.target as any).getAttribute("data-large");
-                                         const currentIndex: number = Number((event.target as any).getAttribute("data-index"));
+                            <div className="grid-item" key={ index }>
+                                <img alt={ photo.description }
+                                     src={ props.baseUrl + photo.mediumThumbPath }
+                                     data-index={ index }
+                                     data-large={ props.baseUrl + photo.fullSizePath }
+                                     onClick={ (event) => {
+                                         const currentImage: string = (event.target as any).getAttribute('data-large');
+                                         const currentIndex: number = Number((event.target as any).getAttribute('data-index'));
                                          setCurrentImage({source: currentImage, index: currentIndex});
-                                     }}
-                                     onLoad={(event) => {
+                                     } }
+                                     onLoad={ (event) => {
                                          ClassList.add(event.target, 'loaded');
-                                     }}
+                                     } }
                                 />
-                                <p>{photo.description}</p>
+                                <p>{ photo.description }</p>
                             </div>
                         );
-                    })}
+                    }) }
                 </div>
             </>
         );
     } else {
         return (
             <div className="ui-gallery grid-container grid-two-columns">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => {
+                { [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => {
                     return (
-                        <div className="grid-item" key={index}/>
+                        <div className="grid-item" key={ index } />
                     );
-                })}
+                }) }
             </div>
         );
     }

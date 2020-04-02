@@ -1,2 +1,2 @@
-export * from "./UIMenu";
+export * from './UIMenu';
 //# sourceMappingURL=index.js.map

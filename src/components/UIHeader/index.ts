@@ -1,1 +1,1 @@
-export * from "./UIHeader"
+export * from './UIHeader';

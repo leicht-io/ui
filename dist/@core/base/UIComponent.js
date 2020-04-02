@@ -1,38 +1,44 @@
-import { UUID } from "../utils/UUID";
-import { QuerySelector } from "../DOM/QuerySelector";
-export class UIComponent {
-    constructor(properties) {
+import { UUID } from '../utils/UUID';
+import { QuerySelector } from '../DOM/QuerySelector';
+var UIComponent = (function () {
+    function UIComponent(properties) {
         this.id = UUID.generate(8);
         this.properties = properties;
-        const content = this.render();
+        var content = this.render();
         this.addContentToDOM(content);
     }
-    destroy() {
-        this.timeout = setTimeout(() => {
-            const container = QuerySelector.get("#" + this.id);
+    UIComponent.prototype.destroy = function () {
+        var _this = this;
+        this.timeout = setTimeout(function () {
+            var container = QuerySelector.get('#' + _this.id);
             if (container) {
-                container.outerHTML = "";
+                container.outerHTML = '';
             }
-            if (this.timeout) {
-                clearTimeout(this.timeout);
+            if (_this.timeout) {
+                clearTimeout(_this.timeout);
             }
         }, 350);
-    }
-    render() {
-    }
-    onRendered() {
-    }
-    addContentToDOM(content) {
-        const element = document.createElement('div');
+    };
+    UIComponent.prototype.render = function () {
+        return;
+    };
+    UIComponent.prototype.onRendered = function () {
+        return;
+    };
+    UIComponent.prototype.addContentToDOM = function (content) {
+        var _this = this;
+        var element = document.createElement('div');
         element.innerHTML = content;
         element.id = this.id;
-        const container = QuerySelector.get(this.properties.container);
+        var container = QuerySelector.get(this.properties.container);
         if (container) {
             container.appendChild(element);
         }
-        setTimeout(() => {
-            this.onRendered();
+        setTimeout(function () {
+            _this.onRendered();
         }, 0);
-    }
-}
+    };
+    return UIComponent;
+}());
+export { UIComponent };
 //# sourceMappingURL=UIComponent.js.map
