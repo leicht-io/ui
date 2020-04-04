@@ -25,5 +25,7 @@ export interface IGallery {
 export interface IProps {
     baseUrl: string;
     gallery: IGallery;
+
+    skeletons?: number;
 }
 

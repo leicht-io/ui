@@ -1,6 +1,7 @@
 import React from 'react';
 import './UIHeader.scss';
 import { IProps } from './types';
+import { UIImage } from '../UIImage';
 
 export const UIHeader = (props: IProps) => {
     const getContent = () => {
@@ -21,9 +22,11 @@ export const UIHeader = (props: IProps) => {
                         <div className="header--row">
                             <div className="header--metadata">
                                 <div className="blog-metadata author-image">
-                                    <img className="img img-responsive img-circle"
-                                         src={ props.metadata.author.image }
-                                         alt={ props.metadata.author.name } width="80" height="80" />
+                                    <UIImage responsive={ true } round={ true }
+                                             alt={ props.metadata.author.image }
+                                             source={ props.metadata.author.image }
+                                             width="80"
+                                             height="80" />
                                 </div>
                                 <div className="blog-metadata blog-author">
                                     <p className="blog-metadata-light">Author</p>

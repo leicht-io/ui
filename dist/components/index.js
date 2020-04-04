@@ -9,4 +9,6 @@ export * from './UIHeader';
 export * from './UIIcon';
 export * from './UISlider';
 export * from './UIInput';
+export * from './UIImage';
+export * from './UITextArea';
 //# sourceMappingURL=index.js.map

@@ -17,8 +17,7 @@ export interface IMetadata {
 export interface IAuthor {
     image: string;
     name: string;
-    published;
-    string;
+    published: string;
     updated: string;
     length: string;
 }

@@ -177,7 +177,7 @@ export const UIGallery = (props: IProps) => {
     } else {
         return (
             <div className="ui-gallery grid-container grid-two-columns">
-                { [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => {
+                { [...Array(props.skeletons || 10)].map((index) => {
                     return (
                         <div className="grid-item" key={ index } />
                     );

@@ -4,6 +4,7 @@ import {
     UIGallery,
     UIHeader,
     UIIcon,
+    UIImage,
     UIInput,
     UIMenu,
     UIModal,
@@ -19,15 +20,18 @@ import { UITypography } from '../../src/components/UITypography';
 import { UIButton } from '../../src/components/UIButton';
 import { galleryMockResponse } from '../assets/gallery.mock';
 import { sliderMockResponse } from '../assets/slider.mock';
+import { UITextArea } from '../../src/components/UITextArea';
 
 export const App = () => {
     const [gallery, setGallery] = React.useState<any>(null);
     const [showModal1, setShowModal1] = React.useState<boolean>(false);
     const [showModal2, setShowModal2] = React.useState<boolean>(false);
+    const [imageSource, setImageSource] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         setTimeout(() => {
             setGallery(galleryMockResponse);
+            setImageSource('https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg');
         }, 2500);
     }, []);
 
@@ -62,10 +66,10 @@ export const App = () => {
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Dividers</UITypography>
 
-                <UIDivider size={ 'large' } border={ true } />
-                <UIDivider size={ 'medium' } border={ true } />
-                <UIDivider size={ 'small' } border={ true } />
-                <UIDivider size={ 'medium' } border={ false } />
+                <UIDivider size={ 'large' } showBorder={ true } />
+                <UIDivider size={ 'medium' } showBorder={ true } />
+                <UIDivider size={ 'small' } showBorder={ true } />
+                <UIDivider size={ 'medium' } showBorder={ false } />
             </UIPageContainer>
 
             <UIPageContainer>
@@ -123,15 +127,24 @@ export const App = () => {
 
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Gallery</UITypography>
-                <UIGallery baseUrl="https://ni.leicht.io/" gallery={ gallery } />
+                <UIGallery baseUrl="https://ni.leicht.io/" gallery={ gallery } skeletons={ 12 } />
+            </UIPageContainer>
+
+            <UIPageContainer>
+                <UITypography type={ 'h3' }>Images</UITypography>
+                <UIImage
+                    label="This is the label"
+                    height="658px"
+                    source={ imageSource } />
             </UIPageContainer>
 
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Grid & Cards</UITypography>
                 <UIGrid columns={ 'four' }>
                     <UICard title="Title 1">
-                        <img
-                            src="https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg" />
+                        <UIImage
+                            source={ 'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg' } />
+
                         <UITags tags={ [
                             {type: 'primary', name: '3D Print'},
                             {type: 'secondary', name: 'PCB'},
@@ -143,11 +156,8 @@ export const App = () => {
                     </UICard>
 
                     <UICard title="Title 3">
-                        {
-                            // TODO: images
-                        }
-                        <img
-                            src="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg" />
+                        <UIImage
+                            source="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg" />
 
                         {
                             // TODO: Toolbar
@@ -164,8 +174,8 @@ export const App = () => {
                     </UICard>
 
                     <UICard title="Title 4">
-                        <img
-                            src="https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg" />
+                        <UIImage
+                            source="https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg" />
                     </UICard>
                 </UIGrid>
             </UIPageContainer>
@@ -174,6 +184,15 @@ export const App = () => {
                 <UITypography type={ 'h3' }>Inputs</UITypography>
 
                 <UIInput label={ 'Input Label' } onChange={ (value: string) => {
+                    // tslint:disable-next-line:no-console
+                    console.log('Value:', value);
+                } } />
+                <UIInput label={ 'Input Label' } onChange={ (value: string) => {
+                    // tslint:disable-next-line:no-console
+                    console.log('Value:', value);
+                } } />
+
+                <UITextArea label={ 'Input Label' } onChange={ (value: string) => {
                     // tslint:disable-next-line:no-console
                     console.log('Value:', value);
                 } } />
@@ -200,7 +219,7 @@ export const App = () => {
             <UIModal title={ 'Modal Title' } show={ showModal2 } onHide={ () => {
                 setShowModal2(false);
             } }>
-                <p>With HTML content</p>
+                <UITypography type="p">With HTML content</UITypography>
             </UIModal>
         </>
     );

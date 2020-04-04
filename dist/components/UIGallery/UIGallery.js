@@ -1,3 +1,10 @@
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 import React from 'react';
 import './UIGallery.scss';
 import { UIIcon } from '../UIIcon';
@@ -81,7 +88,7 @@ export var UIGallery = function (props) {
             }))));
     }
     else {
-        return (React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (index) {
+        return (React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, __spreadArrays(Array(props.skeletons || 10)).map(function (index) {
             return (React.createElement("div", { className: "grid-item", key: index }));
         })));
     }
