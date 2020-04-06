@@ -1,0 +1,14 @@
+@import "../../../@core/styles/@theme.scss";
+
+.ui-card-title {
+  &-as-overlay {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+
+  h4 {
+    padding: $base-spacing * 2 $base-spacing $base-spacing;
+    margin: 0;
+  }
+}

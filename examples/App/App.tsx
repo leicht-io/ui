@@ -14,13 +14,15 @@ import {
     UITags
 } from '../../src/components';
 import { UINotification } from '../../src/components/UINotification';
-import { UICard } from '../../src/components/UICard';
+import { UICard, UICardBody, UICardTitle, UICardToolbar } from '../../src/components/UICard';
 import { UIGrid } from '../../src/components/UIGrid';
 import { UITypography } from '../../src/components/UITypography';
 import { UIButton } from '../../src/components/UIButton';
 import { galleryMockResponse } from '../assets/gallery.mock';
 import { sliderMockResponse } from '../assets/slider.mock';
 import { UITextArea } from '../../src/components/UITextArea';
+import { MenuMock } from '../assets/menuMock';
+import { logo } from '../assets/logo';
 
 export const App = () => {
     const [gallery, setGallery] = React.useState<any>(null);
@@ -38,7 +40,7 @@ export const App = () => {
     return (
         <>
             <UIProgress />
-            <UIMenu />
+            <UIMenu menuItems={ MenuMock } logo={ logo } />
             <UIHeader title="Leicht.IO React UI Component Library"
                       imageUrl="https://leicht.io//assets/images/header-7.7f48e486decb2b9246586c0f33d03c942e25dcb23bb5f5d33dff9876f59ca2f9.jpg" />
 
@@ -113,15 +115,16 @@ export const App = () => {
                     <UIIcon icon={ 'landscape' } size={ 'lg' } />
                     <UIIcon icon={ 'usa' } size={ 'lg' } />
                     <UIIcon icon={ 'close' } size={ 'lg' } />
-                    <UIIcon icon={ 'three-d-model' } size={ 'lg' } />
+                    <UIIcon icon={ 'threeDModel' } size={ 'lg' } />
                     <UIIcon icon={ 'electronics' } size={ 'lg' } />
                     <UIIcon icon={ 'mail' } size={ 'lg' } />
                     <UIIcon icon={ 'phone' } size={ 'lg' } />
-                    <UIIcon icon={ 'chevron-down' } size={ 'lg' } />
+                    <UIIcon icon={ 'chevronDown' } size={ 'lg' } />
                     <UIIcon icon={ 'hamburger' } size={ 'lg' } />
                     <UIIcon icon={ 'close' } size={ 'lg' } />
-                    <UIIcon icon={ 'close-square' } size={ 'lg' } />
+                    <UIIcon icon={ 'closeSquare' } size={ 'lg' } />
                     <UIIcon icon={ 'magnify' } size={ 'lg' } />
+                    <UIIcon icon={ 'download' } size={ 'lg' } />
                 </UIGrid>
             </UIPageContainer>
 
@@ -133,15 +136,15 @@ export const App = () => {
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Images</UITypography>
                 <UIImage
-                    label="This is the label"
-                    height="658px"
+                    skeletonHeight={ 658 }
+                    label={ {text: 'This is the label', background: true} }
                     source={ imageSource } />
             </UIPageContainer>
 
             <UIPageContainer>
                 <UITypography type={ 'h3' }>Grid & Cards</UITypography>
                 <UIGrid columns={ 'four' }>
-                    <UICard title="Title 1">
+                    <UICard>
                         <UIImage
                             source={ 'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg' } />
 
@@ -151,29 +154,28 @@ export const App = () => {
                         ] } />
                     </UICard>
 
-                    <UICard title="Title 2">
-                        <UITypography type={ 'p' }> This content is a paragraph</UITypography>
+                    <UICard>
+                        <UICardTitle title="Title 2" />
+                        <UICardBody>
+                            <UITypography type={ 'p' }>This content is a paragraph</UITypography>
+                        </UICardBody>
                     </UICard>
 
-                    <UICard title="Title 3">
+                    <UICard>
                         <UIImage
                             source="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg" />
 
-                        {
-                            // TODO: Toolbar
-                        }
-                        <div className="ui-card--toolbar">
-                            <div>
-                                <p>Content left</p>
-                            </div>
-                            <div className="ui-icons">
-                                <div className="ui-i ui-i--magnify ui-i--white" />
-                                <div className="ui-i ui-i--download ui-i--white" />
-                            </div>
-                        </div>
+                        <UICardToolbar text="Content Left" icons={ [{
+                            id: 'facebook',
+                            onClick: () => {
+                                // tslint:disable-next-line:no-console
+                                console.log('Clicked icon');
+                            }
+                        }] } />
                     </UICard>
 
-                    <UICard title="Title 4">
+                    <UICard>
+                        <UICardTitle title={ 'Title 4' } asOverlay={ true } />
                         <UIImage
                             source="https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg" />
                     </UICard>

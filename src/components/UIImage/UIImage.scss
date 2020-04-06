@@ -7,6 +7,46 @@
   border-radius: $base-spacing;
   overflow: hidden;
   transition: all 0.3s linear;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  &.ui-image-pointer {
+    cursor: pointer;
+  }
+
+  &.ui-img-round {
+    border-radius: 50%;
+  }
+
+  img {
+    object-fit: cover;
+    min-height: 1px;
+  }
+
+  .ui-img-label-wrapper {
+    background: #fff;
+  }
+
+  .ui-img-label {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    height: 55px;
+
+    p {
+      margin: 0;
+      text-align: center;
+    }
+  }
 
   &-loading {
     background: #eeeb;
@@ -34,10 +74,6 @@
 
     &.img-fullwidth {
       width: 100%;
-    }
-
-    &.ui-img-round {
-      border-radius: 50%;
     }
 
     &.ui-img-responsive {

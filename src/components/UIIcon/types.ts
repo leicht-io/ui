@@ -1,5 +1,5 @@
 export interface IProps {
-    icon: 'facebook' | 'instagram' | 'github' | 'landscape' | 'usa' | 'three-d-model' | 'electronics' | 'mail' | 'phone' | 'chevron-down' | 'hamburger' | 'close-square' | 'magnify' | 'close';
+    icon: 'facebook' | 'instagram' | 'github' | 'landscape' | 'usa' | 'threeDModel' | 'electronics' | 'mail' | 'phone' | 'chevronDown' | 'hamburger' | 'closeSquare' | 'magnify' | 'close' | 'download';
 
     size?: 'sm' | 'md' | 'lg';
 

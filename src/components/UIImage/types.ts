@@ -1,6 +1,6 @@
 export interface IProps {
     source: string;
-    label?: string;
+    label?: { text: string; background?: boolean; };
 
     responsive?: boolean;
     round?: boolean;
@@ -9,4 +9,8 @@ export interface IProps {
     height?: number | string;
 
     alt?: string;
+
+    skeletonHeight?: number;
+
+    onClick?: () => void;
 }

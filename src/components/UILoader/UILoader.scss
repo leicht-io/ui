@@ -1,0 +1,18 @@
+.ui-loader {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  svg {
+    width: 15%;
+    height: 15%;
+  }
+}

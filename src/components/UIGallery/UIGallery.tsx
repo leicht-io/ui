@@ -2,12 +2,14 @@ import React from 'react';
 import './UIGallery.scss';
 import { IGallery, IProps, Photo } from './types';
 import { UIIcon } from '../UIIcon';
+import { UIImage } from '../UIImage';
+import { UILoader } from '../UILoader';
 
 export const UIGallery = (props: IProps) => {
     const [photos, setPhotos] = React.useState<IGallery | null>(null);
     const [showSlider, setShowSlider] = React.useState<boolean>(false);
     const [sliderReady, setSliderReady] = React.useState<boolean>(false);
-    const [currentImage, setCurrentImage] = React.useState<Photo | null>(null);
+    const [currentImage, setCurrentImage] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         if (currentImage !== null && currentImage !== '') {
@@ -116,7 +118,7 @@ export const UIGallery = (props: IProps) => {
                             </div>
                         </div>*/}
                         <img alt="Current Photo" draggable="false" className={ 'loaded' }
-                             src={ currentImage && currentImage.source }
+                             src={ currentImage }
                              onLoad={ () => {
                                  setSliderReady(true);
                              } } />
@@ -144,7 +146,7 @@ export const UIGallery = (props: IProps) => {
                 <div className={ 'ui-gallery--wrapper ' + (showSlider ? 'ui-gallery--wrapper-visible' : '') }
                      onClick={ (event) => {
                          if (event.target.classList.contains('ui-gallery--wrapper')) {
-                             setCurrentImage(null);
+                             closeImage();
                          }
                      } }>
                     { getSliderContent() }
@@ -154,20 +156,14 @@ export const UIGallery = (props: IProps) => {
                     { photos && photos.map((photo: Photo, index) => {
                         return (
                             <div className="grid-item" key={ index }>
-                                <img alt={ photo.description }
-                                     src={ props.baseUrl + photo.mediumThumbPath }
-                                     data-index={ index }
-                                     data-large={ props.baseUrl + photo.fullSizePath }
-                                     onClick={ (event) => {
-                                         const currentImage: string = (event.target as any).getAttribute('data-large');
-                                         const currentIndex: number = Number((event.target as any).getAttribute('data-index'));
-                                         setCurrentImage({source: currentImage, index: currentIndex});
-                                     } }
-                                     onLoad={ (event) => {
-                                         event.target.classList.add('loaded');
-                                     } }
+                                <UIImage
+                                    alt={ photo.description }
+                                    source={ props.baseUrl + photo.mediumThumbPath }
+                                    onClick={ () => {
+                                        setCurrentImage(props.baseUrl + photo.fullSizePath);
+                                    } }
+                                    label={ {text: photo.description} }
                                 />
-                                <p>{ photo.description }</p>
                             </div>
                         );
                     }) }
@@ -179,7 +175,9 @@ export const UIGallery = (props: IProps) => {
             <div className="ui-gallery grid-container grid-two-columns">
                 { [...Array(props.skeletons || 10)].map((index) => {
                     return (
-                        <div className="grid-item" key={ index } />
+                        <div className="grid-item" key={ index }>
+                            <UILoader />
+                        </div>
                     );
                 }) }
             </div>

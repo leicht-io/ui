@@ -8,6 +8,8 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 import React from 'react';
 import './UIGallery.scss';
 import { UIIcon } from '../UIIcon';
+import { UIImage } from '../UIImage';
+import { UILoader } from '../UILoader';
 export var UIGallery = function (props) {
     var _a = React.useState(null), photos = _a[0], setPhotos = _a[1];
     var _b = React.useState(false), showSlider = _b[0], setShowSlider = _b[1];
@@ -56,7 +58,7 @@ export var UIGallery = function (props) {
         if (showSlider) {
             return (React.createElement(React.Fragment, null,
                 React.createElement("div", { className: 'ui-gallery--current-image ' + (sliderReady ? 'ui-gallery--current-image-visible' : '') },
-                    React.createElement("img", { alt: "Current Photo", draggable: "false", className: 'loaded', src: currentImage && currentImage.source, onLoad: function () {
+                    React.createElement("img", { alt: "Current Photo", draggable: "false", className: 'loaded', src: currentImage, onLoad: function () {
                             setSliderReady(true);
                         } }),
                     React.createElement("div", { className: "ui-gallery--close", onClick: function () {
@@ -72,24 +74,20 @@ export var UIGallery = function (props) {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: 'ui-gallery--wrapper ' + (showSlider ? 'ui-gallery--wrapper-visible' : ''), onClick: function (event) {
                     if (event.target.classList.contains('ui-gallery--wrapper')) {
-                        setCurrentImage(null);
+                        closeImage();
                     }
                 } }, getSliderContent()),
             React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, photos && photos.map(function (photo, index) {
                 return (React.createElement("div", { className: "grid-item", key: index },
-                    React.createElement("img", { alt: photo.description, src: props.baseUrl + photo.mediumThumbPath, "data-index": index, "data-large": props.baseUrl + photo.fullSizePath, onClick: function (event) {
-                            var currentImage = event.target.getAttribute('data-large');
-                            var currentIndex = Number(event.target.getAttribute('data-index'));
-                            setCurrentImage({ source: currentImage, index: currentIndex });
-                        }, onLoad: function (event) {
-                            event.target.classList.add('loaded');
-                        } }),
-                    React.createElement("p", null, photo.description)));
+                    React.createElement(UIImage, { alt: photo.description, source: props.baseUrl + photo.mediumThumbPath, onClick: function () {
+                            setCurrentImage(props.baseUrl + photo.fullSizePath);
+                        }, label: { text: photo.description } })));
             }))));
     }
     else {
         return (React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, __spreadArrays(Array(props.skeletons || 10)).map(function (index) {
-            return (React.createElement("div", { className: "grid-item", key: index }));
+            return (React.createElement("div", { className: "grid-item", key: index },
+                React.createElement(UILoader, null)));
         })));
     }
 };
