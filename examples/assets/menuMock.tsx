@@ -3,7 +3,8 @@ import { MenuItem } from '../../src/components/UIMenu/types';
 export const MenuMock: MenuItem[] = [
     {
         title: 'Home',
-        link: '/'
+        link: '/',
+        active: true,
     }, {
         title: 'About',
         menuItems: [{

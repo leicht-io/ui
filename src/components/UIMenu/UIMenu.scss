@@ -1,6 +1,6 @@
 @import "../../@core/styles/@theme.scss";
 
-// TODO: Clean file when using SVG instead of image
+// TODO: This file should be refactored completely
 .disable-animations {
   transition: none !important;
   opacity: 1 !important;
@@ -10,10 +10,10 @@ body.nav--disable-scroll {
   overflow: hidden;
 }
 
-.nav-wrapper {
+.ui-navigation {
   height: $navigation-height;
 
-  background-color: #333;
+  background-color: transparent;
 
   display: flex;
   flex-direction: row;
@@ -22,7 +22,36 @@ body.nav--disable-scroll {
   align-items: center;
   align-content: center;
 
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+
   transition: all 0.250s linear;
+
+  &.sidebar-visible {
+    a {
+      color: $secondaryText;
+    }
+
+    .nav-item--primary.nav-item--primary {
+      a {
+        background: #fff;
+        text-decoration: none;
+        font-weight: 400;
+        color: $secondaryText;
+        margin: 0;
+        float: left;
+        width: 100%;
+        height: auto;
+        text-transform: none;
+        font-size: 16px;
+        justify-content: start;
+        padding: 22px 16px;
+      }
+    }
+  }
 
   .logo {
     height: $navigation-height;
@@ -62,18 +91,35 @@ body.nav--disable-scroll {
     }
   }
 
-  &.nav-wrapper-transparent {
-    background-color: transparent;
+  .nav-item {
+    &.nav-item--primary {
+      a {
+        background: #009688;
+        height: 32px;
+        padding: 0 15px;
+        margin-left: 15px;
+        margin-top: 32px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: white;
+        font-size: 14px;
+      }
+    }
   }
 
   &.nav-wrapper--active {
     @include cardShadow();
 
-    background-color: #fff !important;
-    height: 56px !important;
+    background-color: #fff;
+    height: 56px;
 
     a, .nav-sub-btn {
       color: $secondaryText;
+
+      svg {
+        fill: $secondaryText;
+      }
     }
 
     .logo {
@@ -123,31 +169,27 @@ body.nav--disable-scroll {
     align-content: center;
   }
 
-  .nav-item.active a {
+  .nav-item {
+    svg {
+      transition: all 0.100s linear;
+    }
+  }
+
+  .nav-item.active > a, .nav-item.active > span {
     font-weight: 700;
     color: $teal;
-  }
 
-  &.nav-wrapper--full-width {
-    > .nav-container {
-      width: 100%;
-    }
-
-    .nav-logo {
-      margin-left: $base-spacing * 2;
-    }
-
-    .nav {
-      margin-right: $base-spacing * 2;
+    svg {
+      fill: $teal;
     }
   }
 
-  &.nav-wrapper--fixed {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 999;
+  .nav-item.active {
+    .active {
+      font-weight: 700;
+
+      color: $teal;
+    }
   }
 
   > .nav-container {
@@ -167,9 +209,12 @@ body.nav--disable-scroll {
     }
 
     .nav .ui-i {
-      width: $base-spacing * 2;
-      height: $base-spacing * 2;
       margin-left: $base-spacing;
+
+      svg {
+        width: $base-spacing * 2;
+        height: $base-spacing * 2;
+      }
     }
   }
 
@@ -194,11 +239,11 @@ body.nav--disable-scroll {
     justify-content: space-between;
     align-items: center;
     align-content: stretch;
-  }
 
-  .nav-hamburger:hover {
-    opacity: 0.75;
-    transition: all .25s linear;
+    &:hover {
+      opacity: 0.75;
+      transition: all .25s linear;
+    }
   }
 
   .nav-responsive-header {
@@ -239,33 +284,35 @@ body.nav--disable-scroll {
       }
     }
 
-    .nav-content a {
-      background: #fff;
-      text-decoration: none;
-      font-weight: 400;
-      color: $secondaryText;
-      float: left;
-      width: 100%;
-      justify-content: start;
+    .nav-content {
+      span {
+        padding: 18px;
+        color: $secondaryText;
+        background: #fff;
+        text-decoration: none;
+        font-weight: 400;
+        float: left;
+        width: 100%;
 
-      &:hover {
-        font-weight: 700;
-        color: $teal;
+        &:hover {
+          font-weight: 700;
+          color: $teal;
+        }
       }
-    }
 
-    .nav-content span {
-      padding: 18px;
-      color: $secondaryText;
-      background: #fff;
-      text-decoration: none;
-      font-weight: 400;
-      float: left;
-      width: 100%;
+      a {
+        background: #fff;
+        text-decoration: none;
+        font-weight: 400;
+        color: $secondaryText;
+        float: left;
+        width: 100%;
+        justify-content: start;
 
-      &:hover {
-        font-weight: 700;
-        color: $teal;
+        &:hover {
+          font-weight: 700;
+          color: $teal;
+        }
       }
     }
 
@@ -273,30 +320,31 @@ body.nav--disable-scroll {
       opacity: 0;
       visibility: hidden;
       height: 0;
-    }
 
-    .nav-sub-content-active {
-      opacity: 1;
-      visibility: visible;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: stretch;
-      align-content: stretch;
-      height: auto;
-      float: left;
-      width: 100%;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      background: #f9f9f9;
-      border-bottom: 1px solid #eee;
+      &.nav-sub-content--expanded {
+        opacity: 1;
+        visibility: visible;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+        height: auto;
+        float: left;
+        width: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background: #f9f9f9;
+        border-bottom: 1px solid #eee;
+      }
     }
 
     .nav-active.nav-active {
       transform: translateX(0%);
       visibility: visible;
       transition: all .5s ease-in-out;
+      box-shadow: 5px 0 20px 0 rgba(0, 0, 0, 0.25);
     }
 
     .nav {
@@ -365,11 +413,7 @@ body.nav--disable-scroll {
   }
 
   @media (min-width: 768px) {
-    .nav-background {
-      display: none;
-    }
-
-    .nav-hamburger {
+    .nav-background, .nav-hamburger {
       display: none;
     }
 
@@ -401,9 +445,16 @@ body.nav--disable-scroll {
     .nav a:hover, .nav-sub:hover .nav-sub-btn {
       color: $teal;
       transition: all 0.100s linear;
+
+      svg {
+        transition: all 0.100s linear;
+        fill: $teal;
+      }
     }
 
     .nav-sub-content {
+      @include dropDownShadow();
+
       position: absolute;
       background-color: #fff;
       width: 250px;
@@ -411,11 +462,8 @@ body.nav--disable-scroll {
       top: $base-spacing * 9;
       border-radius: 8px;
 
-      @include dropDownShadow();
-
       opacity: 0;
       visibility: hidden;
-
       transition: all 0.150s linear;
 
       &:after {
@@ -430,31 +478,29 @@ body.nav--disable-scroll {
         border-bottom-color: #fff;
         margin-left: -8px;
       }
-    }
 
-    .nav-sub-content a {
-      float: left;
-      text-align: left;
-      text-decoration: none;
-      width: calc(100% - 32px);
-      padding: 16px;
-      color: $secondaryText;
-    }
+      a {
+        float: left;
+        text-align: left;
+        text-decoration: none;
+        width: calc(100% - 32px);
+        padding: 16px;
+        color: $secondaryText;
 
-    .nav-sub-content {
-      a:hover {
-        background-color: #eee;
-        color: black;
-      }
+        &:first-child:hover {
+          border-top-left-radius: $base-spacing;
+          border-top-right-radius: $base-spacing;
+        }
 
-      a:first-child:hover {
-        border-top-left-radius: $base-spacing;
-        border-top-right-radius: $base-spacing;
-      }
+        &:last-child:hover {
+          border-bottom-left-radius: $base-spacing;
+          border-bottom-right-radius: $base-spacing;
+        }
 
-      a:last-child:hover {
-        border-bottom-left-radius: $base-spacing;
-        border-bottom-right-radius: $base-spacing;
+        &:hover {
+          background-color: #eee;
+          color: black;
+        }
       }
     }
 
@@ -472,20 +518,5 @@ body.nav--disable-scroll {
       align-items: center;
       align-content: center;
     }
-  }
-}
-
-.nav-item--primary {
-  a {
-    background: #009688;
-    height: 32px;
-    padding: 0 15px;
-    margin-left: 15px;
-    margin-top: 32px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: white !important;
-    font-size: 14px;
   }
 }

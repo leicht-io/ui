@@ -3,7 +3,7 @@ import './UIHeader.scss';
 import { IProps } from './types';
 import { UIImage } from '../UIImage';
 
-export const UIHeader = (props: IProps) => {
+export const UIHeader = React.memo((props: IProps) => {
     const getContent = () => {
         if (props.multiContent) {
             return (
@@ -72,4 +72,4 @@ export const UIHeader = (props: IProps) => {
             ) }
         </header>
     );
-};
+});

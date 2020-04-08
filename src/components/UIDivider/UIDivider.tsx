@@ -8,7 +8,6 @@ export const UIDivider = (props: IProps) => {
     };
 
     return (
-        <div
-            className={ getClasses() } />
+        <div className={ getClasses() } />
     );
 };

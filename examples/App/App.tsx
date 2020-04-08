@@ -23,12 +23,15 @@ import { sliderMockResponse } from '../assets/slider.mock';
 import { UITextArea } from '../../src/components/UITextArea';
 import { MenuMock } from '../assets/menuMock';
 import { logo } from '../assets/logo';
+import { MenuItem } from '../../src/components/UIMenu/types';
 
 export const App = () => {
     const [gallery, setGallery] = React.useState<any>(null);
     const [showModal1, setShowModal1] = React.useState<boolean>(false);
     const [showModal2, setShowModal2] = React.useState<boolean>(false);
     const [imageSource, setImageSource] = React.useState<string | null>(null);
+    // @ts-ignore
+    const [menuItems, setMenuItems] = React.useState<MenuItem[]>(MenuMock);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -40,7 +43,14 @@ export const App = () => {
     return (
         <>
             <UIProgress />
-            <UIMenu menuItems={ MenuMock } logo={ logo } />
+            <UIMenu
+                menuItems={ menuItems }
+                logo={ logo }
+                onNavigate={ (destination: MenuItem) => {
+                    // tslint:disable-next-line:no-console
+                    console.log('Navigating to', destination.title);
+                } }
+            />
             <UIHeader title="Leicht.IO React UI Component Library"
                       imageUrl="https://leicht.io//assets/images/header-7.7f48e486decb2b9246586c0f33d03c942e25dcb23bb5f5d33dff9876f59ca2f9.jpg" />
 

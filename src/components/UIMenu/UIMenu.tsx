@@ -4,27 +4,42 @@ import { IProps, MenuItem } from './types';
 import { UIIcon } from '../UIIcon';
 
 export const UIMenu = (props: IProps) => {
-    /*const xDown: any = null;
-    const yDown: any = null;
-    const xDiff: any = null;
-    const yDiff: any = null;
-    const timeDown: any = null;
-    const startEl: any = null;
-    const timer: any = null;
+    let xDown: any = null;
+    let yDown: any = null;
+    let xDiff: any = null;
+    let yDiff: any = null;
+    let timeDown: any = null;
+    let startEl: any = null;
+    let timer: any = null;
+    let last: any = null;
+
     const throttleDelay: number = 100;
-    const last: any = null;
-    const initialLoad = true;*/
 
     const [scrollActive, setScrollActive] = React.useState<boolean>(false);
+    const [showSidebar, setShowSidebar] = React.useState<boolean>(false);
+    const [disableAnimations, setDisableAnimations] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        document.addEventListener('scroll', () => {
-            throttleScroll();
-        }, true);
+        toggleMenu(showSidebar);
+    }, [showSidebar]);
+
+    React.useEffect(() => {
+        if (window.pageYOffset > 0) {
+            setScrollActive(true);
+            setDisableAnimations(true);
+        }
+        handleInitialLoad();
+        addCustomEvent();
+        setTouchListeners();
+        document.addEventListener('keyup', (e: any) => {
+            if (e.key === 'Escape') {
+                setShowSidebar(false);
+            }
+        });
     }, []);
 
     // patch CustomEvent to allow constructor creation (IE/Chrome)
-    /*const addCustomEvent = (): void => {
+    const addCustomEvent = (): void => {
         if (typeof (window as any).CustomEvent !== 'function') {
             (window as any).CustomEvent = (event, params) => {
                 params = params || {bubbles: false, cancelable: false, detail: undefined};
@@ -38,49 +53,8 @@ export const UIMenu = (props: IProps) => {
     };
 
     const handleInitialLoad = (): void => {
-        requestAnimationFrame(() => {
-            const wrapper: any = document.querySelector('.nav-wrapper');
-
-            if (wrapper !== null) {
-                if (initialLoad && window.pageYOffset > 0) {
-                    wrapper.classList.add('disable-animations');
-
-                    handleScrollClasses(true);
-                    toggleMenuChevrons(false);
-                    toggleHamburger(true);
-
-                    wrapper.classList.add('nav-wrapper--active');
-
-                } else {
-                    wrapper.classList.remove('disable-animations');
-                }
-            }
-            initialLoad = false;
-        });
-    };
-
-    const setActiveLinkItem = (): void => {
-        const anchors: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper a');
-        const pathName = document.location.pathname.split('/')[1];
-
-        for (let i = 0; i < anchors.length; i++) {
-            const anchor: Element = anchors.item(i);
-            const attribute: string | null = anchor.getAttribute('href');
-            if (anchor && anchor.parentElement && attribute && attribute.split('/')[1] === pathName) {
-                anchor.parentElement.classList.add('active');
-            }
-        }
-    };
-
-    const setListeners = (): void => {
-        setTouchListeners();
-        setClickListeners();
-        setScrollListeners();
-    };
-
-    const setScrollListeners = (): void => {
-        window.addEventListener('scroll', () => {
-            throttle();
+        document.addEventListener('scroll', () => {
+            throttleScroll();
         }, true);
     };
 
@@ -90,52 +64,8 @@ export const UIMenu = (props: IProps) => {
         document.addEventListener('touchend', handleTouchEnd, false);
 
         document.addEventListener('swiped-left', () => {
-            toggleMenu(false);
+            setShowSidebar(false);
         });
-    };
-
-    const setClickListeners = (): void => {
-        const hamburger: any = document.querySelector('.nav-hamburger');
-        const navBackground: any = document.querySelector('.nav-background');
-        const dropDownButtons = document.querySelectorAll('.nav-sub-btn');
-        const closeBtn: any = document.querySelector('.nav-responsive-header .ui-i--close');
-
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                toggleMenu(true);
-            });
-        }
-
-        if (navBackground) {
-            navBackground.addEventListener('click', () => {
-                toggleMenu(false);
-            });
-        }
-
-        for (let i = 0; i < dropDownButtons.length; i++) {
-            const button: Element = dropDownButtons.item(i);
-
-            button.addEventListener('click', (event: any) => {
-                const subContent: any = event.target.parentElement.querySelector('.nav-sub-content');
-
-                if (subContent.classList.contains('nav-sub-content-active')) {
-                    subContent.classList.remove('nav-sub-content-active');
-                } else {
-                    for (let q = 0; q < dropDownButtons.length; q++) {
-                        const subParent: any = dropDownButtons[q].parentElement;
-                        subParent.getElementsByClassName('nav-sub-content')[0].classList.remove('nav-sub-content-active');
-                    }
-
-                    subContent.classList.add('nav-sub-content-active');
-                }
-            });
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                toggleMenu(false);
-            });
-        }
     };
 
     const toggleMenu = (shouldOpen: boolean): void => {
@@ -156,168 +86,124 @@ export const UIMenu = (props: IProps) => {
         body.classList.remove('nav--disable-scroll');
     };
 
-    const toggleMenuChevrons = (add: boolean): void => {
-        const menuIcons: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper .ui-i--chevron-down');
-
-        for (let i = 0; i < menuIcons.length; i++) {
-            const icon: Element = menuIcons.item(i);
-
-            if (add) {
-                icon.classList.add('ui-i--white');
-                icon.classList.remove('ui-i--gray');
-            } else {
-                icon.classList.remove('ui-i--white');
-                icon.classList.add('ui-i-gray');
-            }
-        }
-    };
-
-    const toggleHamburger = (dark: boolean): void => {
-        const hamburgers: NodeListOf<Element> = document.querySelectorAll('.nav-wrapper .ui-i--hamburger');
-
-        for (let i = 0; i < hamburgers.length; i++) {
-            const hamburger: Element = hamburgers.item(i);
-            if (dark) {
-                hamburger.classList.remove('ui-i--white');
-                hamburger.classList.remove('ui-i--gray');
-            } else {
-                hamburger.classList.remove('ui-i--gray');
-                hamburger.classList.add('ui-i--white');
-            }
-        }
-    };
-
-
-    const handleScrollClasses = (showOriginal: boolean): void => {
-        const header = getHeaderElement();
-
-        if (!header) {
-            return;
-        }
-
-        if (!showOriginal) {
-            header.classList.add('nav-wrapper--active');
-        } else {
-            header.classList.remove('nav-wrapper--active');
-        }
-    };
-*/
     const getHeaderElement = () => {
-        return document.querySelector('.nav-wrapper');
+        return document.querySelector('.ui-navigation');
     };
 
     const throttleScroll = () => {
-//        const now = +new Date();
-//        if (last && now < last + throttleDelay) {
-//            clearTimeout(timer);
-//            timer = setTimeout(() => {
-//                last = now;
-        onScroll();
-//            }, throttleDelay);
-//        } else {
-//            last = now;
-//            onScroll();
-//        }
+        const now = +new Date();
+        if (last && now < last + throttleDelay) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                last = now;
+                onScroll();
+                setDisableAnimations(false);
+            }, throttleDelay);
+        } else {
+            last = now;
+            onScroll();
+        }
     };
 
     const onScroll = () => {
-        /*const wrapper: HTMLElement | null = document.querySelector('.nav-wrapper');
-        if (wrapper) {
-            wrapper.classList.remove('disable-animations');
-        }*/
-
         const header = getHeaderElement();
 
         if (header && window.pageYOffset && !scrollActive) {
-            // handleScrollClasses(false);
-            // toggleMenuChevrons(false);
-            // toggleHamburger(true);
             if (!scrollActive) {
                 setScrollActive(true);
             }
         } else if (window.pageYOffset === 0) {
-                setScrollActive(false);
-            // handleScrollClasses(true);
-            // toggleMenuChevrons(true);
-            // toggleHamburger(false);
+            setScrollActive(false);
         }
     };
-    /*
-        const handleTouchEnd = (e) => {
-            if (startEl !== e.target) return;
 
-            const swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
-            const swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
-            const timeDiff = Date.now() - timeDown;
-            let eventType = '';
+    const handleTouchEnd = (e) => {
+        if (startEl !== e.target) return;
 
-            if (Math.abs(xDiff) > Math.abs(yDiff)) { // most significant
-                if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
-                    if (xDiff > 0) {
-                        eventType = 'swiped-left';
-                    } else {
-                        eventType = 'swiped-right';
-                    }
-                }
-            } else {
-                if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
-                    if (yDiff > 0) {
-                        eventType = 'swiped-up';
-                    } else {
-                        eventType = 'swiped-down';
-                    }
+        const swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
+        const swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
+        const timeDiff = Date.now() - timeDown;
+        let eventType = '';
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) { // most significant
+            if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+                if (xDiff > 0) {
+                    eventType = 'swiped-left';
+                } else {
+                    eventType = 'swiped-right';
                 }
             }
-
-            if (eventType !== '') {
-                startEl.dispatchEvent(new CustomEvent(eventType, {bubbles: true, cancelable: true})); // fire event on the element that started the swipe
+        } else {
+            if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+                if (yDiff > 0) {
+                    eventType = 'swiped-up';
+                } else {
+                    eventType = 'swiped-down';
+                }
             }
+        }
 
-            xDown = null;
-            yDown = null;
-            timeDown = null;
-        };
+        if (eventType !== '') {
+            startEl.dispatchEvent(new CustomEvent(eventType, {bubbles: true, cancelable: true})); // fire event on the element that started the swipe
+        }
 
-         const handleTouchStart = (e) => {
-            if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
+        xDown = null;
+        yDown = null;
+        timeDown = null;
+    };
 
-            startEl = e.target;
-            timeDown = Date.now();
-            xDown = e.touches[0].clientX;
-            yDown = e.touches[0].clientY;
-            xDiff = 0;
-            yDiff = 0;
-        };
+    const handleTouchStart = (e) => {
+        if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
 
-        const handleTouchMove = (e) => {
-            if (!xDown || !yDown) return;
+        startEl = e.target;
+        timeDown = Date.now();
+        xDown = e.touches[0].clientX;
+        yDown = e.touches[0].clientY;
+        xDiff = 0;
+        yDiff = 0;
+    };
 
-            const xUp = e.touches[0].clientX;
-            const yUp = e.touches[0].clientY;
-            xDiff = xDown - xUp;
-            yDiff = yDown - yUp;
-        };
-    */
+    const handleTouchMove = (e) => {
+        if (!xDown || !yDown) return;
 
-    // addCustomEvent();
-//     handleInitialLoad();
-//     setActiveLinkItem();
-//     setListeners();
+        const xUp = e.touches[0].clientX;
+        const yUp = e.touches[0].clientY;
+        xDiff = xDown - xUp;
+        yDiff = yDown - yUp;
+    };
+
+
+    const handleClick = (event: Event, menuItem: MenuItem) => {
+        event.preventDefault();
+
+        props.onNavigate(menuItem);
+    };
 
     const getMenuItem = (menuItem: MenuItem) => {
         if (menuItem.menuItems && menuItem.menuItems.length > 0) {
             return (
                 <>
-                    <span className="nav-sub-btn">{ menuItem.title }
-                        <UIIcon icon={ 'chevronDown' } color={ 'white' } />
+                    <span className="nav-sub-btn" onClick={ (event) => {
+                        if (showSidebar) {
+                            const sibling = event.target.parentElement.querySelector('.nav-sub-content');
+                            if (sibling.classList.contains('nav-sub-content--expanded')) {
+                                sibling.classList.remove('nav-sub-content--expanded');
+                            } else {
+                                sibling.classList.add('nav-sub-content--expanded');
+                            }
+                        }
+                    } }>
+                        { menuItem.title }
+                        <UIIcon icon={ 'chevronDown' } color={ showSidebar ? 'grey' : 'white' } />
                     </span>
-                    <div className="nav-sub-content">
+                    <div
+                        className={ 'nav-sub-content' }>
                         { menuItem.menuItems && menuItem.menuItems.map((menuItem, index) => {
                             return (
                                 <a key={ index }
-                                   onClick={ () => {
-                                       // TODO: navigate
-                                       // menuItem.link;
+                                   className={ (menuItem.active ? ' active' : '') }
+                                   onClick={ (event) => {
+                                       handleClick(event, menuItem);
                                    } }>{ menuItem.title }</a>
                             );
                         }) }
@@ -326,38 +212,64 @@ export const UIMenu = (props: IProps) => {
             );
         } else if (menuItem.button) {
             return (
-                <div className="nav-item nav-item--primary">
-                    <a href={ menuItem.link }>{ menuItem.title }</a>
-                </div>
+                <a onClick={ (event) => {
+                    handleClick(event, menuItem);
+                } }>{ menuItem.title }</a>
             );
         } else {
             return (
-                <a href={ menuItem.link }>{ menuItem.title }</a>
+                <a href={ menuItem.link } onClick={ (event) => {
+                    handleClick(event, menuItem);
+                } }>{ menuItem.title }</a>
             );
         }
     };
 
+    const hasActiveChildren = (menuItem: MenuItem) => {
+        let hasActiveChildren: boolean = false;
+
+        if (menuItem.menuItems) {
+            menuItem.menuItems.forEach((menuItem: MenuItem) => {
+                if (menuItem.active) {
+                    hasActiveChildren = true;
+                }
+            });
+        }
+
+        return hasActiveChildren;
+    };
+
     return (
         <div
-            className={ 'nav-wrapper nav-wrapper--fixed nav-wrapper-transparent ' + (scrollActive ? 'nav-wrapper--active' : '') }>
+            className={ 'ui-navigation ' + (scrollActive ? 'nav-wrapper--active' : '') + (disableAnimations ? ' disable-animations' : '') + (showSidebar ? ' sidebar-visible' : '') }>
             <div className="nav-container">
-                <div className="nav-hamburger">
-                    <UIIcon icon={ 'hamburger' } color={ 'white' } />
+                <div className="nav-hamburger" onClick={ () => {
+                    setShowSidebar(true);
+                } }>
+                    <UIIcon icon={ 'hamburger' } color={ scrollActive ? 'grey' : 'white' } size={ 'md' } />
                 </div>
 
                 <div className="logo">
-                    <a href="/">
+                    <a onClick={ (event) => {
+                        handleClick(event, {title: 'Home', link: '/'});
+                    } }>
                         { props.logo }
                     </a>
                 </div>
 
-                <div className="nav-background" />
+                <div className="nav-background" onClick={ () => {
+                    if (showSidebar) {
+                        setShowSidebar(false);
+                    }
+                } } />
 
                 <nav className="nav">
                     <div className="nav-responsive-header">
                         { props.logo }
 
-                        <div className="nav-hamburger">
+                        <div className="nav-hamburger" onClick={ () => {
+                            setShowSidebar(false);
+                        } }>
                             <UIIcon icon={ 'close' } color={ 'grey' } />
                         </div>
                     </div>
@@ -365,7 +277,7 @@ export const UIMenu = (props: IProps) => {
                         { props.menuItems.map((menuItem, index) => {
                             return (
                                 <div
-                                    className={ 'nav-item ' + ((menuItem.menuItems && menuItem.menuItems.length > 0) ? 'nav-sub' : '') }
+                                    className={ 'nav-item ' + ((menuItem.menuItems && menuItem.menuItems.length > 0) ? 'nav-sub' : '') + (menuItem.active || hasActiveChildren(menuItem) ? ' active' : '') + (menuItem.button ? ' nav-item--primary' : '') }
                                     key={ index }>
                                     { getMenuItem(menuItem) }
                                 </div>

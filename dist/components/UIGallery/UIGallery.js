@@ -85,7 +85,7 @@ export var UIGallery = function (props) {
             }))));
     }
     else {
-        return (React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, __spreadArrays(Array(props.skeletons || 10)).map(function (index) {
+        return (React.createElement("div", { className: "ui-gallery grid-container grid-two-columns" }, __spreadArrays(Array(props.skeletons || 10)).map(function (key, index) {
             return (React.createElement("div", { className: "grid-item", key: index },
                 React.createElement(UILoader, null)));
         })));

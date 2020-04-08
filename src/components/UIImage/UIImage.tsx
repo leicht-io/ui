@@ -17,9 +17,10 @@ export const UIImage = (props: IProps) => {
             alt={ props.alt ? props.alt : '' }
             width={ props.width ? props.width : '' }
             height={ props.height ? props.height : '' }
-            src={ props.source } onLoad={ () => {
-            setLoaded(true);
-        } } />;
+            src={ props.source }
+            onLoad={ () => {
+                setLoaded(true);
+            } } />;
     };
 
     const getLabel = () => {
@@ -49,7 +50,7 @@ export const UIImage = (props: IProps) => {
                     props.onClick();
                 }
             } }>
-            { getLoader() }
+            { !loaded && getLoader() }
             { getImage() }
             { getLabel() }
         </div>
