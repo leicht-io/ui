@@ -1,12 +1,13 @@
 {
   "name": "@leicht.io/ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "scripts": {
-    "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples",
+    "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples && npm run copy-scss",
     "build:production:dist": "rimraf ./dist && tsc",
     "build:production:examples": "parcel build ./examples/index.html --out-dir ./examples/dist",
     "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
+    "copy-scss": "copy-files-from-to",
     "deploy": "npm run build:all && npm publish",
     "lint": "npm run lint:scss && npm run lint:ts && npm run lint:ts:demo",
     "lint:ts": "tsc --noEmit && npx tslint './src/**/*.{ts,tsx}'",
@@ -16,13 +17,18 @@
   "files": [
     "/src",
     "/dist",
-    "/examples",
     "/package.json",
     "/package-lock.json",
     "/README.md"
   ],
+  "copyFiles": [
+    {
+      "from": "src/**/*.scss",
+      "to": "dist/"
+    }
+  ],
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types.d.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leicht-io/ui.git"
