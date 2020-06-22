@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples",
     "build:production:dist": "rimraf ./dist && tsc",
     "build:production:examples": "parcel build ./examples/index.html --out-dir ./examples/dist",
     "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
-    "build": "npm run lint && npm run build:production:dist && npm run build:production:examples",
     "deploy": "npm run build:all && npm publish",
     "lint": "npm run lint:scss && npm run lint:ts && npm run lint:ts:demo",
     "lint:ts": "tsc --noEmit && npx tslint './src/**/*.{ts,tsx}'",

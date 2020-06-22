@@ -11,4 +11,10 @@ export * from './UISlider';
 export * from './UIInput';
 export * from './UIImage';
 export * from './UITextArea';
+export * from './UIButton';
+export * from './UICard';
+export * from './UIGrid';
+export * from './UILoader';
+export * from './UINotification';
+export * from './UITypography';
 //# sourceMappingURL=index.js.map
