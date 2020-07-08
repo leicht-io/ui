@@ -1,19 +1,21 @@
 import React from 'react';
 import './UITags.scss';
-import { IProps } from './types';
+import {IProps} from './types';
 
 export const UITags = (props: IProps) => {
-    const getTags = () => {
-        return props.tags.map((tag, index) => {
-            return <div key={ index } className={ 'ui-tag ui-tag--' + tag.type }>
-                { tag.name }
-            </div>;
-        });
-    };
+  const getTags = () => {
+    return props.tags.map((tag, index) => {
+      return <div key={ index } className={ 'ui-tag ui-tag--' + tag.type }>
+        { tag.name }
+      </div>;
+    });
+  };
 
-    return (
-        <div className="ui-tags">
-            { getTags() }
-        </div>
-    );
+  return (
+    <div className="ui-tags">
+      { getTags() }
+    </div>
+  );
 };
+
+UITags.displayName = 'UITags';

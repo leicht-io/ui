@@ -1,17 +1,17 @@
 export interface MenuItem {
-    title: string;
-    link?: string;
-    button?: boolean;
-    active?: boolean;
+  title: string;
+  link?: string;
+  button?: boolean;
+  active?: boolean;
 
-    expanded?: boolean;
+  expanded?: boolean;
 
-    menuItems?: MenuItem[];
+  menuItems?: MenuItem[];
 }
 
 export interface IProps {
-    menuItems: MenuItem[];
-    logo: any;
+  menuItems: MenuItem[];
+  logo: any;
 
-    onNavigate: (destination: MenuItem) => void;
+  onNavigate: (destination: MenuItem) => void;
 }

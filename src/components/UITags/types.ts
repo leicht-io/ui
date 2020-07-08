@@ -1,8 +1,8 @@
 export interface IProps {
-    tags: ITag[];
+  tags: ITag[];
 }
 
 export interface ITag {
-    type: 'primary' | 'secondary';
-    name: string;
+  type: 'primary' | 'secondary';
+  name: string;
 }

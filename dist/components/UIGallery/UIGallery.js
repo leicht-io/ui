@@ -58,7 +58,7 @@ export var UIGallery = function (props) {
         if (showSlider) {
             return (React.createElement(React.Fragment, null,
                 React.createElement("div", { className: 'ui-gallery--current-image ' + (sliderReady ? 'ui-gallery--current-image-visible' : '') },
-                    React.createElement("img", { alt: "Current Photo", draggable: "false", className: 'loaded', src: currentImage, onLoad: function () {
+                    React.createElement("img", { alt: "Current Photo", draggable: "false", className: 'loaded', src: currentImage || undefined, onLoad: function () {
                             setSliderReady(true);
                         } }),
                     React.createElement("div", { className: "ui-gallery--close", onClick: function () {
@@ -91,4 +91,5 @@ export var UIGallery = function (props) {
         })));
     }
 };
+UIGallery.displayName = 'UIGallery';
 //# sourceMappingURL=UIGallery.js.map

@@ -1,13 +1,15 @@
 import React from 'react';
-import { IProps } from './types';
+import {IProps} from './types';
 import './UIDivider.scss';
 
 export const UIDivider = (props: IProps) => {
-    const getClasses = (): string => {
-        return 'divider ' + (props.size ? ' divider-' + props.size : '') + (props.showBorder ? ' divider-border' : '');
-    };
+  const getClasses = (): string => {
+    return 'divider ' + (props.size ? ' divider-' + props.size : '') + (props.showBorder ? ' divider-border' : '');
+  };
 
-    return (
-        <div className={ getClasses() } />
-    );
+  return (
+    <div className={ getClasses() } />
+  );
 };
+
+UIDivider.displayName = 'UIDivider';

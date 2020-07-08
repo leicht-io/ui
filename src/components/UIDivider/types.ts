@@ -1,4 +1,4 @@
 export interface IProps {
-    size?: 'small' | 'medium' | 'large';
-    showBorder?: boolean;
+  size?: 'small' | 'medium' | 'large';
+  showBorder?: boolean;
 }

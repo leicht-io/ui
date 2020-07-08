@@ -1,16 +1,16 @@
 export interface IProps {
-    source: string;
-    label?: { text: string; background?: boolean; };
+  source: string;
+  label?: { text: string; background?: boolean };
 
-    responsive?: boolean;
-    round?: boolean;
+  responsive?: boolean;
+  round?: boolean;
 
-    width?: number | string;
-    height?: number | string;
+  width?: number | string;
+  height?: number | string;
 
-    alt?: string;
+  alt?: string;
 
-    skeletonHeight?: number;
+  skeletonHeight?: number;
 
-    onClick?: () => void;
+  onClick?: () => void;
 }

@@ -150,10 +150,6 @@ export var UIMenu = function (props) {
         xDiff = xDown - xUp;
         yDiff = yDown - yUp;
     };
-    var handleClick = function (event, menuItem) {
-        event.preventDefault();
-        props.onNavigate(menuItem);
-    };
     var getMenuItem = function (menuItem) {
         if (menuItem.menuItems && menuItem.menuItems.length > 0) {
             return (React.createElement(React.Fragment, null,
@@ -186,6 +182,10 @@ export var UIMenu = function (props) {
                     handleClick(event, menuItem);
                 } }, menuItem.title));
         }
+    };
+    var handleClick = function (event, menuItem) {
+        event.preventDefault();
+        props.onNavigate(menuItem);
     };
     var hasActiveChildren = function (menuItem) {
         var hasActiveChildren = false;
@@ -224,4 +224,5 @@ export var UIMenu = function (props) {
                     return (React.createElement("div", { className: 'nav-item ' + ((menuItem.menuItems && menuItem.menuItems.length > 0) ? 'nav-sub' : '') + (menuItem.active || hasActiveChildren(menuItem) ? ' active' : '') + (menuItem.button ? ' nav-item--primary' : ''), key: index }, getMenuItem(menuItem)));
                 }))))));
 };
+UIMenu.displayName = 'UIMenu';
 //# sourceMappingURL=UIMenu.js.map

@@ -1,4 +1,4 @@
 export interface IProps {
-    label: string;
-    onChange: (value: string) => void;
+  label: string;
+  onChange: (value: string) => void;
 }

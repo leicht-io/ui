@@ -1,23 +1,25 @@
 export interface IProps {
-    title: string;
+  title: string;
 
-    imageUrl?: string;
-    gradient?: boolean;
+  size?: 'small' | 'large';
 
-    breadcrumbs?: string;
+  imageUrl?: string;
+  gradient?: boolean;
 
-    multiContent?: boolean;
-    metadata?: IMetadata;
+  breadcrumbs?: string;
+
+  multiContent?: boolean;
+  metadata?: IMetadata;
 }
 
 export interface IMetadata {
-    author: IAuthor;
+  author: IAuthor;
 }
 
 export interface IAuthor {
-    image: string;
-    name: string;
-    published: string;
-    updated: string;
-    length: string;
+  image: string;
+  name: string;
+  published: string;
+  updated: string;
+  length: string;
 }

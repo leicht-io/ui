@@ -1,5 +1,5 @@
 export interface IProps {
-    type: 'error' | 'warning' | 'success';
-    title: string;
-    description: string;
+  type: 'error' | 'warning' | 'success';
+  title: string;
+  description: string;
 }

@@ -1,4 +1,4 @@
 export interface IProps {
-    size?: 'small' | 'medium' | 'large';
-    color?: 'light' | 'dark';
+  size?: 'small' | 'medium' | 'large';
+  color?: 'light' | 'dark';
 }

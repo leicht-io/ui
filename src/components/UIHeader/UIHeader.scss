@@ -1,7 +1,15 @@
 @import "../../@core/styles/@theme.scss";
 
 .header {
-  height: 500px;
+
+  &.ui-header--large {
+    height: 500px;
+  }
+
+  &.ui-header--small {
+    height: 300px;
+  }
+
   width: 1070px;
   margin: 0 auto;
 

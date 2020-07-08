@@ -80,4 +80,5 @@ export var UIModal = function (props) {
         return null;
     }
 };
+UIModal.displayName = 'UIModal';
 //# sourceMappingURL=UIModal.js.map

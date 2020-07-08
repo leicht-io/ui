@@ -1,6 +1,6 @@
 {
   "name": "@leicht.io/ui",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
   "scripts": {
     "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples && npm run copy-scss",
@@ -9,9 +9,9 @@
     "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
     "copy-scss": "copy-files-from-to",
     "deploy": "npm run build:all && npm publish",
-    "lint": "npm run lint:scss && npm run lint:ts && npm run lint:ts:demo",
-    "lint:ts": "tsc --noEmit && npx tslint './src/**/*.{ts,tsx}'",
-    "lint:ts:demo": "tsc --noEmit && npx tslint './examples/**/*.{ts,tsx}'",
+    "lint": "npm run lint:scss && npm run lint:ts",
+    "lint:ts": "eslint src --ext .ts,.tsx,.js -c .eslintrc.js && npx tsc --noEmit --skipLibCheck --project ./tsconfig.json",
+    "lint:ts:demo": "eslint examples --ext .ts,.tsx,.js -c .eslintrc.js && npx tsc --noEmit --skipLibCheck --project ./tsconfig.json",
     "lint:scss": "node ./node_modules/stylelint/bin/stylelint.js \"./src/**/*.scss\" --cache --cache-location \".stylelintcache\""
   },
   "files": [
@@ -46,19 +46,30 @@
   "homepage": "https://github.com/leicht-io/ui#readme",
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "react": ">=15",
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/resize-observer-browser": "^0.1.3",
+    "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "husky": "^4.2.3",
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^3.5.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^7.4.0",
+    "eslint-plugin-jsdoc": "^29.1.0",
+    "eslint-plugin-no-null": "^1.0.2",
+    "eslint-plugin-prefer-arrow": "^1.2.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
+    "eslint-plugin-security": "^1.4.0",
+    "husky": "^4.2.5",
     "parcel": "^1.12.4",
     "rimraf": "^3.0.2",
-    "sass": "^1.26.3",
-    "stylelint": "^13.2.1",
-    "tslint": "^6.1.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.2.0",
-    "tslint-react-hooks": "^2.2.2",
-    "typescript": "^3.8.3"
+    "sass": "^1.26.10",
+    "stylelint": "^13.6.1",
+    "typescript": "^3.9.6"
   }
 }
