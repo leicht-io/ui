@@ -51,5 +51,6 @@ export interface ISlide {
 }
 
 export interface IProps {
-  slides: ISlide[];
+  slides: ISlide[] | null;
+  basePath?: string;
 }
