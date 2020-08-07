@@ -220,6 +220,7 @@ export const UIMenu = (props: IProps) => {
 
   const handleClick = (event: any, menuItem: MenuItem) => {
     event.preventDefault();
+    setShowSidebar(false);
 
     props.onNavigate(menuItem);
   };

@@ -185,6 +185,7 @@ export var UIMenu = function (props) {
     };
     var handleClick = function (event, menuItem) {
         event.preventDefault();
+        setShowSidebar(false);
         props.onNavigate(menuItem);
     };
     var hasActiveChildren = function (menuItem) {
