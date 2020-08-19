@@ -80,9 +80,9 @@ export const UIHeader = React.memo((props: IProps) => {
         <div className="header--bg-bottom-gradient" />
       )}
 
-      <img src={ props.imageUrl } onLoad={(element) => {
+      <img src={ props.imageUrl } onLoad={ (element) => {
         element.target.style.opacity = 1;
-      }} />
+      } } />
     </header>
   );
 });
