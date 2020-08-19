@@ -33,11 +33,6 @@
     "type": "git",
     "url": "git+https://github.com/leicht-io/ui.git"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint"
-    }
-  },
   "author": "Christian Leicht",
   "license": "MIT",
   "bugs": {
