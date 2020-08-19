@@ -1,6 +1,21 @@
 @import "../../@core/styles/@theme.scss";
 
 .header {
+  overflow: hidden;
+
+  img {
+    z-index: -9;
+    position: absolute;
+    object-fit: cover;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    transition: opacity 0.250s linear;
+    will-change: opacity;
+    opacity: 0;
+  }
 
   &.ui-header--large {
     height: 500px;

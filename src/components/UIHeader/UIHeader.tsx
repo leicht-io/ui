@@ -70,9 +70,7 @@ export const UIHeader = React.memo((props: IProps) => {
   };
 
   return (
-    <header
-      className={ getClasses() }
-      style={ {backgroundImage: ' url(\'' + props.imageUrl + '\')'} }>
+    <header className={ getClasses() }>
 
       {getGradient()}
 
@@ -81,6 +79,10 @@ export const UIHeader = React.memo((props: IProps) => {
       {props.gradient && (
         <div className="header--bg-bottom-gradient" />
       )}
+
+      <img src={ props.imageUrl } onLoad={(element) => {
+        element.target.style.opacity = 1;
+      }} />
     </header>
   );
 });
