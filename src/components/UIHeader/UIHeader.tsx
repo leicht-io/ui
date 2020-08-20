@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UIHeader.scss';
 import {IProps} from './types';
 import {UIImage} from '../UIImage';
 
-export const UIHeader = React.memo((props: IProps) => {
+export const UIHeader = React.memo((props: IProps): ReactElement => {
   const getContent = () => {
     if (props.multiContent) {
       return (
@@ -15,7 +15,7 @@ export const UIHeader = React.memo((props: IProps) => {
           )}
 
           <div className="header--row">
-            <h1>{props.title}</h1>
+            <h1>{props.title.value}</h1>
           </div>
 
           {props.metadata && props.metadata.author && (
@@ -81,7 +81,7 @@ export const UIHeader = React.memo((props: IProps) => {
       )}
 
       <img src={ props.imageUrl } onLoad={ (element) => {
-        element.target.style.opacity = 1;
+        element.currentTarget.style.setProperty('opacity', '1');
       } } />
     </header>
   );

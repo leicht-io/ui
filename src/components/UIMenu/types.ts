@@ -1,17 +1,8 @@
-export interface MenuItem {
-  title: string;
-  link?: string;
-  button?: boolean;
-  active?: boolean;
-
-  expanded?: boolean;
-
-  menuItems?: MenuItem[];
-}
+import {IMenuItem} from '../../types';
 
 export interface IProps {
-  menuItems: MenuItem[];
+  menuItems: IMenuItem[];
   logo: any;
 
-  onNavigate: (destination: MenuItem) => void;
+  onNavigate: (destination: IMenuItem) => void;
 }

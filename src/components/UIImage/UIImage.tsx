@@ -1,10 +1,10 @@
 import {IProps} from './types';
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {UITypography} from '../UITypography';
 import './UIImage.scss';
 import {UILoader} from '../UILoader';
 
-export const UIImage = (props: IProps) => {
+export const UIImage = (props: IProps): ReactElement => {
   const [loaded, setLoaded] = React.useState<boolean>(false);
 
   const getImage = () => {
@@ -17,7 +17,7 @@ export const UIImage = (props: IProps) => {
       alt={ props.alt ? props.alt : '' }
       width={ props.width ? props.width : '' }
       height={ props.height ? props.height : '' }
-      src={ props.source }
+      src={ props.source || undefined }
       onLoad={ () => {
         setLoaded(true);
       } } />;
@@ -43,7 +43,7 @@ export const UIImage = (props: IProps) => {
 
   return (
     <div
-      className={ 'ui-image ' + (loaded === false ? 'ui-image-loading ' : 'ui-image-loaded ') + (props.onClick ? 'ui-image-pointer ' : '') + (props.round ? 'ui-img-round ' : '') + (props.responsive ? 'ui-img-responsive ' : '') }
+      className={ 'ui-image ' + (!loaded ? 'ui-image-loading ' : 'ui-image-loaded ') + (props.onClick ? 'ui-image-pointer ' : '') + (props.round ? 'ui-img-round ' : '') + (props.responsive ? 'ui-img-responsive ' : '') }
       style={ {height: props.height} }
       onClick={ () => {
         if (props.onClick) {

@@ -1,5 +1,10 @@
+import {IMetaData} from '../../types';
+
 export interface IProps {
-  title: string;
+  title: {
+    value: string | null;
+    skeleton?: boolean;
+  };
 
   size?: 'small' | 'large';
 
@@ -9,17 +14,5 @@ export interface IProps {
   breadcrumbs?: string;
 
   multiContent?: boolean;
-  metadata?: IMetadata;
-}
-
-export interface IMetadata {
-  author: IAuthor;
-}
-
-export interface IAuthor {
-  image: string;
-  name: string;
-  published: string;
-  updated: string;
-  length: string;
+  metadata?: IMetaData;
 }

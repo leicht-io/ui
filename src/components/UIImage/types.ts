@@ -1,5 +1,5 @@
 export interface IProps {
-  source: string;
+  source: string | null;
   label?: { text: string; background?: boolean };
 
   responsive?: boolean;

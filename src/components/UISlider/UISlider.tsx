@@ -1,10 +1,10 @@
 import {IProps} from './types';
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UISlider.scss';
 import Glide from '@glidejs/glide';
 import {UILoader} from '../UILoader';
 
-export const UISlider = (props: IProps) => {
+export const UISlider = (props: IProps): ReactElement => {
   const [slider]: Glide = React.useState<Glide>(new Glide('.glide', {
     startAt: 0,
     hoverPause: true,

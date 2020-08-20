@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UIDivider.scss';
 
-export const UIDivider = (props: IProps) => {
+export const UIDivider = (props: IProps): ReactElement => {
   const getClasses = (): string => {
     return 'divider ' + (props.size ? ' divider-' + props.size : '') + (props.showBorder ? ' divider-border' : '');
   };

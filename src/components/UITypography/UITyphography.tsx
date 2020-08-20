@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UITyphography.scss';
 
-export const UITypography = (props: IProps) => {
+export const UITypography = (props: IProps): ReactElement => {
   switch (props.type) {
     case 'a':
       return <a>{props.children}</a>;

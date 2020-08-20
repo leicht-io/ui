@@ -1,8 +1,8 @@
 import {IProps} from './types';
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UITextArea.scss';
 
-export const UITextArea = (props: IProps) => {
+export const UITextArea = (props: IProps): ReactElement => {
   return (
     <div className="input-wrap">
       <label>{ props.label }</label>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UILoader.scss';
 import {IProps} from './types';
 
-export const UILoader = (props: IProps) => {
+export const UILoader = (props: IProps): ReactElement => {
   return (
     <div className="ui-loader">
       <svg xmlns="http://www.w3.org/2000/svg" stroke={ props.color === 'light' ? '#f9f9f9' : '#cccccc' }

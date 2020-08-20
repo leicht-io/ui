@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UIGallery.scss';
-import {IProps, Photo} from './types';
+import {IProps} from './types';
 import {UIIcon} from '../UIIcon';
 import {UIImage} from '../UIImage';
 import {UILoader} from '../UILoader';
+import {IPhoto} from '../../types';
 
-export const UIGallery = (props: IProps) => {
-  const [photos, setPhotos] = React.useState<Photo[] | null>(null);
+export const UIGallery = (props: IProps): ReactElement => {
+  const [photos, setPhotos] = React.useState<IPhoto[] | null>(null);
   const [showSlider, setShowSlider] = React.useState<boolean>(false);
   const [sliderReady, setSliderReady] = React.useState<boolean>(false);
   const [currentImage, setCurrentImage] = React.useState<string | null>(null);
@@ -42,46 +43,46 @@ export const UIGallery = (props: IProps) => {
 
   const addKeyEventListeners = (): void => {
     /* if (!currentImage) {
-                    return;
-                }
+                            return;
+                        }
 
-                const swipe: Swipe = new Swipe('#ui-gallery--current-image');
-                const currentIndex = currentImage.index;
-                const previousImage = props.baseUrl + photos[currentImage.index - 1].fullSizePath;
-                const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
-                swipe.onLeft(() => {
-                    if (photos && currentIndex < photos.length - 1) {
-                        setCurrentImage({source: nextImage, index: currentIndex + 1})
-                    }
-                });
-                swipe.onRight(() => {
-                    if (currentIndex > 0) {
-                        setCurrentImage({source: previousImage, index: currentIndex - 1})
-                    }
-                });
-                swipe.onUp(() => {
-                });
-                swipe.onDown(() => {
-                });
-                swipe.run();
-
-                document.addEventListener("keydown", (event) => {
-                    const currentIndex = currentImage.index;
-                    const previousImage = props.baseUrl + photos[currentImage.index - 1].fullSizePath;
-                    const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
-
-                    if (isWrapperVisible()) {
-                        if (event.code == 'ArrowLeft') {
+                        const swipe: Swipe = new Swipe('#ui-gallery--current-image');
+                        const currentIndex = currentImage.index;
+                        const previousImage = props.baseUrl + photos[currentImage.index - 1].fullSizePath;
+                        const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
+                        swipe.onLeft(() => {
+                            if (photos && currentIndex < photos.length - 1) {
+                                setCurrentImage({source: nextImage, index: currentIndex + 1})
+                            }
+                        });
+                        swipe.onRight(() => {
                             if (currentIndex > 0) {
                                 setCurrentImage({source: previousImage, index: currentIndex - 1})
                             }
-                        } else if (event.code == 'ArrowRight' && photos) {
-                            if (currentIndex < photos.length - 1) {
-                                setCurrentImage({source: nextImage, index: currentIndex + 1})
+                        });
+                        swipe.onUp(() => {
+                        });
+                        swipe.onDown(() => {
+                        });
+                        swipe.run();
+
+                        document.addEventListener("keydown", (event) => {
+                            const currentIndex = currentImage.index;
+                            const previousImage = props.baseUrl + photos[currentImage.index - 1].fullSizePath;
+                            const nextImage = props.baseUrl + photos[currentImage.index + 1].fullSizePath;
+
+                            if (isWrapperVisible()) {
+                                if (event.code == 'ArrowLeft') {
+                                    if (currentIndex > 0) {
+                                        setCurrentImage({source: previousImage, index: currentIndex - 1})
+                                    }
+                                } else if (event.code == 'ArrowRight' && photos) {
+                                    if (currentIndex < photos.length - 1) {
+                                        setCurrentImage({source: nextImage, index: currentIndex + 1})
+                                    }
+                                }
                             }
-                        }
-                    }
-                });*/
+                        });*/
 
     document.addEventListener('keyup', (e: any) => {
       if (e.key === 'Escape') {
@@ -152,7 +153,7 @@ export const UIGallery = (props: IProps) => {
         </div>
 
         <div className="ui-gallery grid-container grid-two-columns">
-          {photos && photos.map((photo: Photo, index) => {
+          {photos && photos.map((photo: IPhoto, index) => {
             return (
               <div className="grid-item" key={ index }>
                 <UIImage

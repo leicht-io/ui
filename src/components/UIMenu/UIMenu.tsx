@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UIMenu.scss';
-import {IProps, MenuItem} from './types';
+import {IProps} from './types';
 import {UIIcon} from '../UIIcon';
+import {IMenuItem} from '../../types';
 
-export const UIMenu = (props: IProps) => {
+export const UIMenu = (props: IProps): ReactElement => {
   let xDown: any = null;
   let yDown: any = null;
   let xDiff: any = null;
@@ -172,7 +173,7 @@ export const UIMenu = (props: IProps) => {
     yDiff = yDown - yUp;
   };
 
-  const getMenuItem = (menuItem: MenuItem) => {
+  const getMenuItem = (menuItem: IMenuItem) => {
     if (menuItem.menuItems && menuItem.menuItems.length > 0) {
       return (
         <>
@@ -218,18 +219,18 @@ export const UIMenu = (props: IProps) => {
     }
   };
 
-  const handleClick = (event: any, menuItem: MenuItem) => {
+  const handleClick = (event: any, menuItem: IMenuItem) => {
     event.preventDefault();
     setShowSidebar(false);
 
     props.onNavigate(menuItem);
   };
 
-  const hasActiveChildren = (menuItem: MenuItem) => {
+  const hasActiveChildren = (menuItem: IMenuItem) => {
     let hasActiveChildren: boolean = false;
 
     if (menuItem.menuItems) {
-      menuItem.menuItems.forEach((menuItem: MenuItem) => {
+      menuItem.menuItems.forEach((menuItem: IMenuItem) => {
         if (menuItem.active) {
           hasActiveChildren = true;
         }

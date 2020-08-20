@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import './UIProgress.scss';
 
-export const UIProgress = (): JSX.Element => {
+export const UIProgress = (): ReactElement => {
   let windowHeight: number = 0;
   let documentHeight: number = 0;
   const progressBar: any = React.useRef();

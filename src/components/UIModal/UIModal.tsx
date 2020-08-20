@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UIModal.scss';
 import {UIIcon} from '../UIIcon';
 
-export const UIModal = (props: IProps) => {
+export const UIModal = (props: IProps): ReactElement | null => {
   const keyDownCallback = (event) => handleKeyDown(event);
 
   React.useEffect(() => {

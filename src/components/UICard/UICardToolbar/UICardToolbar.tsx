@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UICardToolbar.scss';
 import {UITypography} from '../../UITypography';
 import {UIIcon} from '../../UIIcon';
 
-export const UICardToolbar = (props: IProps) => {
+export const UICardToolbar = (props: IProps): ReactElement => {
   return (
     <div className="ui-card-toolbar">
       <UITypography type={ 'p' }>{ props.text }</UITypography>
