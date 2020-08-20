@@ -23,10 +23,10 @@
     "esModuleInterop": true
   },
   "include": [
-    "src",
-    "examples"
+    "src"
   ],
   "exclude": [
+	"examples",
     "dist",
     "node_modules"
   ]

@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples && npm run copy-scss",
-    "build:production:dist": "rimraf ./dist && tsc",
+    "build:production:dist": "rimraf ./dist && tsc && npm run copy-scss",
     "build:production:examples": "parcel build ./examples/index.html --out-dir ./examples/dist",
     "run:development": "parcel ./examples/index.html --out-dir ./examples/dist",
     "copy-scss": "copy-files-from-to",
