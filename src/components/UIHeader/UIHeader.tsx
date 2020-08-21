@@ -15,33 +15,37 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
           )}
 
           <div className="header--row">
-            <h1>{props.title.value}</h1>
+            <h1 className={ props.title.value ? 'ui-header-title--visible' : 'ui-header-title--invisible' }>{props.title.value}</h1>
           </div>
 
           {props.metadata && props.metadata.author && (
             <div className="header--row">
               <div className="header--metadata">
                 <div className="blog-metadata author-image">
-                  <UIImage responsive={ true } round={ true }
-                    alt={ props.metadata.author.image }
-                    source={ props.metadata.author.image }
-                    width="80"
-                    height="80" />
+                  {(props.metadata.author.name && props.metadata.author.image) && (
+                    <UIImage
+                      responsive={ true }
+                      round={ true }
+                      alt={ props.metadata.author.name }
+                      source={ props.metadata.author.image }
+                      width="80"
+                      height="80" />
+                  )}
                 </div>
                 <div className="blog-metadata blog-author">
-                  <p className="blog-metadata-light">Author</p>
+                  <p className="blog-metadata-light">{props.metadata.author.name ? 'Author' : ''}</p>
                   <p className="blog-metadata-dark">{props.metadata.author.name}</p>
                 </div>
                 <div className="blog-metadata blog-published">
-                  <p className="blog-metadata-light">Published</p>
+                  <p className="blog-metadata-light">{props.metadata.author.published ? 'Published' : ''}</p>
                   <p className="blog-metadata-dark">{props.metadata.author.published}</p>
                 </div>
                 <div className="blog-metadata blog-updated">
-                  <p className="blog-metadata-light">Updated</p>
+                  <p className="blog-metadata-light">{props.metadata.author.updated ? 'Updated' : ''}</p>
                   <p className="blog-metadata-dark">{props.metadata.author.updated}</p>
                 </div>
                 <div className="blog-metadata blog-length">
-                  <p className="blog-metadata-light">Length</p>
+                  <p className="blog-metadata-light">{props.metadata.author.length ? 'Length' : ''}</p>
                   <p className="blog-metadata-dark">{props.metadata.author.length}</p>
                 </div>
               </div>
@@ -50,7 +54,9 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
         </div>
       );
     } else {
-      return (<h1>{props.title}</h1>);
+      return (
+        <h1 className={ props.title.value ? 'ui-header-title--visible' : 'ui-header-title--invisible' }>{props.title.value}</h1>
+      );
     }
   };
 
@@ -80,7 +86,7 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
         <div className="header--bg-bottom-gradient" />
       )}
 
-      <img src={ props.imageUrl } onLoad={ (element) => {
+      <img className={ 'ui-header-img' } src={ props.imageUrl } onLoad={ (element) => {
         element.currentTarget.style.setProperty('opacity', '1');
       } } />
     </header>
