@@ -32,8 +32,8 @@ export const UIMenu = (props: IProps): ReactElement => {
     handleInitialLoad();
     addCustomEvent();
     setTouchListeners();
-    document.addEventListener('keyup', (e: any) => {
-      if (e.key === 'Escape') {
+    document.addEventListener('keyup', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
         setShowSidebar(false);
       }
     });

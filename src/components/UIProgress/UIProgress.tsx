@@ -4,7 +4,7 @@ import './UIProgress.scss';
 export const UIProgress = (): ReactElement => {
   let windowHeight: number = 0;
   let documentHeight: number = 0;
-  const progressBar: any = React.useRef();
+  const progressBar: React.RefObject<any> = React.useRef(null);
 
   React.useEffect(() => {
     calculateProgress();
@@ -33,7 +33,9 @@ export const UIProgress = (): ReactElement => {
 
     const max: number = documentHeight - windowHeight;
 
-    progressBar.current.setAttribute('max', max.toString());
+    if(progressBar && progressBar.current) {
+      progressBar.current.setAttribute('max', max.toString());
+    }
   };
 
   window.addEventListener('scroll', () => {
@@ -42,7 +44,7 @@ export const UIProgress = (): ReactElement => {
 
   const container = document.querySelector('.page-container');
   if (container && typeof ResizeObserver === 'function') {
-    new ResizeObserver(entries => {
+    new ResizeObserver(() => {
       calculateProgress();
     }).observe(container);
   }
