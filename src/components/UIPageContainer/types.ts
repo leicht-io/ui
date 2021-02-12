@@ -1,3 +1,3 @@
 export interface Types {
-  children: any;
+  children: React.ReactNode;
 }
