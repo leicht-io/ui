@@ -146,16 +146,11 @@
   justify-items: stretch;
   align-items: stretch;
 
-
-  &.grid-four-columns {
+  &.grid-two-columns {
     grid-template-columns: 1fr;
 
     @include sm() {
       grid-template-columns: 1fr 1fr;
-    }
-
-    @include md() {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   }
 
@@ -171,11 +166,15 @@
     }
   }
 
-  &.grid-two-columns {
+  &.grid-four-columns {
     grid-template-columns: 1fr;
 
     @include sm() {
       grid-template-columns: 1fr 1fr;
+    }
+
+    @include md() {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   }
 }

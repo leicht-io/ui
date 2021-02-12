@@ -6,11 +6,11 @@ import {UIIcon} from '../../UIIcon';
 
 export const UICardToolbar = (props: IProps): ReactElement => {
   return (
-    <div className="ui-card-toolbar">
-      <UITypography type={ 'p' }>{ props.text }</UITypography>
+    <div className={ `ui-card-toolbar ui-card-toolbar--${props.position || 'bottom'}` }>
+      <UITypography type={ 'p' }>{props.text}</UITypography>
 
       <div className="ui-icons">
-        { props.icons && props.icons.map((icon, index) => {
+        {props.icons && props.icons.map((icon, index) => {
           return (
             <div key={ index } onClick={ () => {
               icon.onClick();
@@ -18,7 +18,7 @@ export const UICardToolbar = (props: IProps): ReactElement => {
               <UIIcon icon={ icon.id } color="white" />
             </div>
           );
-        }) }
+        })}
       </div>
     </div>
   );

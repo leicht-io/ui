@@ -18,7 +18,7 @@ import {
     UITags,
     UITypography
 } from '../../src/components';
-import {UICardBody, UICardTitle, UICardToolbar} from '../../src/components/UICard';
+import {UICardTitle, UICardToolbar} from '../../src/components/UICard';
 import {galleryMockResponse} from '../assets/gallery.mock';
 import {sliderMockResponse} from '../assets/slider.mock';
 import {UITextArea} from '../../src/components/UITextArea';
@@ -165,6 +165,27 @@ export const App = (): ReactElement => {
                 <UITypography type={'h3'}>Grid & Cards</UITypography>
                 <UIGrid columns={'four'}>
                     <UICard>
+                        <UICardToolbar text={"Title"} position={"top"}/>
+                        <UIImage
+                            source={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}/>
+                        <UICardToolbar
+                            text="Content Left"
+                            icons={[{
+                            id: 'download',
+                            onClick: () => {
+                                // eslint-disable-next-line no-console
+                                console.log('Clicked icon');
+                            }
+                        },{
+                                id: 'magnify',
+                                onClick: () => {
+                                    // eslint-disable-next-line no-console
+                                    console.log('Clicked icon');
+                                }
+                            }]}/>
+                    </UICard>
+
+                    <UICard>
                         <UIImage
                             source={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}/>
 
@@ -172,13 +193,6 @@ export const App = (): ReactElement => {
                             {type: 'primary', name: '3D Print'},
                             {type: 'secondary', name: 'PCB'},
                         ]}/>
-                    </UICard>
-
-                    <UICard>
-                        <UICardTitle title="Title 2"/>
-                        <UICardBody>
-                            <UITypography type={'p'}>This content is a paragraph</UITypography>
-                        </UICardBody>
                     </UICard>
 
                     <UICard>
