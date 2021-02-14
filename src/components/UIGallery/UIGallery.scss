@@ -1,45 +1,14 @@
 @import "../../@core/styles/@theme.scss";
 
-.ui-gallery {
-  .grid-item {
-    height: 175px;
-    position: relative;
-
-    p {
-      text-align: center;
-      font-size: 16px;
-      margin-top: -5px;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-
-    @include sm() {
-      height: 200px;
-    }
-
-    @include lg() {
-      height: 280px;
-    }
-  }
-}
-
-.ui-gallery--wrapper {
+.ui-gallery--glide-wrapper {
   background: rgba(0, 0, 0, 0.5);
+
   position: fixed;
-  left: 0;
-  right: 0;
+  z-index: 99999;
   top: 0;
+  left: 0;
   bottom: 0;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s linear;
-  will-change: opacity;
-
-  z-index: 1000;
+  right: 0;
 
   display: flex;
   flex-direction: row;
@@ -47,90 +16,18 @@
   justify-content: center;
   align-items: center;
   align-content: stretch;
+}
 
-  .ui-gallery--current-image {
-    position: relative;
-    opacity: 0;
-    visibility: hidden;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-
-    .ui-gallery--close {
-      position: absolute;
-      right: -16px;
-      top: -16px;
-      background: #eee;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      text-align: center;
-      line-height: 32px;
-      cursor: pointer;
-
+.ui-gallery--slideshow {
+  .glide__slide {
+    img {
+      height: 80vh;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       align-content: stretch;
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition: opacity 0.5s linear;
-      will-change: transition;
-    }
-
-    &-visible {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s linear;
-      will-change: opacity;
-
-      .ui-gallery--close {
-        opacity: 1;
-        visibility: visible;
-
-        transition: opacity 0.5s linear;
-        will-change: transition;
-      }
-
-    }
-  }
-
-  &.ui-gallery--wrapper-visible {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s linear;
-    will-change: opacity;
-  }
-
-  .ui-gallery--current-image-wrapper {
-    position: relative;
-  }
-
-  .ui-gallery--image-wrapper {
-    position: relative;
-  }
-
-  img {
-    max-width: 80vw;
-    height: auto;
-    max-height: 90vh;
-    visibility: hidden;
-    opacity: 0;
-    user-select: none;
-    border-radius: 8px;
-
-    &.loaded {
-      opacity: 1;
-      visibility: visible;
-      transition: all 0.250s linear;
     }
   }
 }
