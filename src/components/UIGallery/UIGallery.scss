@@ -20,14 +20,23 @@
 
 .ui-gallery--slideshow {
   .glide__slide {
-    img {
-      height: 80vh;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      align-content: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .slider__img_wrapper {
+      max-width: 90vw;
+      max-height: 80vh;
+
+      img {
+        width: 100%;
+        border-radius: $base-spacing / 2;
+
+        @include boxShadow();
+      }
     }
   }
 }

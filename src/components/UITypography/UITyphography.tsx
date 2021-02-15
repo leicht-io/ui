@@ -2,7 +2,7 @@ import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UITyphography.scss';
 
-export const UITypography = (props: IProps): ReactElement => {
+export const UITypography = React.memo((props: IProps): ReactElement => {
   switch (props.type) {
     case 'a':
       return <a>{props.children}</a>;
@@ -21,6 +21,6 @@ export const UITypography = (props: IProps): ReactElement => {
     case 'p':
       return <p>{props.children}</p>;
   }
-};
+});
 
 UITypography.displayName = 'UITypography';

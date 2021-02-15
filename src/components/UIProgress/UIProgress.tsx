@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
 import './UIProgress.scss';
 
-export const UIProgress = (): ReactElement => {
+export const UIProgress = React.memo((): ReactElement => {
   let windowHeight: number = 0;
   let documentHeight: number = 0;
   const progressBar: React.RefObject<any> = React.useRef(null);
@@ -52,6 +52,6 @@ export const UIProgress = (): ReactElement => {
   return (
     <progress className="ui-reading-position-indicator" value="0" ref={ progressBar } />
   );
-};
+});
 
 UIProgress.displayName = 'UIProgress';

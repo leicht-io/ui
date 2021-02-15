@@ -8,7 +8,7 @@ module.exports = {
         "function-whitespace-after": "always",
         "unit-case": "lower",
         "unit-no-unknown": true,
-        "unit-whitelist": [
+        "unit-allowed-list": [
             "px",
             "%",
             "deg",
