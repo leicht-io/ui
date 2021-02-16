@@ -4,6 +4,14 @@ h1, h2, h3, h4, h5, h6 {
   @include fontFamily();
 
   color: $primaryText;
+
+  &.fw300 {
+    font-weight: 300;
+  }
+
+  &.fw700 {
+    font-weight: 700;
+  }
 }
 
 p, strong, i, b, u, pre, li {
@@ -20,6 +28,14 @@ p, strong, i, b, u, pre, li {
   @include fontFamily();
 
   color: $primaryText;
+
+  &.fw300 {
+    font-weight: 300;
+  }
+
+  &.fw700 {
+    font-weight: 700;
+  }
 }
 
 h1 {
