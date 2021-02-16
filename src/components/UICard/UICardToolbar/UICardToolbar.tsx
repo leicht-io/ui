@@ -6,7 +6,7 @@ import {UIIcon} from '../../UIIcon';
 
 export const UICardToolbar = (props: IProps): ReactElement => {
   return (
-    <div className={ `ui-card-toolbar ui-card-toolbar--${props.position || 'bottom'}` }>
+    <div className={ `ui-card-toolbar ui-card-toolbar--${props.position || 'bottom'} ui-card-toolbar--text-${props.textAlignment || 'left'}` }>
       <UITypography type={ 'p' }>{props.text}</UITypography>
 
       <div className="ui-icons">

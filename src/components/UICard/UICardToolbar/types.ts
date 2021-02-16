@@ -4,4 +4,5 @@ export interface IProps {
   text?: string;
   icons?: { id: IIconProps['icon']; onClick: () => void }[];
   position?: 'top' | 'bottom';
+  textAlignment?: 'center' | 'left';
 }

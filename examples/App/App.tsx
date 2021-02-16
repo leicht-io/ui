@@ -165,18 +165,18 @@ export const App = (): ReactElement => {
                 <UITypography type={'h3'}>Grid & Cards</UITypography>
                 <UIGrid columns={'four'}>
                     <UICard>
-                        <UICardToolbar text={"Title"} position={"top"}/>
+                        <UICardToolbar text={"Title"} position={"top"} textAlignment={"center"}/>
                         <UIImage
                             source={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}/>
                         <UICardToolbar
                             text="Content Left"
                             icons={[{
-                            id: 'download',
-                            onClick: () => {
-                                // eslint-disable-next-line no-console
-                                console.log('Clicked icon');
-                            }
-                        },{
+                                id: 'download',
+                                onClick: () => {
+                                    // eslint-disable-next-line no-console
+                                    console.log('Clicked icon');
+                                }
+                            }, {
                                 id: 'magnify',
                                 onClick: () => {
                                     // eslint-disable-next-line no-console
