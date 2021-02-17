@@ -3,4 +3,5 @@ export interface IProps {
   children?: any;
   type: 'success' | 'danger' | 'primary';
   onClick?: () => void;
+  disabled?: boolean;
 }

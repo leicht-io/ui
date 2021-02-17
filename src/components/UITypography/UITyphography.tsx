@@ -3,10 +3,18 @@ import {IProps} from './types';
 import './UITyphography.scss';
 
 export const UITypography = React.memo((props: IProps): ReactElement => {
-  let classes = '';
-  if (props.fontWeight) {
-    classes += `fw${props.fontWeight}`;
-  }
+  const [classes, setClasses] = React.useState<string>('');
+
+  React.useEffect(() => {
+    let tempClasses = 'ui-typography';
+    if (props.fontWeight) {
+      tempClasses += ` ui-typography--fw${props.fontWeight}`;
+    }
+    if (props.skeleton) {
+      tempClasses += ' ui-typography--skeleton';
+    }
+    setClasses(tempClasses);
+  }, [props.skeleton, props.fontWeight]);
 
   switch (props.type) {
     case 'a':

@@ -6,6 +6,10 @@
   @include boxShadow();
 }
 
+@mixin boxShadowHover() {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+}
+
 @mixin dropDownShadow() {
   box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
 }

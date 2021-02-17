@@ -1,17 +1,62 @@
 @import "../../@core/styles/@theme.scss";
 
+@-webkit-keyframes skeletonGradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes skeletonGradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+.ui-typography {
+  &.ui-typography--skeleton {
+    height: 18px;
+    line-height: 1.58;
+    background-size: 600% 600%;
+    background: linear-gradient(270deg, #f9f9f9, #eeeeee, #eeeeee);
+    margin-top: 12px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+
+    -webkit-animation: skeletonGradient 13s ease infinite;
+    animation: skeletonGradient 13s ease infinite;
+
+    &:last-child {
+      width: 50%;
+    }
+  }
+
+  &.ui-typography--fw300 {
+    font-weight: 300;
+  }
+
+  &.ui-typography--fw700 {
+    font-weight: 700;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   @include fontFamily();
 
   color: $primaryText;
 
-  &.fw300 {
-    font-weight: 300;
-  }
 
-  &.fw700 {
-    font-weight: 700;
-  }
 }
 
 p, strong, i, b, u, pre, li {
@@ -28,14 +73,6 @@ p, strong, i, b, u, pre, li {
   @include fontFamily();
 
   color: $primaryText;
-
-  &.fw300 {
-    font-weight: 300;
-  }
-
-  &.fw700 {
-    font-weight: 700;
-  }
 }
 
 h1 {

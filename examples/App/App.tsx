@@ -1,7 +1,12 @@
 import React, {ReactElement} from 'react';
 import {
+    IGallery,
+    IMenuItem,
+    ISlide,
     UIButton,
     UICard,
+    UICardTitle,
+    UICardToolbar,
     UIDivider,
     UIGallery,
     UIGrid,
@@ -16,15 +21,13 @@ import {
     UIProgress,
     UISlider,
     UITags,
+    UITextArea,
     UITypography
-} from '../../src/components';
-import {UICardTitle, UICardToolbar} from '../../src/components/UICard';
+} from '../../src';
 import {galleryMockResponse} from '../assets/gallery.mock';
 import {sliderMockResponse} from '../assets/slider.mock';
-import {UITextArea} from '../../src/components/UITextArea';
 import {MenuMock} from '../assets/menuMock';
 import {logo} from '../assets/logo';
-import {IGallery, IMenuItem, ISlide} from '../../src/types';
 
 export const App = (): ReactElement => {
     const [gallery, setGallery] = React.useState<IGallery | null>(null);
@@ -34,6 +37,7 @@ export const App = (): ReactElement => {
     const [menuItems] = React.useState<IMenuItem[]>(MenuMock);
     const [slides, setSlides] = React.useState<ISlide[] | null>(null);
     const [title, setTitle] = React.useState<string | null>(null);
+    const [text, setText] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -43,6 +47,7 @@ export const App = (): ReactElement => {
             setSlides(sliderMockResponse);
 
             setTitle('Leicht.IO React UI Component Library');
+            setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor            incididunt ut            labore et            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut            aliquip ex            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum            dolore eu fugiat            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia            deserunt mollit            anim id est laborum.")
         }, 2500);
     }, []);
 
@@ -68,16 +73,7 @@ export const App = (): ReactElement => {
                 <UITypography type={'h4'}>Heading 4</UITypography>
                 <UITypography type={'h5'}>Heading 5</UITypography>
                 <UITypography type={'h6'}>Heading 6</UITypography>
-                <UITypography type={'p'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut
-                    labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex
-                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit
-                    anim id est laborum.</UITypography>
+                <UITypography type={'p'} skeleton={!text}>{text}</UITypography>
                 <UITypography type={'p'}>Lorem upsim with an <a href="#">anchor</a>.</UITypography>
             </UIPageContainer>
 
@@ -96,6 +92,7 @@ export const App = (): ReactElement => {
                 <UIButton text="Primary Button" type="primary"/>
                 <UIButton text="Danger Button" type="danger"/>
                 <UIButton text="Success Button" type="success"/>
+                <UIButton text="Disabled Button" type="success" disabled={true}/>
             </UIPageContainer>
 
             <UIPageContainer>

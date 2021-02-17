@@ -2,7 +2,6 @@ import {IProps} from './types';
 import React, {ReactElement} from 'react';
 import {UITypography} from '../UITypography';
 import './UIImage.scss';
-import {UILoader} from '../UILoader';
 
 export const UIImage = (props: IProps): ReactElement => {
   const [loaded, setLoaded] = React.useState<boolean>(false);
@@ -24,20 +23,17 @@ export const UIImage = (props: IProps): ReactElement => {
   };
 
   const getLabel = () => {
-    if (props.label) {
-      return (<div className={ 'ui-img-label-wrapper' }>
-        <div className="ui-img-label">
-          <UITypography type="p">{props.label.text}</UITypography>
-        </div>
-      </div>);
-    } else {
-      return null;
+    if (!props.label) {
+      return;
     }
-  };
 
-  const getLoader = () => {
     return (
-      <UILoader />
+      <div className={ 'ui-img-label-wrapper' }>
+        <div className="ui-img-label">
+          <UITypography type="p"
+            skeleton={ props.label && (!props.label.text || props.label.text === '') }>{props.label ? props.label.text : ''}</UITypography>
+        </div>
+      </div>
     );
   };
 
@@ -50,7 +46,6 @@ export const UIImage = (props: IProps): ReactElement => {
           props.onClick();
         }
       } }>
-      {!loaded && getLoader()}
       {getImage()}
       {getLabel()}
     </div>

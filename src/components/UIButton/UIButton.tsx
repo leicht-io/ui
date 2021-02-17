@@ -4,7 +4,7 @@ import './UIButton.scss';
 
 export const UIButton = React.memo((props: IProps): ReactElement => {
   return (
-    <button onClick={ props.onClick } className={ 'btn btn--' + props.type }>
+    <button onClick={ props.onClick } className={ `btn btn--${props.type} ${props.disabled ? 'btn--disabled' : ''}` }>
       {props.text || props.children}
     </button>
   );
