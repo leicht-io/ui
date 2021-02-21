@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
 import './UIHeader.scss';
 import {IProps} from './types';
-import {UIImage} from '../UIImage';
+import {UICard} from '../UICard';
 
 export const UIHeader = React.memo((props: IProps): ReactElement => {
   const getContent = () => {
@@ -23,11 +23,12 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
               <div className="header--metadata">
                 <div className="blog-metadata author-image">
                   {(props.metadata.author.name && props.metadata.author.image) && (
-                    <UIImage
+                    <UICard
+                      hideTitle={ true }
                       responsive={ true }
                       round={ true }
                       alt={ props.metadata.author.name }
-                      source={ props.metadata.author.image }
+                      backgroundUrl={ props.metadata.author.image }
                       width="80"
                       height="80" />
                   )}
@@ -60,8 +61,20 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
     }
   };
 
-  const getGradient = () => {
+  const getTopGradient = () => {
     return (props.gradient && (<div className="header--bg-top-gradient" />));
+  };
+
+  const getBottomGradient = () => {
+    return (props.gradient && (<div className="header--bg-bottom-gradient" />));
+  };
+
+  const getHeaderImage = () => {
+    return (
+      <img alt="Header Image" className={ 'ui-header-img' } src={ props.imageUrl } onLoad={ (element) => {
+        element.currentTarget.style.setProperty('opacity', '1');
+      } } />
+    );
   };
 
   const getClasses = () => {
@@ -77,18 +90,10 @@ export const UIHeader = React.memo((props: IProps): ReactElement => {
 
   return (
     <header className={ getClasses() }>
-
-      {getGradient()}
-
+      {getTopGradient()}
       {getContent()}
-
-      {props.gradient && (
-        <div className="header--bg-bottom-gradient" />
-      )}
-
-      <img className={ 'ui-header-img' } src={ props.imageUrl } onLoad={ (element) => {
-        element.currentTarget.style.setProperty('opacity', '1');
-      } } />
+      {getBottomGradient()}
+      {getHeaderImage()}
     </header>
   );
 });

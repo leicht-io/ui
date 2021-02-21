@@ -9,7 +9,7 @@ export * from './UIHeader';
 export * from './UIIcon';
 export * from './UISlider';
 export * from './UIInput';
-export * from './UIImage';
+export * from './UICard';
 export * from './UITextArea';
 export * from './UIButton';
 export * from './UICard';

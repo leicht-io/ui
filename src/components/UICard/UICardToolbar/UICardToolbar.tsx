@@ -1,22 +1,20 @@
 import React, {ReactElement} from 'react';
 import {IProps} from './types';
 import './UICardToolbar.scss';
-import {UITypography} from '../../UITypography';
 import {UIIcon} from '../../UIIcon';
 
 export const UICardToolbar = (props: IProps): ReactElement => {
   return (
-    <div className={ `ui-card-toolbar ui-card-toolbar--${props.position || 'bottom'} ui-card-toolbar--text-${props.textAlignment || 'left'}` }>
-      <UITypography type={ 'p' }>{props.text}</UITypography>
-
+    <div className={ 'ui-card-toolbar' }>
       <div className="ui-icons">
         {props.icons && props.icons.map((icon, index) => {
           return (
-            <div key={ index } onClick={ () => {
-              icon.onClick();
-            } }>
-              <UIIcon icon={ icon.id } color="white" />
-            </div>
+            <UIIcon
+              icon={ icon.id }
+              key={ index }
+              onClick={ () => {
+                icon.onClick();
+              } } />
           );
         })}
       </div>

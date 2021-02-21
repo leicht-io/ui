@@ -19,6 +19,10 @@
 
   margin-left: $base-spacing;
 
+  svg {
+    fill: #242424;
+  }
+
   &:first-child {
     margin-left: 0;
   }
@@ -29,7 +33,7 @@
     }
   }
 
-  &.ui-i--gray {
+  &.ui-i--grey {
     svg {
       fill: #eee;
     }

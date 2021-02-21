@@ -1,12 +1,10 @@
-@import "../../../@core/styles/@theme.scss";
+@import "src/@core/styles/@theme";
 
 .ui-card-toolbar {
   bottom: 0;
   right: 0;
-  left: 0;
   position: absolute;
-  background: rgba(0, 0, 0, 0.6);
-  height: 32px;
+  height: 55px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -34,9 +32,10 @@
 
   .ui-i {
     cursor: pointer;
+    fill: black;
     height: 20px;
     width: 20px;
-    margin: 0 0 0 $base-spacing / 2;
+    margin: 0 0 0 $base-spacing * 1.5;
   }
 
   p {

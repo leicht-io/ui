@@ -4,4 +4,6 @@ export interface IProps {
   size?: 'sm' | 'md' | 'lg';
 
   color?: 'white' | 'grey';
+
+  onClick?: () => void;
 }

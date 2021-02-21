@@ -5,14 +5,12 @@ import {
     ISlide,
     UIButton,
     UICard,
-    UICardTitle,
     UICardToolbar,
     UIDivider,
     UIGallery,
     UIGrid,
     UIHeader,
     UIIcon,
-    UIImage,
     UIInput,
     UIMenu,
     UIModal,
@@ -152,21 +150,18 @@ export const App = (): ReactElement => {
 
             <UIPageContainer>
                 <UITypography type={'h3'}>Images</UITypography>
-                <UIImage
+                <UICard
                     skeletonHeight={658}
-                    label={{text: 'This is the label', background: true}}
-                    source={imageSource}/>
+                    title='This is the label'
+                    backgroundUrl={imageSource}/>
             </UIPageContainer>
 
             <UIPageContainer>
                 <UITypography type={'h3'}>Grid & Cards</UITypography>
                 <UIGrid columns={'four'}>
-                    <UICard>
-                        <UICardToolbar text={"Title"} position={"top"} textAlignment={"center"}/>
-                        <UIImage
-                            source={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}/>
+                    <UICard title={"This is a very long title that is very long"} titleAlignment={"left"}
+                            backgroundUrl={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}>
                         <UICardToolbar
-                            text="Content Left"
                             icons={[{
                                 id: 'download',
                                 onClick: () => {
@@ -182,21 +177,17 @@ export const App = (): ReactElement => {
                             }]}/>
                     </UICard>
 
-                    <UICard>
-                        <UIImage
-                            source={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}/>
-
+                    <UICard
+                        backgroundUrl={'https://ni.leicht.io/sunset_feggeklit.90238d8d3fba65a90cfd8d60beab1e230da73ed7_original.jpg'}>
                         <UITags tags={[
                             {type: 'primary', name: '3D Print'},
                             {type: 'secondary', name: 'PCB'},
                         ]}/>
                     </UICard>
 
-                    <UICard>
-                        <UIImage
-                            source="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg"/>
-
-                        <UICardToolbar text="Content Left" icons={[{
+                    <UICard title={"title"}
+                            backgroundUrl="https://ni.leicht.io/sunset_kaloe.34af0caa00ad06dacc6a578f5bc30bd748d10e1a_medium.jpg">
+                        <UICardToolbar icons={[{
                             id: 'facebook',
                             onClick: () => {
                                 // eslint-disable-next-line no-console
@@ -205,30 +196,36 @@ export const App = (): ReactElement => {
                         }]}/>
                     </UICard>
 
-                    <UICard>
-                        <UICardTitle title={'Title 4'} asOverlay={true}/>
-                        <UIImage
-                            source="https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg"/>
-                    </UICard>
+                    <UICard title={'This is also a very long title that is very long'}
+                            backgroundUrl="https://ni.leicht.io/wadden_sea.0039e6c00cf93aed50f037fcfbdfa31f5517546e_original.jpg"/>
                 </UIGrid>
             </UIPageContainer>
 
             <UIPageContainer>
                 <UITypography type={'h3'}>Inputs</UITypography>
 
-                <UIInput label={'Input Label'} onChange={(value: string) => {
-                    // eslint-disable-next-line no-console
-                    console.log('Value:', value);
-                }}/>
-                <UIInput label={'Input Label'} onChange={(value: string) => {
-                    // eslint-disable-next-line no-console
-                    console.log('Value:', value);
-                }}/>
+                <UIInput
+                    tabIndex={1}
+                    label={'Input Label'}
+                    onChange={(value: string) => {
+                        // eslint-disable-next-line no-console
+                        console.log('Value:', value);
+                    }}/>
+                <UIInput
+                    tabIndex={2}
+                    label={'Input Label'}
+                    onChange={(value: string) => {
+                        // eslint-disable-next-line no-console
+                        console.log('Value:', value);
+                    }}/>
 
-                <UITextArea label={'Input Label'} onChange={(value: string) => {
-                    // eslint-disable-next-line no-console
-                    console.log('Value:', value);
-                }}/>
+                <UITextArea
+                    tabIndex={3}
+                    label={'Input Label'}
+                    onChange={(value: string) => {
+                        // eslint-disable-next-line no-console
+                        console.log('Value:', value);
+                    }}/>
             </UIPageContainer>
 
             <UIPageContainer>

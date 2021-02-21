@@ -4,7 +4,7 @@ import './UIProgress.scss';
 export const UIProgress = React.memo((): ReactElement => {
   let windowHeight: number = 0;
   let documentHeight: number = 0;
-  const progressBar: React.RefObject<any> = React.useRef(null);
+  const progressBar: React.RefObject<HTMLProgressElement> = React.useRef(null);
 
   React.useEffect(() => {
     calculateProgress();

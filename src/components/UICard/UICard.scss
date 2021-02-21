@@ -1,15 +1,128 @@
 @import "../../@core/styles/@theme.scss";
 
-.ui-card {
-  border-radius: $base-spacing;
-  min-height: 100px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-
+.ui-image {
   @include cardShadow();
 
-  &-skeleton {
-    @include skeleton();
+  position: relative;
+  border-radius: $base-spacing;
+  overflow: hidden;
+  transition: all 0.3s linear;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  &.ui-image-pointer {
+    cursor: pointer;
+
+    &:hover {
+      @include boxShadowHover();
+
+      transition: all 0.3s linear;
+      filter: grayscale(75%);
+    }
   }
+
+  &.ui-img-round {
+    border-radius: 50%;
+  }
+
+  img {
+    object-fit: cover;
+    min-height: 1px;
+  }
+
+  .ui-img-label-wrapper {
+    background: #fff;
+  }
+
+  .ui-img-label {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    height: 55px;
+
+    &.ui-img-label--left p {
+      text-align: left;
+      padding: 0 $base-spacing * 2;
+    }
+
+    p {
+      margin: 0 $base-spacing;
+      text-align: center;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ui-typography--skeleton {
+      margin: 0 20px;
+      width: calc(100% - 40px);
+      padding: 0;
+    }
+  }
+
+  &-loading {
+    background: #eeeb;
+    transition: all 0.3s linear;
+
+    img {
+      will-change: opacity;
+      opacity: 0;
+      transition: opacity 0.3s linear;
+    }
+  }
+
+  &-loaded {
+    img {
+      will-change: opacity;
+      opacity: 1;
+      transition: opacity 0.3s linear;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+    &.img-fullwidth {
+      width: 100%;
+    }
+
+    &.ui-img-responsive {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    &.img-center {
+      margin: 0 auto;
+    }
+  }
+
+  .img-with-caption {
+    position: relative;
+    margin-bottom: 20px;
+
+    p {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      padding: 5px 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+  }
+
 }

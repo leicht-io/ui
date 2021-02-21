@@ -7,6 +7,13 @@
   border-radius: $base-spacing;
   margin-bottom: $base-spacing * 2;
 
+  transition: border 250ms linear;
+
+  &.input-wrap--focused {
+    transition: border 250ms linear;
+    border: 1px solid $teal;
+  }
+
   > label {
     font-size: 12px;
     color: #666666;

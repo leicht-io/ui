@@ -4,7 +4,7 @@ import {IProps} from './types';
 import Glide from 'react-glidejs';
 import 'react-glidejs/dist/index.css';
 import {IPhoto} from '../../types';
-import {UIImage} from '../UIImage';
+import {UICard} from '../UICard';
 
 const getSkeletonArray = (amount: number) => {
   const tempArray: null[] = [];
@@ -18,7 +18,7 @@ const getSkeletonArray = (amount: number) => {
 export const UIGallery = (props: IProps): ReactElement => {
   const gliderRef = React.useRef(null);
 
-  const [data, setData] = React.useState<any>(getSkeletonArray(props.skeletons || 10));
+  const [data, setData] = React.useState<null[] | IPhoto[]>(getSkeletonArray(props.skeletons || 10));
   const [showSlider, setShowSlider] = React.useState<boolean>(false);
   const [index, setIndex] = React.useState<number>(0);
 
@@ -36,7 +36,7 @@ export const UIGallery = (props: IProps): ReactElement => {
     }
   }, [props.gallery]);
 
-  const handleEventListeners = (event) => {
+  const handleEventListeners = (event: KeyboardEvent) => {
     switch (event.key) {
       case 'Escape':
         setShowSlider(false);
@@ -68,7 +68,7 @@ export const UIGallery = (props: IProps): ReactElement => {
             {props.gallery && props.gallery.photos && props.gallery.photos.map((photo, index) => {
               return (
                 <div key={ index } className="slider__img_wrapper">
-                  <img src={ props.baseUrl + photo.fullSizePath } />
+                  <img alt={ `Slide #${index}` } src={ props.baseUrl + photo.fullSizePath } />
                 </div>
               );
             })}
@@ -77,19 +77,19 @@ export const UIGallery = (props: IProps): ReactElement => {
       )}
 
       <div className="ui-gallery grid-container grid-two-columns">
-        {data.map((photo: IPhoto, index) => {
+        {(data as any[]).map((photo: IPhoto, index: number) => {
           return (
             <div className="grid-item" key={ index }>
-              <UIImage
+              <UICard
                 alt={ photo ? photo.description : '' }
-                source={ photo ? (props.baseUrl + photo.mediumThumbPath) : '' }
+                backgroundUrl={ photo ? (props.baseUrl + photo.mediumThumbPath) : '' }
                 onClick={ () => {
                   if (photo) {
                     setIndex(index);
                     setShowSlider(true);
                   }
                 } }
-                label={ {text: photo ? photo.description : ''} }
+                title={ photo ? photo.description : undefined }
               />
             </div>
           );

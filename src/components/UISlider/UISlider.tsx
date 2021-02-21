@@ -4,7 +4,9 @@ import './UISlider.scss';
 import Glide from '@glidejs/glide';
 import {UILoader} from '../UILoader';
 
+// TODO: Use React intrgration of Glide,
 export const UISlider = (props: IProps): ReactElement => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
   const [slider]: Glide = React.useState<Glide>(new Glide('.glide', {
     startAt: 0,
     hoverPause: true,
@@ -12,11 +14,13 @@ export const UISlider = (props: IProps): ReactElement => {
   }));
 
   React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
     return () => slider.destroy();
   }, []);
 
   React.useEffect(() => {
     if (props.slides) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call
       slider.mount();
     }
   }, [props.slides]);

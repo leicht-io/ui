@@ -4,7 +4,10 @@ import './UIButton.scss';
 
 export const UIButton = React.memo((props: IProps): ReactElement => {
   return (
-    <button onClick={ props.onClick } className={ `btn btn--${props.type} ${props.disabled ? 'btn--disabled' : ''}` }>
+    <button
+      tabIndex={ props.tabIndex || -1 }
+      onClick={ props.onClick }
+      className={ `btn btn--${props.type} ${props.disabled ? 'btn--disabled' : ''}` }>
       {props.text || props.children}
     </button>
   );
