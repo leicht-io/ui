@@ -9,6 +9,9 @@
   box-sizing: border-box;
   padding: 16px 24px;
 
+  transition: all 0.25s linear;
+  opacity: 0;
+
   p, strong {
     color: $white;
     margin: 0;
@@ -25,19 +28,11 @@
     color: #fff;
   }
 
-  &.notification--fade-in {
-    transition: all 0.25s linear;
-    opacity: 1;
-    visibility: visible;
-    height: $base-spacing * 8;
+  &.notification--rendering {
+    opacity: 0;
   }
 
-  &.notification--fade-out {
-    transition: all 0.25s linear;
-    opacity: 0;
-    margin: 0;
-    padding: 0;
-    visibility: hidden;
-    height: 0;
+  &.notification--visible {
+    opacity: 1;
   }
 }

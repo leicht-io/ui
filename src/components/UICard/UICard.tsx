@@ -49,7 +49,6 @@ export const UICard = (props: IProps): ReactElement => {
       } }>
       {getImage()}
       {getLabel()}
-
       {props.children && props.children}
     </div>
   );

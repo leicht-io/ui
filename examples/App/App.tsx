@@ -36,6 +36,11 @@ export const App = (): ReactElement => {
     const [slides, setSlides] = React.useState<ISlide[] | null>(null);
     const [title, setTitle] = React.useState<string | null>(null);
     const [text, setText] = React.useState<string | null>(null);
+    const [notifications, setNotifications] = React.useState<{ type: any, title: string, message: string }[]>([{
+        type: "error",
+        Title: "Error!",
+        message: "This is an error notification"
+    }, {type: "success", message: "This is a success notification", title: "Success!"}]);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -204,20 +209,22 @@ export const App = (): ReactElement => {
             <UIPageContainer>
                 <UITypography type={'h3'}>Inputs</UITypography>
 
-                <UIInput
-                    tabIndex={1}
-                    label={'Input Label'}
-                    onChange={(value: string) => {
-                        // eslint-disable-next-line no-console
-                        console.log('Value:', value);
-                    }}/>
-                <UIInput
-                    tabIndex={2}
-                    label={'Input Label'}
-                    onChange={(value: string) => {
-                        // eslint-disable-next-line no-console
-                        console.log('Value:', value);
-                    }}/>
+                <UIGrid columns={"two"}>
+                    <UIInput
+                        tabIndex={1}
+                        label={'Input Label'}
+                        onChange={(value: string) => {
+                            // eslint-disable-next-line no-console
+                            console.log('Value:', value);
+                        }}/>
+                    <UIInput
+                        tabIndex={2}
+                        label={'Input Label'}
+                        onChange={(value: string) => {
+                            // eslint-disable-next-line no-console
+                            console.log('Value:', value);
+                        }}/>
+                </UIGrid>
 
                 <UITextArea
                     tabIndex={3}
@@ -226,13 +233,34 @@ export const App = (): ReactElement => {
                         // eslint-disable-next-line no-console
                         console.log('Value:', value);
                     }}/>
+
+                <UIButton text="Primary Button" type="primary" disabled={true}/>
             </UIPageContainer>
 
             <UIPageContainer>
                 <UITypography type={'h3'}>Notifications</UITypography>
 
-                <UINotification type="success" title="Success!" description="We'll be in touch!"/>
-                <UINotification type="error" title="Error!" description="Please try again!"/>
+                {notifications.map(notification => {
+                    return (
+                        <UINotification
+                            type={notification.type}
+                            title={notification.title}
+                            description={notification.message}/>
+                    );
+                })}
+
+                <UIButton type={"primary"}
+                          onClick={() => {
+                              const tempNotifications = [...notifications];
+                              tempNotifications.push({
+                                  title: "Error!",
+                                  message: "This is an error notification",
+                                  type: "error"
+                              })
+                              setNotifications(tempNotifications)
+                          }}>
+                    Add Notification
+                </UIButton>
             </UIPageContainer>
 
             <UIPageContainer>
