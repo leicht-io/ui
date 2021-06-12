@@ -247,7 +247,7 @@ export const UIMenu = (props: IProps): ReactElement => {
         <div className="nav-hamburger" onClick={ () => {
           setShowSidebar(true);
         } }>
-          <UIIcon icon={ 'hamburger' } color={ scrollActive ? 'grey' : 'white' } size={ 'md' } />
+          <UIIcon icon={ 'hamburger' } color={ scrollActive ? 'black' : 'white' } size={ 'md' } />
         </div>
 
         <div className="logo">
@@ -271,7 +271,7 @@ export const UIMenu = (props: IProps): ReactElement => {
             <div className="nav-hamburger" onClick={ () => {
               setShowSidebar(false);
             } }>
-              <UIIcon icon={ 'close' } color={ 'grey' } />
+              <UIIcon icon={ 'close' } color={ 'black' } />
             </div>
           </div>
           <div className="nav-content">

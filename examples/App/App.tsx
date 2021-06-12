@@ -65,8 +65,11 @@ export const App = (): ReactElement => {
                     console.log('Navigating to', destination.title);
                 }}
             />
-            <UIHeader title={{value: title, skeleton: true}}
-                      imageUrl="https://leicht.io//assets/images/header-7.7f48e486decb2b9246586c0f33d03c942e25dcb23bb5f5d33dff9876f59ca2f9.jpg"/>
+
+            <UISlider slides={slides} basePath={'https://ni.leicht.io/'}/>
+
+            {/* <UIHeader title={{value: title, skeleton: true}}
+                      imageUrl="https://leicht.io//assets/images/header-7.7f48e486decb2b9246586c0f33d03c942e25dcb23bb5f5d33dff9876f59ca2f9.jpg"/> */ }
 
             <UIPageContainer>
                 <UITypography type={'h3'}>Typography</UITypography>
@@ -262,12 +265,6 @@ export const App = (): ReactElement => {
                     Add Notification
                 </UIButton>
             </UIPageContainer>
-
-            <UIPageContainer>
-                <UITypography type={'h3'}>Slider (based on GlideJS)</UITypography>
-            </UIPageContainer>
-
-            <UISlider slides={slides} basePath={'https://ni.leicht.io/'}/>
 
             <UIModal type={'IFRAME'} title={'Modal Title'} show={showModal1} onHide={() => {
                 setShowModal1(false);

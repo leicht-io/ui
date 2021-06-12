@@ -39,6 +39,12 @@
     }
   }
 
+  &.ui-i--black {
+    svg {
+      fill: $primaryText;
+    }
+  }
+
   &.ui-i--sm {
     width: 20px;
     height: 20px;

@@ -3,7 +3,7 @@ export interface IProps {
 
   size?: 'sm' | 'md' | 'lg';
 
-  color?: 'white' | 'grey';
+  color?: 'white' | 'grey' | 'black';
 
   onClick?: () => void;
 }
