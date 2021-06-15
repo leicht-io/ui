@@ -4,7 +4,7 @@ import './UISlider.scss';
 import Glide from '@glidejs/glide';
 import {UILoader} from '../UILoader';
 
-// TODO: Use React intrgration of Glide,
+// TODO: Use React integration of Glide.
 export const UISlider = (props: IProps): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
   const [slider]: Glide = React.useState<Glide>(new Glide('.glide', {
@@ -45,7 +45,7 @@ export const UISlider = (props: IProps): ReactElement => {
                   } }>
                   <div className="slide-content">
                     <h2>{slide.title}</h2>
-                    <p>{slide.excerpt} <a href={ slide.slug }>See the results!</a></p>
+                    <p>{slide.excerpt} <a className="slide-content--button" href={ slide.slug }>See the results!</a></p>
                   </div>
 
                   <div className="slide-overlay" />

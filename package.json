@@ -1,6 +1,6 @@
 {
   "name": "@leicht.io/ui",
-  "version": "1.1.22",
+  "version": "1.1.23",
   "description": "",
   "scripts": {
     "build:all": "npm run lint && npm run build:production:dist && npm run build:production:examples && npm run copy-scss",
@@ -46,32 +46,33 @@
   "homepage": "https://github.com/leicht-io/ui#readme",
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-glidejs": "^1.0.8"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-glidejs": "^1.0.8",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.1",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
     "@types/react-router-dom": "^5.1.7",
     "@types/resize-observer-browser": "^0.1.5",
-    "@typescript-eslint/eslint-plugin": "^4.14.2",
-    "@typescript-eslint/eslint-plugin-tslint": "^4.14.2",
-    "@typescript-eslint/parser": "^4.14.2",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
     "babel-eslint": "^10.0.3",
     "copy-files-from-to": "^3.2.0",
-    "eslint": "^7.19.0",
-    "eslint-plugin-jsdoc": "^31.6.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-jsdoc": "^35.2.0",
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-security": "^1.4.0",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "parcel": "^1.12.4",
     "rimraf": "^3.0.2",
     "sass": "^1.32.6",
-    "stylelint": "^13.9.0",
+    "stylelint": "^13.13.1",
     "typescript": "^4.1.3"
   }
 }

@@ -1,34 +1,24 @@
-import {IMenuItem} from '../../src/types';
+import {IMenuItem} from '../../src';
 
 export const MenuMock: IMenuItem[] = [
-  {
-    title: 'Home',
-    link: '/',
-    active: true,
-  }, {
-    title: 'About',
-    menuItems: [{
-      title: 'Company',
-      link: '/company'
+    {
+        title: 'Home',
+        link: '/',
+        active: true,
     }, {
-      title: 'Careers',
-      link: '/careers'
+        title: 'Typography',
+        link: '/typography'
     }, {
-      title: 'Team',
-      link: '/team'
-    }]
-  }, {
-    title: 'Services',
-    link: '/services'
-  }, {
-    title: 'Partners',
-    link: '/partners'
-  }, {
-    title: 'Contact',
-    link: '/contact'
-  }, {
-    title: 'Shop',
-    link: '/shop',
-    button: true
-  }
+        title: 'Buttons',
+        link: '/buttons'
+    }, {
+        title: 'Icons',
+        link: '/icons'
+    }, {
+        title: 'Gallery',
+        link: '/gallery'
+    }, {
+        title: 'Grids & Cards',
+        link: '/grids-and-cards'
+    }
 ];
